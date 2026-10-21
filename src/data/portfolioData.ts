@@ -164,22 +164,40 @@ export const portfolioConfig = {
         tags: ["FastAPI", "Google Gemini API", "React 19", "Playwright", "PostgreSQL", "WeasyPrint"],
         slides: [
           {
+            id: "jobflow-preview-modal",
+            label: "Preview & Print Modal",
+            type: "image",
+            src: "/media/jobflow-preview-modal.png",
+            badge: "PDF PREVIEW MODAL",
+            title: "Web-Based Resume Preview & Print Modal",
+            caption: "Interactive A4 preview modal with zoom controls, pixel overflow detection, and direct PDF print"
+          },
+          {
+            id: "jobflow-builder",
+            label: "Resume Studio Builder",
+            type: "image",
+            src: "/media/jobflow-resume-builder.png",
+            badge: "AI TAILOR STUDIO",
+            title: "Interactive Resume Builder",
+            caption: "Live resume editor with split-screen tailoring, Gemini AI bullet suggestions, and skill matching"
+          },
+          {
+            id: "jobflow-profile",
+            label: "Master Profile",
+            type: "image",
+            src: "/media/jobflow-master-profile.png",
+            badge: "MASTER REPOSITORY",
+            title: "Master Profile Data Engine",
+            caption: "Centralized repository for skills, career accomplishments, and project telemetry data"
+          },
+          {
             id: "jobflow-dash",
             label: "Pipeline Dashboard",
             type: "image",
             src: "/media/jobflow-dashboard.png",
-            badge: "LIVE PIPELINE",
+            badge: "JOB PIPELINE",
             title: "Application Tracking Studio",
-            caption: "Interactive job tracking board with status lanes and AI cover letter generation"
-          },
-          {
-            id: "jobflow-resume",
-            label: "ATS Resume Preview",
-            type: "image",
-            src: "/media/jobflow-resume-preview.png",
-            badge: "ATS PDF OUTPUT",
-            title: "ATS-Compliant PDF Generation",
-            caption: "Single-page A4 rendering engine with typographic scaling and zero overflow"
+            caption: "Universal scraper ingestion, status tracking lanes, and cover letter generator"
           }
         ],
         githubUrl: "https://github.com/Fauxx/jobflow",
