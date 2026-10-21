@@ -21,8 +21,8 @@
   --radius-md: 10px;
   --radius-lg: 14px;
   --radius-full: 9999px;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
 }
 
 * {
@@ -56,10 +56,25 @@ code, pre {
   font-family: var(--font-mono);
 }
 
+/* Fluid responsive container that utilizes modern wide screens at 100% zoom without cramped centering */
 .container {
-  max-width: 1040px;
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 2.5rem;
+}
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1440px;
+    padding: 0 3.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.25rem;
+  }
 }
 
 /* Common Section Heading Utilities */
@@ -74,8 +89,8 @@ code, pre {
 }
 
 .section-title {
-  font-size: 1.85rem;
-  font-weight: 700;
+  font-size: clamp(1.75rem, 2.5vw, 2.35rem);
+  font-weight: 800;
   letter-spacing: -0.025em;
   color: var(--text-main);
 }
@@ -86,17 +101,18 @@ code, pre {
   gap: 0.5rem;
   background-color: #0f172a;
   color: #ffffff;
-  padding: 0.65rem 1.25rem;
+  padding: 0.7rem 1.4rem;
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.15s ease;
 }
 
 .btn-primary:hover {
   background-color: #1e293b;
+  transform: translateY(-1px);
 }
 
 .btn-outline {
@@ -105,25 +121,57 @@ code, pre {
   gap: 0.5rem;
   background-color: #ffffff;
   color: var(--text-main);
-  padding: 0.65rem 1.25rem;
+  padding: 0.7rem 1.4rem;
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   border: 1px solid var(--border);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .btn-outline:hover {
   background-color: var(--bg-subtle);
   border-color: #cbd5e1;
+  transform: translateY(-1px);
 }
 
 .tag-badge {
   font-size: 0.75rem;
-  padding: 0.25rem 0.6rem;
+  padding: 0.3rem 0.65rem;
   background-color: #f1f5f9;
-  color: #475569;
+  color: #334155;
   border-radius: var(--radius-full);
   font-weight: 500;
+}
+
+/* Flagship Responsive Grid Layout */
+.flagship-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2.5rem;
+}
+
+@media (max-width: 992px) {
+  .flagship-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Secondary Two-Column Grid */
+.secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 860px) {
+  .secondary-grid {
+    grid-template-columns: 1fr;
+  }
 }

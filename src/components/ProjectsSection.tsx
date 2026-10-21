@@ -31,16 +31,16 @@ export const ProjectsSection: React.FC = () => {
   };
 
   return (
-    <section id="projects" style={{ padding: '4.5rem 0', borderBottom: '1px solid var(--border)' }}>
+    <section id="projects" style={{ padding: '5rem 0', borderBottom: '1px solid var(--border)' }}>
       <div className="container">
         {/* Section Header */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '2.5rem',
+          alignItems: 'flex-end',
+          marginBottom: '2.75rem',
           flexWrap: 'wrap',
-          gap: '1rem'
+          gap: '1.25rem'
         }}>
           <div>
             <div className="section-tag">{projects.tag}</div>
@@ -56,7 +56,7 @@ export const ProjectsSection: React.FC = () => {
               alignItems: 'center',
               gap: '0.4rem',
               color: 'var(--primary-blue)',
-              fontSize: '0.875rem',
+              fontSize: '0.9rem',
               fontWeight: 600
             }}
           >
@@ -65,18 +65,9 @@ export const ProjectsSection: React.FC = () => {
         </div>
 
         {/* =========================================================================
-            1. FLAGSHIP CARD: FireMonitoringSystem (Cloud Architecture, Logs & GIF)
+            1. FLAGSHIP CARD: FireMonitoringSystem (Dynamic Wide Responsive Viewport)
            ========================================================================= */}
-        <div style={{
-          backgroundColor: '#ffffff',
-          border: '1px solid var(--border)',
-          borderRadius: 'var(--radius-lg)',
-          overflow: 'hidden',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-          boxShadow: 'var(--shadow-md)',
-          marginBottom: '2.5rem'
-        }}>
+        <div className="flagship-grid">
           {/* Left Column: Interactive Multi-Slide Viewport */}
           <div style={{
             backgroundColor: '#090d16',
@@ -86,27 +77,27 @@ export const ProjectsSection: React.FC = () => {
           }}>
             {/* Top Window Bar with Slide Tabs */}
             <div style={{
-              padding: '0.75rem 1rem',
+              padding: '0.85rem 1.25rem',
               backgroundColor: '#0c111d',
               borderBottom: '1px solid #1e293b',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               flexWrap: 'wrap',
-              gap: '0.5rem'
+              gap: '0.75rem'
             }}>
               {/* Window Controls */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: '#ef4444' }} />
-                <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: '#f59e0b' }} />
-                <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: '#10b981' }} />
-                <span style={{ fontSize: '0.7rem', color: '#64748b', fontFamily: 'var(--font-mono)', marginLeft: '0.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#ef4444' }} />
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#f59e0b' }} />
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#10b981' }} />
+                <span style={{ fontSize: '0.75rem', color: '#64748b', fontFamily: 'var(--font-mono)', marginLeft: '0.5rem' }}>
                   dev.fires.systems
                 </span>
               </div>
 
               {/* Slide Buttons */}
-              <div style={{ display: 'flex', gap: '0.3rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
                 {flagship.slides.map((s, idx) => (
                   <button
                     key={s.id}
@@ -116,9 +107,9 @@ export const ProjectsSection: React.FC = () => {
                       color: flagshipSlide === idx ? '#38bdf8' : '#94a3b8',
                       border: flagshipSlide === idx ? '1px solid #334155' : '1px solid transparent',
                       borderRadius: '4px',
-                      fontSize: '0.675rem',
+                      fontSize: '0.725rem',
                       fontFamily: 'var(--font-mono)',
-                      padding: '0.2rem 0.5rem',
+                      padding: '0.25rem 0.6rem',
                       cursor: 'pointer',
                       transition: 'all 0.15s ease'
                     }}
@@ -134,7 +125,7 @@ export const ProjectsSection: React.FC = () => {
               style={{
                 position: 'relative',
                 flex: 1,
-                minHeight: '360px',
+                minHeight: '420px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -152,7 +143,7 @@ export const ProjectsSection: React.FC = () => {
                   style={{
                     width: '100%',
                     height: '100%',
-                    maxHeight: '440px',
+                    maxHeight: '520px',
                     objectFit: 'contain',
                     display: 'block'
                   }}
@@ -164,62 +155,64 @@ export const ProjectsSection: React.FC = () => {
                 onClick={(e) => { e.stopPropagation(); handlePrevFlagship(); }}
                 style={{
                   position: 'absolute',
-                  left: '10px',
+                  left: '14px',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  backgroundColor: 'rgba(15, 23, 42, 0.75)',
+                  backgroundColor: 'rgba(15, 23, 42, 0.8)',
                   border: '1px solid #334155',
                   color: '#ffffff',
-                  width: '32px',
-                  height: '32px',
+                  width: '36px',
+                  height: '36px',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  zIndex: 10
+                  zIndex: 10,
+                  transition: 'background 0.2s ease'
                 }}
                 aria-label="Previous Slide"
               >
-                <ChevronLeft size={16} />
+                <ChevronLeft size={18} />
               </button>
 
               <button
                 onClick={(e) => { e.stopPropagation(); handleNextFlagship(); }}
                 style={{
                   position: 'absolute',
-                  right: '10px',
+                  right: '14px',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  backgroundColor: 'rgba(15, 23, 42, 0.75)',
+                  backgroundColor: 'rgba(15, 23, 42, 0.8)',
                   border: '1px solid #334155',
                   color: '#ffffff',
-                  width: '32px',
-                  height: '32px',
+                  width: '36px',
+                  height: '36px',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  zIndex: 10
+                  zIndex: 10,
+                  transition: 'background 0.2s ease'
                 }}
                 aria-label="Next Slide"
               >
-                <ChevronRight size={16} />
+                <ChevronRight size={18} />
               </button>
 
               {/* Floating Slide Badge */}
               <div style={{
                 position: 'absolute',
-                top: '12px',
-                right: '12px',
-                backgroundColor: 'rgba(15, 23, 42, 0.85)',
+                top: '14px',
+                right: '14px',
+                backgroundColor: 'rgba(15, 23, 42, 0.9)',
                 backdropFilter: 'blur(4px)',
                 border: '1px solid #334155',
                 color: '#38bdf8',
-                fontSize: '0.65rem',
+                fontSize: '0.675rem',
                 fontFamily: 'var(--font-mono)',
-                padding: '0.2rem 0.5rem',
+                padding: '0.25rem 0.6rem',
                 borderRadius: '4px',
                 fontWeight: 600
               }}>
@@ -229,59 +222,59 @@ export const ProjectsSection: React.FC = () => {
               {/* Floating Zoom Hint */}
               <div style={{
                 position: 'absolute',
-                bottom: '12px',
-                right: '12px',
-                backgroundColor: 'rgba(15, 23, 42, 0.85)',
+                bottom: '14px',
+                right: '14px',
+                backgroundColor: 'rgba(15, 23, 42, 0.9)',
                 backdropFilter: 'blur(4px)',
                 border: '1px solid #334155',
                 color: '#f8fafc',
-                fontSize: '0.7rem',
+                fontSize: '0.725rem',
                 fontFamily: 'var(--font-mono)',
-                padding: '0.25rem 0.55rem',
+                padding: '0.3rem 0.65rem',
                 borderRadius: '4px',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.35rem',
+                gap: '0.4rem',
                 pointerEvents: 'none'
               }}>
-                <Eye size={12} /> Click to expand
+                <Eye size={13} /> Click to expand
               </div>
             </div>
 
             {/* Sub-caption bar with Slide Index Indicator */}
             <div style={{
-              padding: '0.65rem 1rem',
+              padding: '0.75rem 1.25rem',
               backgroundColor: '#090d16',
               borderTop: '1px solid #1e293b',
-              fontSize: '0.75rem',
+              fontSize: '0.775rem',
               color: '#94a3b8',
               fontFamily: 'var(--font-mono)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: '0.5rem'
+              gap: '0.75rem'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', overflow: 'hidden' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', overflow: 'hidden' }}>
                 <span style={{ color: '#38bdf8' }}>●</span>
                 <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {currentFlagshipSlide.title}: {currentFlagshipSlide.caption}
                 </span>
               </div>
-              <span style={{ fontSize: '0.7rem', color: '#64748b', flexShrink: 0 }}>
+              <span style={{ fontSize: '0.725rem', color: '#64748b', flexShrink: 0 }}>
                 {flagshipSlide + 1} / {flagship.slides.length}
               </span>
             </div>
           </div>
 
           {/* Right Column: Architectural Narrative & Actions */}
-          <div style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div style={{ padding: '3rem 2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.85rem' }}>
               <span style={{
-                fontSize: '0.725rem',
+                fontSize: '0.75rem',
                 fontWeight: 700,
                 color: '#2563eb',
                 backgroundColor: '#eff6ff',
-                padding: '0.25rem 0.65rem',
+                padding: '0.25rem 0.75rem',
                 borderRadius: 'var(--radius-full)'
               }}>
                 {flagship.badge}
@@ -291,26 +284,26 @@ export const ProjectsSection: React.FC = () => {
               </span>
             </div>
 
-            <h3 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-main)', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
+            <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-main)', marginBottom: '0.85rem', letterSpacing: '-0.02em' }}>
               {flagship.title}
             </h3>
 
-            <p style={{ fontSize: '0.925rem', color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: '1.25rem' }}>
+            <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
               {flagship.description}
             </p>
 
             {/* Architectural Highlights */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem', marginBottom: '1.75rem' }}>
               {flagship.highlights.map((h, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--text-body)' }}>
-                  <CheckCircle2 size={15} color="#2563eb" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', fontSize: '0.875rem', color: 'var(--text-body)' }}>
+                  <CheckCircle2 size={16} color="#2563eb" style={{ flexShrink: 0, marginTop: '2px' }} />
                   <span>{h}</span>
                 </div>
               ))}
             </div>
 
             {/* Tags */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', marginBottom: '2.25rem' }}>
               {flagship.tags.map((tag, idx) => (
                 <span key={idx} className="tag-badge">
                   {tag}
@@ -344,14 +337,10 @@ export const ProjectsSection: React.FC = () => {
         </div>
 
         {/* =========================================================================
-            2. SECONDARY GRID: Jobflow (Multi-Slide Carousel) & AI Email Agent
+            2. SECONDARY GRID: Jobflow (4-Slide Studio) & AI Email Agent
            ========================================================================= */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-          gap: '1.75rem'
-        }}>
-          {/* A. JOBFLOW CARD (Pipeline Studio + ATS Resume Preview Slides) */}
+        <div className="secondary-grid">
+          {/* A. JOBFLOW CARD (4-Slide Studio) */}
           <div
             style={{
               backgroundColor: '#ffffff',
@@ -368,14 +357,16 @@ export const ProjectsSection: React.FC = () => {
             <div style={{ backgroundColor: '#0b1120', borderBottom: '1px solid var(--border)', position: 'relative' }}>
               {/* Header Tab Bar */}
               <div style={{
-                padding: '0.5rem 0.75rem',
+                padding: '0.6rem 0.85rem',
                 backgroundColor: '#0f172a',
                 borderBottom: '1px solid #1e293b',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'space-between'
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                gap: '0.4rem'
               }}>
-                <div style={{ display: 'flex', gap: '0.3rem' }}>
+                <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
                   {jobflowProject.slides.map((s, idx) => (
                     <button
                       key={s.id}
@@ -385,9 +376,9 @@ export const ProjectsSection: React.FC = () => {
                         color: jobflowSlide === idx ? '#38bdf8' : '#94a3b8',
                         border: jobflowSlide === idx ? '1px solid #334155' : '1px solid transparent',
                         borderRadius: '4px',
-                        fontSize: '0.65rem',
+                        fontSize: '0.675rem',
                         fontFamily: 'var(--font-mono)',
-                        padding: '0.15rem 0.45rem',
+                        padding: '0.2rem 0.5rem',
                         cursor: 'pointer'
                       }}
                     >
@@ -396,7 +387,7 @@ export const ProjectsSection: React.FC = () => {
                   ))}
                 </div>
 
-                <span style={{ fontSize: '0.65rem', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
+                <span style={{ fontSize: '0.675rem', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
                   {jobflowSlide + 1} / {jobflowProject.slides.length}
                 </span>
               </div>
@@ -404,7 +395,7 @@ export const ProjectsSection: React.FC = () => {
               {/* Image Viewport */}
               <div
                 style={{
-                  height: '220px',
+                  height: '280px',
                   position: 'relative',
                   cursor: 'pointer',
                   overflow: 'hidden',
@@ -422,8 +413,7 @@ export const ProjectsSection: React.FC = () => {
                   style={{
                     width: '100%',
                     height: '100%',
-                    objectFit: jobflowSlide === 1 ? 'contain' : 'cover',
-                    objectPosition: 'top left',
+                    objectFit: 'contain',
                     display: 'block'
                   }}
                 />
@@ -433,14 +423,14 @@ export const ProjectsSection: React.FC = () => {
                   onClick={(e) => { e.stopPropagation(); handlePrevJobflow(); }}
                   style={{
                     position: 'absolute',
-                    left: '8px',
+                    left: '10px',
                     top: '50%',
                     transform: 'translateY(-50%)',
-                    backgroundColor: 'rgba(15, 23, 42, 0.75)',
+                    backgroundColor: 'rgba(15, 23, 42, 0.8)',
                     border: '1px solid #334155',
                     color: '#ffffff',
-                    width: '26px',
-                    height: '26px',
+                    width: '30px',
+                    height: '30px',
                     borderRadius: '50%',
                     display: 'flex',
                     alignItems: 'center',
@@ -449,21 +439,21 @@ export const ProjectsSection: React.FC = () => {
                   }}
                   aria-label="Previous Slide"
                 >
-                  <ChevronLeft size={14} />
+                  <ChevronLeft size={16} />
                 </button>
 
                 <button
                   onClick={(e) => { e.stopPropagation(); handleNextJobflow(); }}
                   style={{
                     position: 'absolute',
-                    right: '8px',
+                    right: '10px',
                     top: '50%',
                     transform: 'translateY(-50%)',
-                    backgroundColor: 'rgba(15, 23, 42, 0.75)',
+                    backgroundColor: 'rgba(15, 23, 42, 0.8)',
                     border: '1px solid #334155',
                     color: '#ffffff',
-                    width: '26px',
-                    height: '26px',
+                    width: '30px',
+                    height: '30px',
                     borderRadius: '50%',
                     display: 'flex',
                     alignItems: 'center',
@@ -472,21 +462,21 @@ export const ProjectsSection: React.FC = () => {
                   }}
                   aria-label="Next Slide"
                 >
-                  <ChevronRight size={14} />
+                  <ChevronRight size={16} />
                 </button>
 
                 {/* Badge */}
                 <div style={{
                   position: 'absolute',
-                  top: '8px',
-                  right: '8px',
-                  backgroundColor: 'rgba(15, 23, 42, 0.85)',
+                  top: '10px',
+                  right: '10px',
+                  backgroundColor: 'rgba(15, 23, 42, 0.9)',
                   backdropFilter: 'blur(4px)',
                   border: '1px solid #334155',
                   color: '#38bdf8',
-                  fontSize: '0.625rem',
+                  fontSize: '0.65rem',
                   fontFamily: 'var(--font-mono)',
-                  padding: '0.15rem 0.45rem',
+                  padding: '0.2rem 0.5rem',
                   borderRadius: '4px',
                   fontWeight: 600
                 }}>
@@ -496,10 +486,10 @@ export const ProjectsSection: React.FC = () => {
 
               {/* Sub-caption */}
               <div style={{
-                padding: '0.4rem 0.75rem',
+                padding: '0.55rem 0.85rem',
                 backgroundColor: '#0c111d',
                 borderTop: '1px solid #1e293b',
-                fontSize: '0.7rem',
+                fontSize: '0.725rem',
                 color: '#94a3b8',
                 fontFamily: 'var(--font-mono)',
                 overflow: 'hidden',
@@ -511,23 +501,23 @@ export const ProjectsSection: React.FC = () => {
             </div>
 
             {/* Jobflow Card Content */}
-            <div style={{ padding: '1.75rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.5rem' }}>
-                <Sparkles size={13} color="#2563eb" />
+            <div style={{ padding: '2rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.5rem' }}>
+                <Sparkles size={14} color="#2563eb" />
                 <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#2563eb', fontFamily: 'var(--font-mono)' }}>
                   {jobflowProject.pillar}
                 </span>
               </div>
 
-              <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.75rem' }}>
+              <h3 style={{ fontSize: '1.45rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.75rem' }}>
                 {jobflowProject.title}
               </h3>
 
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1.25rem', flex: 1 }}>
+              <p style={{ fontSize: '0.925rem', color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: '1.25rem', flex: 1 }}>
                 {jobflowProject.description}
               </p>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.75rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', marginBottom: '1.75rem' }}>
                 {jobflowProject.tags.map((tag, tIdx) => (
                   <span key={tIdx} className="tag-badge">
                     {tag}
@@ -535,7 +525,7 @@ export const ProjectsSection: React.FC = () => {
                 ))}
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: '1.25rem' }}>
                 <a
                   href={jobflowProject.githubUrl}
                   target="_blank"
@@ -543,19 +533,19 @@ export const ProjectsSection: React.FC = () => {
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.4rem',
+                    gap: '0.45rem',
                     color: 'var(--text-main)',
-                    fontSize: '0.85rem',
+                    fontSize: '0.875rem',
                     fontWeight: 600
                   }}
                 >
-                  <Icons.Github width={14} height={14} /> Repository <ArrowRight size={13} />
+                  <Icons.Github width={15} height={15} /> Repository <ArrowRight size={14} />
                 </a>
               </div>
             </div>
           </div>
 
-          {/* B. AI EMAIL AGENT CARD (Dedicated Clean Placeholder) */}
+          {/* B. AI EMAIL AGENT CARD (Clean Pipeline Placeholder) */}
           <div
             style={{
               backgroundColor: '#ffffff',
@@ -573,49 +563,49 @@ export const ProjectsSection: React.FC = () => {
               style={{
                 backgroundColor: '#f8fafc',
                 borderBottom: '1px dashed var(--border)',
-                height: '260px',
+                height: '320px',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                padding: '1.5rem',
+                padding: '2rem',
                 textAlign: 'center',
                 position: 'relative'
               }}
             >
               <div style={{
-                width: '46px',
-                height: '46px',
+                width: '52px',
+                height: '52px',
                 borderRadius: '50%',
                 backgroundColor: '#ffffff',
                 border: '1px solid var(--border)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '0.85rem',
+                marginBottom: '1rem',
                 boxShadow: 'var(--shadow-sm)'
               }}>
-                <Radio size={20} color="#64748b" />
+                <Radio size={24} color="#64748b" />
               </div>
 
-              <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.3rem' }}>
+              <span style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.4rem' }}>
                 Telegram Bot & Event Pipeline
               </span>
 
-              <p style={{ fontSize: '0.775rem', color: 'var(--text-muted)', maxWidth: '280px', margin: 0, lineHeight: 1.5 }}>
+              <p style={{ fontSize: '0.825rem', color: 'var(--text-muted)', maxWidth: '320px', margin: 0, lineHeight: 1.6 }}>
                 {emailAgentProject.slides[0].caption}
               </p>
 
               <div style={{
                 position: 'absolute',
-                top: '12px',
-                right: '12px',
+                top: '14px',
+                right: '14px',
                 backgroundColor: '#ffffff',
                 border: '1px solid var(--border)',
                 color: 'var(--text-dim)',
-                fontSize: '0.65rem',
+                fontSize: '0.675rem',
                 fontFamily: 'var(--font-mono)',
-                padding: '0.2rem 0.5rem',
+                padding: '0.25rem 0.55rem',
                 borderRadius: '4px'
               }}>
                 {emailAgentProject.slides[0].badge}
@@ -623,23 +613,23 @@ export const ProjectsSection: React.FC = () => {
             </div>
 
             {/* Email Agent Card Body */}
-            <div style={{ padding: '1.75rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.5rem' }}>
-                <Sparkles size={13} color="#2563eb" />
+            <div style={{ padding: '2rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.5rem' }}>
+                <Sparkles size={14} color="#2563eb" />
                 <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#2563eb', fontFamily: 'var(--font-mono)' }}>
                   {emailAgentProject.pillar}
                 </span>
               </div>
 
-              <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.75rem' }}>
+              <h3 style={{ fontSize: '1.45rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.75rem' }}>
                 {emailAgentProject.title}
               </h3>
 
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1.25rem', flex: 1 }}>
+              <p style={{ fontSize: '0.925rem', color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: '1.25rem', flex: 1 }}>
                 {emailAgentProject.description}
               </p>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.75rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', marginBottom: '1.75rem' }}>
                 {emailAgentProject.tags.map((tag, tIdx) => (
                   <span key={tIdx} className="tag-badge">
                     {tag}
@@ -647,7 +637,7 @@ export const ProjectsSection: React.FC = () => {
                 ))}
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: '1.25rem' }}>
                 <a
                   href={emailAgentProject.githubUrl}
                   target="_blank"
@@ -655,13 +645,13 @@ export const ProjectsSection: React.FC = () => {
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.4rem',
+                    gap: '0.45rem',
                     color: 'var(--text-main)',
-                    fontSize: '0.85rem',
+                    fontSize: '0.875rem',
                     fontWeight: 600
                   }}
                 >
-                  <Icons.Github width={14} height={14} /> Repository <ArrowRight size={13} />
+                  <Icons.Github width={15} height={15} /> Repository <ArrowRight size={14} />
                 </a>
               </div>
             </div>
@@ -680,7 +670,7 @@ export const ProjectsSection: React.FC = () => {
               left: 0,
               width: '100vw',
               height: '100vh',
-              backgroundColor: 'rgba(0, 0, 0, 0.85)',
+              backgroundColor: 'rgba(0, 0, 0, 0.9)',
               backdropFilter: 'blur(8px)',
               zIndex: 1000,
               display: 'flex',
@@ -690,13 +680,13 @@ export const ProjectsSection: React.FC = () => {
               cursor: 'zoom-out'
             }}
           >
-            <div style={{ maxWidth: '95vw', maxHeight: '90vh', position: 'relative' }}>
+            <div style={{ maxWidth: '96vw', maxHeight: '92vh', position: 'relative' }}>
               <img
                 src={modalImage}
                 alt="Enlarged view"
                 style={{
                   maxWidth: '100%',
-                  maxHeight: '90vh',
+                  maxHeight: '92vh',
                   objectFit: 'contain',
                   borderRadius: '8px',
                   boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
