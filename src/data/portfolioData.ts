@@ -33,6 +33,7 @@ export interface TimelineEntry {
   period: string;
   title: string;
   organization: string;
+  roleTag: string;
   bullets: string[];
 }
 
@@ -47,10 +48,15 @@ export const portfolioConfig = {
     greeting: "Hi, I'm",
     name: "Zet Donaue Samson",
     role: "Software Developer | Cloud & DevOps Engineer",
-    summary: "I build end-to-end applications and the cloud-native infrastructure behind them — from 4-layer Terraform Kubernetes platforms to reactive AI applications and automated event-driven pipelines.",
-    avatarImage: "/media/zet-avatar.jpg",
-    avatarInitials: "ZS",
+    summary: "I build end-to-end applications and the cloud-native infrastructure behind them — from 4-layer Terraform Kubernetes platforms and C# Clean Architecture APIs to reactive AI systems and event-driven automation pipelines.",
+    monogram: "ZS",
     mantra: ["BUILD", "DEPLOY", "IMPROVE"],
+    terminalSpecs: [
+      { label: "ENGINEERING", value: "Full-Lifecycle (Code to Cloud)" },
+      { label: "CLOUD & IAC", value: "Azure AKS • GKE • Terraform (4-Layer)" },
+      { label: "BACKEND STACK", value: "Python • C# / ASP.NET Core 8 • Node.js" },
+      { label: "DELIVERY & OPS", value: "ArgoCD GitOps • Prometheus • Loki" }
+    ],
     stats: [
       { label: "Cloud Infrastructure", value: "4-Layer IaC" },
       { label: "GitOps Kubernetes", value: "13 Services" },
@@ -73,7 +79,7 @@ export const portfolioConfig = {
         "Live 360° multi-tier architecture & latency verification hops across all service tiers",
         "Grafana Loki log aggregation with Cloud SQL sidecar stream aliasing & level filtering",
         "Animated real-time telemetry streaming over MQTT & WebGL 3D map canvas",
-        "Zero-trust network policies, multi-stage non-root containers & Trivy vulnerability scanning"
+        "Zero-trust network policies (Calico), non-root containers & Trivy vulnerability scanning"
       ],
       tags: ["Kubernetes (AKS)", "Terraform IaC", "ArgoCD GitOps", "Prometheus & Loki", "FastAPI ETL", "MapLibre 3D", "PostgreSQL"],
       slides: [
@@ -217,62 +223,68 @@ export const portfolioConfig = {
       {
         id: "cloud",
         icon: "cloud",
-        title: "Cloud Infrastructure",
-        items: ["GKE", "Azure AKS", "Terraform", "Networking", "IaC"]
+        title: "Cloud Infrastructure & IaC",
+        items: ["GKE", "Azure AKS", "Terraform (Modular 4-Layer)", "VNet / VPC Networking", "Helm"]
       },
       {
         id: "containers",
         icon: "box",
-        title: "Containers & Delivery",
-        items: ["Kubernetes", "Docker", "GitHub Actions", "Argo CD", "Kustomize"]
+        title: "Containers, CI/CD & GitOps",
+        items: ["Kubernetes", "Docker Buildx", "ArgoCD", "GitHub Actions", "Kustomize (v5)"]
+      },
+      {
+        id: "backend",
+        icon: "box",
+        title: "Backend APIs & Architecture",
+        items: ["Python / FastAPI", "C# / ASP.NET Core 8 Minimal APIs", "Clean Architecture", "PostgreSQL", "Redis"]
       },
       {
         id: "security",
         icon: "shield",
-        title: "Security & Reliability",
-        items: ["Trivy Vulnerability Scan", "Calico Network Policies", "Non-Root Containers", "Troubleshooting"]
-      },
-      {
-        id: "observability",
-        icon: "chart",
-        title: "Observability & Systems",
-        items: ["Python", "ASP.NET Core", "TypeScript", "Prometheus", "Loki Logs", "Grafana Alloy"]
+        title: "Security & Observability",
+        items: ["Trivy CVE Scanning", "Calico NetworkPolicies", "Prometheus", "Loki Logs", "Grafana Alloy"]
       }
     ] as ExpertiseCard[]
   },
   about: {
     title: "About Me",
-    paragraph: "I'm a Computer Engineering Technology graduate from TUP Manila, with hands-on experience in software development, cloud infrastructure, and automation. I enjoy building practical solutions, learning new technologies, and solving real-world problems through code and infrastructure.",
-    highlightQuote: "I'm always open to new challenges, collaborations, and opportunities to grow."
+    paragraph: "I'm a Computer Engineering Technology graduate from TUP Manila, with hands-on experience in backend engineering, cloud infrastructure, and intelligent automation. I enjoy designing clean architectures, solving concurrency challenges, and operationalizing zero-trust cloud platforms.",
+    highlightQuote: "Building reliable, scalable systems through disciplined code, immutable infrastructure, and full-stack observability."
   },
   careerEducation: {
     title: "Career & Education",
     timeline: [
       {
-        period: "2026 – Present",
+        period: "Feb 2026 – June 2026",
         title: "Software Developer Intern",
-        organization: "InfoTouch Corporation",
+        organization: "InfoTouch Corporation • Makati, Philippines",
+        roleTag: "Backend & Systems",
         bullets: [
-          "Developed and maintained web applications using modern technologies",
-          "Collaborated with cross-functional teams in an Agile environment"
+          "Built and structured ASP.NET Core 8.0 REST API endpoints following Clean Architecture (Domain, Application, Infrastructure layers)",
+          "Refactored legacy C# MVC controllers into ASP.NET Core Minimal APIs, reducing boilerplate code and improving endpoint maintainability",
+          "Implemented database concurrency controls using SELECT FOR UPDATE within Wallet Service transactions to eliminate race conditions under concurrent operations",
+          "Engineered idempotent wallet transaction endpoints enforcing strict state transitions to guarantee transaction safety"
         ]
       },
       {
         period: "2022 – 2026",
-        title: "Computer Engineering Technology",
-        organization: "Technological University of the Philippines (TUP) Manila",
+        title: "Bachelor of Engineering Technology — Computer Engineering Technology",
+        organization: "Technological University of the Philippines (TUP) • Manila, Philippines",
+        roleTag: "Degree",
         bullets: [
-          "Completed a degree in Computer Engineering Technology",
-          "Gained foundational knowledge in software, hardware, and networking"
+          "Graduated with core competencies in computer systems, digital logic, and network communications",
+          "Lead Developer & Cloud Infrastructure Engineer for the university thesis: Cloud-Native IoT Fire Monitoring & Observability Platform"
         ]
       },
       {
-        period: "2024",
-        title: "Customer Service Representative",
-        organization: "Concentrix",
+        period: "July 2024 – Nov 2024",
+        title: "Adviser I, Technical Support & Sales (AT&T MSS Account)",
+        organization: "Concentrix • Metro Manila, Philippines",
+        roleTag: "Enterprise Operations",
         bullets: [
-          "Provided technical and customer support",
-          "Developed communication and problem-solving skills"
+          "Handled high-volume inbound technical troubleshooting, network connectivity issues, and billing diagnostics under strict SLA targets",
+          "Navigated complex AT&T internal CRM platforms and technical diagnostic databases simultaneously during live customer engagements",
+          "Developed high-pressure KPI execution and client-facing communication skills that reinforce delivery discipline"
         ]
       }
     ] as TimelineEntry[]

@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { portfolioConfig } from '../data/portfolioData';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Terminal, Copy, Check } from 'lucide-react';
 import { Icons } from './BrandIcons';
 
 export const Hero: React.FC = () => {
   const { hero } = portfolioConfig;
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(hero.links.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
-    <section id="home" style={{ padding: '4.5rem 0 4rem 0', borderBottom: '1px solid var(--border)' }}>
+    <section id="home" style={{ padding: '5rem 0 4.5rem 0', borderBottom: '1px solid var(--border)' }}>
       <div className="container" style={{
         display: 'flex',
         alignItems: 'center',
@@ -72,6 +79,19 @@ export const Hero: React.FC = () => {
             <a href={hero.links.github} target="_blank" rel="noreferrer" className="btn-outline">
               <Icons.Github width={16} height={16} /> GitHub
             </a>
+            <button
+              onClick={handleCopyEmail}
+              className="btn-outline"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.8rem',
+                padding: '0.65rem 1rem'
+              }}
+              title="Copy email to clipboard"
+            >
+              {copied ? <Check size={14} color="#16a34a" /> : <Copy size={14} />}
+              <span>{copied ? 'Copied Email' : 'Copy Email'}</span>
+            </button>
           </div>
 
           {/* Impact Stats Grid (Proof of Work) */}
@@ -95,71 +115,127 @@ export const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Column: Graduation Portrait Avatar + Ring + Dots Grid + Mantra */}
+        {/* Right Column: Editorial System Monogram & Live Telemetry Console */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '2.75rem',
+          gap: '2.5rem',
           position: 'relative'
         }}>
           {/* Subtle dot matrix background */}
           <div style={{
             position: 'absolute',
-            left: '-25px',
-            bottom: '-25px',
+            left: '-20px',
+            bottom: '-20px',
             width: '140px',
             height: '120px',
             backgroundImage: 'radial-gradient(#cbd5e1 1.5px, transparent 1.5px)',
             backgroundSize: '14px 14px',
             zIndex: 0,
-            opacity: 0.85
+            opacity: 0.75
           }} />
 
-          {/* Graduation Portrait Avatar Container with Crisp Blue Accent Ring */}
+          {/* Minimalist Engineering Monogram Card */}
           <div style={{
             position: 'relative',
             zIndex: 1,
-            width: '190px',
-            height: '190px',
-            borderRadius: '50%',
-            backgroundColor: '#0f172a',
-            border: '4px solid #2563eb',
-            boxShadow: '0 12px 28px -4px rgba(15, 23, 42, 0.22)',
-            overflow: 'hidden',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
+            backgroundColor: '#0c111d',
+            border: '1px solid #1e293b',
+            borderRadius: 'var(--radius-lg)',
+            boxShadow: 'var(--shadow-md)',
+            width: '310px',
+            overflow: 'hidden'
           }}>
-            {hero.avatarImage ? (
-              <img
-                src={hero.avatarImage}
-                alt={hero.name}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center 20%'
-                }}
-              />
-            ) : (
-              <span style={{
-                color: '#ffffff',
-                fontSize: '2.5rem',
-                fontWeight: 800,
-                letterSpacing: '0.04em'
-              }}>
-                {hero.avatarInitials}
-              </span>
-            )}
+            {/* Window Top Bar */}
+            <div style={{
+              padding: '0.7rem 1rem',
+              backgroundColor: '#070a12',
+              borderBottom: '1px solid #1e293b',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#ef4444' }} />
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#f59e0b' }} />
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981' }} />
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#64748b', fontSize: '0.7rem', fontFamily: 'var(--font-mono)' }}>
+                <Terminal size={12} />
+                <span>engine.sys ~ 100%</span>
+              </div>
+            </div>
+
+            {/* Inner Console Content with ZS Monogram Watermark */}
+            <div style={{ padding: '1.5rem', position: 'relative' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
+                <div style={{
+                  width: '54px',
+                  height: '54px',
+                  borderRadius: '12px',
+                  backgroundColor: '#111827',
+                  border: '2px solid #2563eb',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#ffffff',
+                  fontSize: '1.35rem',
+                  fontWeight: 800,
+                  fontFamily: 'var(--font-mono)',
+                  letterSpacing: '0.05em',
+                  boxShadow: '0 4px 14px -2px rgba(37, 99, 235, 0.4)'
+                }}>
+                  {hero.monogram}
+                </div>
+                <div>
+                  <div style={{ color: '#ffffff', fontSize: '0.95rem', fontWeight: 700 }}>
+                    Zet Donaue Samson
+                  </div>
+                  <div style={{ color: '#38bdf8', fontSize: '0.725rem', fontFamily: 'var(--font-mono)' }}>
+                    ● Systems Engineer
+                  </div>
+                </div>
+              </div>
+
+              {/* Console Specs */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                {hero.terminalSpecs.map((spec, sIdx) => (
+                  <div key={sIdx} style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>
+                    <span style={{ color: '#64748b', display: 'block', fontSize: '0.675rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                      {spec.label}
+                    </span>
+                    <span style={{ color: '#e2e8f0', fontWeight: 500 }}>
+                      {spec.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom Status Ticker */}
+            <div style={{
+              padding: '0.55rem 1rem',
+              backgroundColor: '#070a12',
+              borderTop: '1px solid #1e293b',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              fontSize: '0.675rem',
+              fontFamily: 'var(--font-mono)',
+              color: '#10b981'
+            }}>
+              <span>IMMUTABLE IAC</span>
+              <span>ZERO-TRUST PSS</span>
+            </div>
           </div>
 
           {/* Side Vertical Mantra (BUILD DEPLOY IMPROVE) */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.6rem',
+            gap: '0.65rem',
             borderLeft: '1px solid var(--border)',
-            paddingLeft: '1.35rem',
+            paddingLeft: '1.25rem',
             zIndex: 1
           }}>
             {hero.mantra.map((word, idx) => (
