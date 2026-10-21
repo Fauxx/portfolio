@@ -5,16 +5,41 @@ export interface ExpertiseCard {
   items: string[];
 }
 
-export interface ProjectItem {
+export interface MediaOption {
+  label: string;
+  type: 'image' | 'video' | 'placeholder';
+  src?: string;
+  caption: string;
+}
+
+export interface FeaturedProject {
   id: string;
   title: string;
   badge?: string;
+  pillar: string;
+  description: string;
+  highlights: string[];
+  tags: string[];
+  mediaOptions: MediaOption[];
+  githubUrl?: string;
+  liveUrl?: string;
+  caseStudyText: string;
+}
+
+export interface SecondaryProject {
+  id: string;
+  title: string;
+  pillar: string;
   description: string;
   tags: string[];
-  viewLinkText: string;
-  hasGithub?: boolean;
-  hasDemo?: boolean;
-  isLarge?: boolean;
+  media: {
+    type: 'image' | 'placeholder';
+    src?: string;
+    caption: string;
+    mockBadge?: string;
+  };
+  githubUrl?: string;
+  caseStudyText: string;
 }
 
 export interface TimelineEntry {
@@ -77,33 +102,73 @@ export const portfolioConfig = {
     tag: "FEATURED PROJECTS",
     title: "Real Projects. Practical Solutions.",
     allProjectsUrl: "https://github.com/Fauxx",
-    featured: {
+    flagship: {
       id: "fire-monitoring",
       title: "FireMonitoringSystem",
-      badge: "Featured",
-      description: "An IoT fire detection and monitoring platform with cloud infrastructure, telemetry processing, and a command-center dashboard.",
-      tags: ["IoT", "Kubernetes", "Terraform", "GitOps", "React"],
-      viewLinkText: "View Case Study",
-      githubUrl: "https://github.com/Fauxx/FireMonitoringSystem"
-    },
-    cards: [
+      badge: "Flagship Cloud Architecture",
+      pillar: "Cloud Infrastructure • 4-Layer IaC • Full Observability",
+      description: "Production-grade IoT telemetry platform on Kubernetes (AKS/GKE). Engineered with 4-layer Terraform IaC, ArgoCD GitOps pipelines, and an end-to-end observability stack querying live Prometheus & Loki metrics without mock data.",
+      highlights: [
+        "Live 360° multi-tier architecture & latency verification hops",
+        "Unified Command Center managing real-time MQTT telemetry nodes",
+        "Zero-trust network policies, multi-stage non-root containers & Trivy scanning"
+      ],
+      tags: ["Kubernetes (AKS)", "Terraform IaC", "ArgoCD", "Prometheus & Loki", "FastAPI ETL", "MapLibre 3D"],
+      mediaOptions: [
+        {
+          label: "360° Architecture & Observability",
+          type: "image",
+          src: "/media/fire-architecture-modal.png",
+          caption: "Live 360° Architecture Modal with real-time multi-tier topology & latency hops"
+        },
+        {
+          label: "Command Center Hub",
+          type: "image",
+          src: "/media/fire-command-center.png",
+          caption: "Unified Command Center managing active sensor fleet and system diagnostics"
+        },
+        {
+          label: "Live Telemetry Drawer",
+          type: "image",
+          src: "/media/fire-sensor-telemetry.png",
+          caption: "Real-time MQTT sensor readings and time-series telemetry drawer"
+        }
+      ],
+      githubUrl: "https://github.com/Fauxx/FireMonitoringSystem",
+      liveUrl: "https://dev.fires.systems",
+      caseStudyText: "View Case Study"
+    } as FeaturedProject,
+    secondaryCards: [
       {
         id: "jobflow",
         title: "Jobflow",
-        description: "A full-stack job tracking application with AI-assisted résumé tailoring and workflow automation.",
-        tags: ["React", "Node.js", "PostgreSQL", "AI"],
-        viewLinkText: "View Case Study",
-        githubUrl: "https://github.com/Fauxx/jobflow"
+        pillar: "AI Product Engineering • Applied Gemini LLM",
+        description: "Full-stack AI job tracking & résumé tailoring studio. Integrates Google Gemini API with strict Pydantic JSON validation, Playwright browser cookie scraping, and ATS-compliant pixel-accurate PDF generation.",
+        tags: ["FastAPI", "Google Gemini API", "React 19", "Playwright", "PostgreSQL", "TailwindCSS"],
+        media: {
+          type: "image",
+          src: "/media/jobflow-dashboard.png",
+          caption: "Jobflow interactive pipeline & AI resume tailoring workspace",
+          mockBadge: "LIVE INSTANCE"
+        },
+        githubUrl: "https://github.com/Fauxx/jobflow",
+        caseStudyText: "View Case Study"
       },
       {
         id: "ai-email-agent",
-        title: "AI Email Agent",
-        description: "An intelligent email classification and notification agent with automated workflows and integrations.",
-        tags: ["Python", "Automation", "APIs"],
-        viewLinkText: "View Case Study",
-        githubUrl: "https://github.com/Fauxx/ai-job-email-agent"
+        title: "Autonomous Job Email Agent",
+        pillar: "Event-Driven Backend • Serverless Automation",
+        description: "Event-driven automation workflow running headless in the cloud. Autonomously ingests incoming recruiter outreach, triggers Gemini LLM intent classification, and dispatches real-time Telegram actionable alerts.",
+        tags: ["Python", "Gemini 2.0 Flash", "Telegram Bot API", "GitHub Actions", "Docker"],
+        media: {
+          type: "placeholder",
+          caption: "Awaiting Telegram Alert & GitHub Actions Runner screenshot captures",
+          mockBadge: "MEDIA PLACEHOLDER"
+        },
+        githubUrl: "https://github.com/Fauxx/ai-job-email-agent",
+        caseStudyText: "View Architecture"
       }
-    ]
+    ] as SecondaryProject[]
   },
   about: {
     title: "About Me",
