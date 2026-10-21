@@ -1,16 +1,34 @@
 import React, { useState } from 'react';
 import { portfolioConfig } from '../data/portfolioData';
-import { ArrowRight, ExternalLink, CheckCircle2, Eye, Sparkles, Radio } from 'lucide-react';
+import { ArrowRight, ExternalLink, CheckCircle2, Eye, Sparkles, ChevronLeft, ChevronRight, Radio } from 'lucide-react';
 import { Icons } from './BrandIcons';
 
 export const ProjectsSection: React.FC = () => {
   const { projects } = portfolioConfig;
   const { flagship, secondaryCards } = projects;
 
-  const [activeMediaIndex, setActiveMediaIndex] = useState<number>(0);
+  const [flagshipSlide, setFlagshipSlide] = useState<number>(0);
+  const [jobflowSlide, setJobflowSlide] = useState<number>(0);
   const [modalImage, setModalImage] = useState<string | null>(null);
 
-  const currentMedia = flagship.mediaOptions[activeMediaIndex];
+  const currentFlagshipSlide = flagship.slides[flagshipSlide];
+  const jobflowProject = secondaryCards.find(c => c.id === 'jobflow')!;
+  const currentJobflowSlide = jobflowProject.slides[jobflowSlide];
+  const emailAgentProject = secondaryCards.find(c => c.id === 'ai-email-agent')!;
+
+  const handleNextFlagship = () => {
+    setFlagshipSlide((prev) => (prev + 1) % flagship.slides.length);
+  };
+  const handlePrevFlagship = () => {
+    setFlagshipSlide((prev) => (prev - 1 + flagship.slides.length) % flagship.slides.length);
+  };
+
+  const handleNextJobflow = () => {
+    setJobflowSlide((prev) => (prev + 1) % jobflowProject.slides.length);
+  };
+  const handlePrevJobflow = () => {
+    setJobflowSlide((prev) => (prev - 1 + jobflowProject.slides.length) % jobflowProject.slides.length);
+  };
 
   return (
     <section id="projects" style={{ padding: '4.5rem 0', borderBottom: '1px solid var(--border)' }}>
@@ -47,7 +65,7 @@ export const ProjectsSection: React.FC = () => {
         </div>
 
         {/* =========================================================================
-            1. FLAGSHIP CARD: FireMonitoringSystem (Cloud Architecture & Observability)
+            1. FLAGSHIP CARD: FireMonitoringSystem (Cloud Architecture, Logs & GIF)
            ========================================================================= */}
         <div style={{
           backgroundColor: '#ffffff',
@@ -59,14 +77,14 @@ export const ProjectsSection: React.FC = () => {
           boxShadow: 'var(--shadow-md)',
           marginBottom: '2.5rem'
         }}>
-          {/* Left Column: Interactive Media Viewport (Native 100% Crisp Preview) */}
+          {/* Left Column: Interactive Multi-Slide Viewport */}
           <div style={{
             backgroundColor: '#090d16',
             display: 'flex',
             flexDirection: 'column',
             borderRight: '1px solid var(--border)'
           }}>
-            {/* Top Window Bar with Tab Switchers */}
+            {/* Top Window Bar with Slide Tabs */}
             <div style={{
               padding: '0.75rem 1rem',
               backgroundColor: '#0c111d',
@@ -87,36 +105,36 @@ export const ProjectsSection: React.FC = () => {
                 </span>
               </div>
 
-              {/* Media Switcher Tabs */}
-              <div style={{ display: 'flex', gap: '0.35rem' }}>
-                {flagship.mediaOptions.map((opt, idx) => (
+              {/* Slide Buttons */}
+              <div style={{ display: 'flex', gap: '0.3rem', flexWrap: 'wrap' }}>
+                {flagship.slides.map((s, idx) => (
                   <button
-                    key={idx}
-                    onClick={() => setActiveMediaIndex(idx)}
+                    key={s.id}
+                    onClick={() => setFlagshipSlide(idx)}
                     style={{
-                      background: activeMediaIndex === idx ? '#1e293b' : 'transparent',
-                      color: activeMediaIndex === idx ? '#38bdf8' : '#94a3b8',
-                      border: activeMediaIndex === idx ? '1px solid #334155' : '1px solid transparent',
+                      background: flagshipSlide === idx ? '#1e293b' : 'transparent',
+                      color: flagshipSlide === idx ? '#38bdf8' : '#94a3b8',
+                      border: flagshipSlide === idx ? '1px solid #334155' : '1px solid transparent',
                       borderRadius: '4px',
-                      fontSize: '0.7rem',
+                      fontSize: '0.675rem',
                       fontFamily: 'var(--font-mono)',
                       padding: '0.2rem 0.5rem',
                       cursor: 'pointer',
                       transition: 'all 0.15s ease'
                     }}
                   >
-                    {opt.label}
+                    {s.label}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Media Canvas with Click-to-Zoom */}
+            {/* Media Canvas with Carousel Arrows */}
             <div
               style={{
                 position: 'relative',
                 flex: 1,
-                minHeight: '340px',
+                minHeight: '360px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -124,13 +142,13 @@ export const ProjectsSection: React.FC = () => {
                 cursor: 'pointer',
                 overflow: 'hidden'
               }}
-              onClick={() => currentMedia.src && setModalImage(currentMedia.src)}
+              onClick={() => currentFlagshipSlide.src && setModalImage(currentFlagshipSlide.src)}
               title="Click to view full-resolution image"
             >
-              {currentMedia.src ? (
+              {currentFlagshipSlide.src ? (
                 <img
-                  src={currentMedia.src}
-                  alt={currentMedia.caption}
+                  src={currentFlagshipSlide.src}
+                  alt={currentFlagshipSlide.caption}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -140,6 +158,73 @@ export const ProjectsSection: React.FC = () => {
                   }}
                 />
               ) : null}
+
+              {/* Prev / Next Carousel Controls */}
+              <button
+                onClick={(e) => { e.stopPropagation(); handlePrevFlagship(); }}
+                style={{
+                  position: 'absolute',
+                  left: '10px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  backgroundColor: 'rgba(15, 23, 42, 0.75)',
+                  border: '1px solid #334155',
+                  color: '#ffffff',
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  zIndex: 10
+                }}
+                aria-label="Previous Slide"
+              >
+                <ChevronLeft size={16} />
+              </button>
+
+              <button
+                onClick={(e) => { e.stopPropagation(); handleNextFlagship(); }}
+                style={{
+                  position: 'absolute',
+                  right: '10px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  backgroundColor: 'rgba(15, 23, 42, 0.75)',
+                  border: '1px solid #334155',
+                  color: '#ffffff',
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  zIndex: 10
+                }}
+                aria-label="Next Slide"
+              >
+                <ChevronRight size={16} />
+              </button>
+
+              {/* Floating Slide Badge */}
+              <div style={{
+                position: 'absolute',
+                top: '12px',
+                right: '12px',
+                backgroundColor: 'rgba(15, 23, 42, 0.85)',
+                backdropFilter: 'blur(4px)',
+                border: '1px solid #334155',
+                color: '#38bdf8',
+                fontSize: '0.65rem',
+                fontFamily: 'var(--font-mono)',
+                padding: '0.2rem 0.5rem',
+                borderRadius: '4px',
+                fontWeight: 600
+              }}>
+                {currentFlagshipSlide.badge}
+              </div>
 
               {/* Floating Zoom Hint */}
               <div style={{
@@ -163,7 +248,7 @@ export const ProjectsSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Sub-caption bar */}
+            {/* Sub-caption bar with Slide Index Indicator */}
             <div style={{
               padding: '0.65rem 1rem',
               backgroundColor: '#090d16',
@@ -173,11 +258,17 @@ export const ProjectsSection: React.FC = () => {
               fontFamily: 'var(--font-mono)',
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'space-between',
               gap: '0.5rem'
             }}>
-              <span style={{ color: '#38bdf8' }}>●</span>
-              <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {currentMedia.caption}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', overflow: 'hidden' }}>
+                <span style={{ color: '#38bdf8' }}>●</span>
+                <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {currentFlagshipSlide.title}: {currentFlagshipSlide.caption}
+                </span>
+              </div>
+              <span style={{ fontSize: '0.7rem', color: '#64748b', flexShrink: 0 }}>
+                {flagshipSlide + 1} / {flagship.slides.length}
               </span>
             </div>
           </div>
@@ -253,173 +344,328 @@ export const ProjectsSection: React.FC = () => {
         </div>
 
         {/* =========================================================================
-            2. SECONDARY GRID: Jobflow (Integrated) & AI Email Agent (Placeholder)
+            2. SECONDARY GRID: Jobflow (Multi-Slide Carousel) & AI Email Agent
            ========================================================================= */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
           gap: '1.75rem'
         }}>
-          {secondaryCards.map((project) => (
-            <div
-              key={project.id}
-              style={{
-                backgroundColor: '#ffffff',
-                border: '1px solid var(--border)',
-                borderRadius: 'var(--radius-lg)',
-                overflow: 'hidden',
+          {/* A. JOBFLOW CARD (Pipeline Studio + ATS Resume Preview Slides) */}
+          <div
+            style={{
+              backgroundColor: '#ffffff',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-lg)',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              boxShadow: 'var(--shadow-sm)'
+            }}
+          >
+            {/* Multi-Slide Media Viewport for Jobflow */}
+            <div style={{ backgroundColor: '#0b1120', borderBottom: '1px solid var(--border)', position: 'relative' }}>
+              {/* Header Tab Bar */}
+              <div style={{
+                padding: '0.5rem 0.75rem',
+                backgroundColor: '#0f172a',
+                borderBottom: '1px solid #1e293b',
                 display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                boxShadow: 'var(--shadow-sm)',
-                transition: 'border-color 0.2s'
-              }}
-            >
-              {/* Media Preview Section for Card */}
-              {project.media.type === 'image' && project.media.src ? (
-                <div
-                  style={{
-                    backgroundColor: '#0b1120',
-                    borderBottom: '1px solid var(--border)',
-                    height: '210px',
-                    position: 'relative',
-                    cursor: 'pointer',
-                    overflow: 'hidden'
-                  }}
-                  onClick={() => setModalImage(project.media.src!)}
-                  title="Click to view full resolution"
-                >
-                  <img
-                    src={project.media.src}
-                    alt={project.title}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      objectPosition: 'top left',
-                      display: 'block'
-                    }}
-                  />
-                  {/* Floating Badges */}
-                  <div style={{
-                    position: 'absolute',
-                    top: '10px',
-                    right: '10px',
-                    backgroundColor: 'rgba(15, 23, 42, 0.85)',
-                    backdropFilter: 'blur(4px)',
-                    border: '1px solid #334155',
-                    color: '#38bdf8',
-                    fontSize: '0.65rem',
-                    fontFamily: 'var(--font-mono)',
-                    padding: '0.2rem 0.5rem',
-                    borderRadius: '4px',
-                    fontWeight: 600
-                  }}>
-                    {project.media.mockBadge}
-                  </div>
-                </div>
-              ) : (
-                /* Sleek Editorial Placeholder for Serverless AI Email Agent */
-                <div
-                  style={{
-                    backgroundColor: '#f8fafc',
-                    borderBottom: '1px dashed var(--border)',
-                    height: '210px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '1.5rem',
-                    textAlign: 'center',
-                    position: 'relative'
-                  }}
-                >
-                  <div style={{
-                    width: '44px',
-                    height: '44px',
-                    borderRadius: '50%',
-                    backgroundColor: '#ffffff',
-                    border: '1px solid var(--border)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: '0.75rem',
-                    boxShadow: 'var(--shadow-sm)'
-                  }}>
-                    <Radio size={20} color="#64748b" />
-                  </div>
-
-                  <span style={{ fontSize: '0.825rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.25rem' }}>
-                    Telegram & CI/CD Pipeline
-                  </span>
-
-                  <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', maxWidth: '280px', margin: 0 }}>
-                    {project.media.caption}
-                  </p>
-
-                  <div style={{
-                    position: 'absolute',
-                    top: '10px',
-                    right: '10px',
-                    backgroundColor: '#ffffff',
-                    border: '1px solid var(--border)',
-                    color: 'var(--text-dim)',
-                    fontSize: '0.65rem',
-                    fontFamily: 'var(--font-mono)',
-                    padding: '0.2rem 0.5rem',
-                    borderRadius: '4px'
-                  }}>
-                    {project.media.mockBadge}
-                  </div>
-                </div>
-              )}
-
-              {/* Card Body */}
-              <div style={{ padding: '1.75rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.5rem' }}>
-                  <Sparkles size={13} color="#2563eb" />
-                  <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#2563eb', fontFamily: 'var(--font-mono)' }}>
-                    {project.pillar}
-                  </span>
-                </div>
-
-                <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.75rem' }}>
-                  {project.title}
-                </h3>
-
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1.25rem', flex: 1 }}>
-                  {project.description}
-                </p>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.75rem' }}>
-                  {project.tags.map((tag, tIdx) => (
-                    <span key={tIdx} className="tag-badge">
-                      {tag}
-                    </span>
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}>
+                <div style={{ display: 'flex', gap: '0.3rem' }}>
+                  {jobflowProject.slides.map((s, idx) => (
+                    <button
+                      key={s.id}
+                      onClick={() => setJobflowSlide(idx)}
+                      style={{
+                        background: jobflowSlide === idx ? '#1e293b' : 'transparent',
+                        color: jobflowSlide === idx ? '#38bdf8' : '#94a3b8',
+                        border: jobflowSlide === idx ? '1px solid #334155' : '1px solid transparent',
+                        borderRadius: '4px',
+                        fontSize: '0.65rem',
+                        fontFamily: 'var(--font-mono)',
+                        padding: '0.15rem 0.45rem',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {s.label}
+                    </button>
                   ))}
                 </div>
 
-                {/* Footer Link */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem' }}>
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.4rem',
-                      color: 'var(--text-main)',
-                      fontSize: '0.85rem',
-                      fontWeight: 600
-                    }}
-                  >
-                    <Icons.Github width={14} height={14} /> Repository <ArrowRight size={13} />
-                  </a>
+                <span style={{ fontSize: '0.65rem', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
+                  {jobflowSlide + 1} / {jobflowProject.slides.length}
+                </span>
+              </div>
+
+              {/* Image Viewport */}
+              <div
+                style={{
+                  height: '220px',
+                  position: 'relative',
+                  cursor: 'pointer',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: '#060a12'
+                }}
+                onClick={() => setModalImage(currentJobflowSlide.src!)}
+                title="Click to view full resolution"
+              >
+                <img
+                  src={currentJobflowSlide.src}
+                  alt={currentJobflowSlide.caption}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: jobflowSlide === 1 ? 'contain' : 'cover',
+                    objectPosition: 'top left',
+                    display: 'block'
+                  }}
+                />
+
+                {/* Left/Right controls */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); handlePrevJobflow(); }}
+                  style={{
+                    position: 'absolute',
+                    left: '8px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    backgroundColor: 'rgba(15, 23, 42, 0.75)',
+                    border: '1px solid #334155',
+                    color: '#ffffff',
+                    width: '26px',
+                    height: '26px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer'
+                  }}
+                  aria-label="Previous Slide"
+                >
+                  <ChevronLeft size={14} />
+                </button>
+
+                <button
+                  onClick={(e) => { e.stopPropagation(); handleNextJobflow(); }}
+                  style={{
+                    position: 'absolute',
+                    right: '8px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    backgroundColor: 'rgba(15, 23, 42, 0.75)',
+                    border: '1px solid #334155',
+                    color: '#ffffff',
+                    width: '26px',
+                    height: '26px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer'
+                  }}
+                  aria-label="Next Slide"
+                >
+                  <ChevronRight size={14} />
+                </button>
+
+                {/* Badge */}
+                <div style={{
+                  position: 'absolute',
+                  top: '8px',
+                  right: '8px',
+                  backgroundColor: 'rgba(15, 23, 42, 0.85)',
+                  backdropFilter: 'blur(4px)',
+                  border: '1px solid #334155',
+                  color: '#38bdf8',
+                  fontSize: '0.625rem',
+                  fontFamily: 'var(--font-mono)',
+                  padding: '0.15rem 0.45rem',
+                  borderRadius: '4px',
+                  fontWeight: 600
+                }}>
+                  {currentJobflowSlide.badge}
                 </div>
               </div>
+
+              {/* Sub-caption */}
+              <div style={{
+                padding: '0.4rem 0.75rem',
+                backgroundColor: '#0c111d',
+                borderTop: '1px solid #1e293b',
+                fontSize: '0.7rem',
+                color: '#94a3b8',
+                fontFamily: 'var(--font-mono)',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+              }}>
+                {currentJobflowSlide.caption}
+              </div>
             </div>
-          ))}
+
+            {/* Jobflow Card Content */}
+            <div style={{ padding: '1.75rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.5rem' }}>
+                <Sparkles size={13} color="#2563eb" />
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#2563eb', fontFamily: 'var(--font-mono)' }}>
+                  {jobflowProject.pillar}
+                </span>
+              </div>
+
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.75rem' }}>
+                {jobflowProject.title}
+              </h3>
+
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1.25rem', flex: 1 }}>
+                {jobflowProject.description}
+              </p>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.75rem' }}>
+                {jobflowProject.tags.map((tag, tIdx) => (
+                  <span key={tIdx} className="tag-badge">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem' }}>
+                <a
+                  href={jobflowProject.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    color: 'var(--text-main)',
+                    fontSize: '0.85rem',
+                    fontWeight: 600
+                  }}
+                >
+                  <Icons.Github width={14} height={14} /> Repository <ArrowRight size={13} />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* B. AI EMAIL AGENT CARD (Dedicated Clean Placeholder) */}
+          <div
+            style={{
+              backgroundColor: '#ffffff',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-lg)',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              boxShadow: 'var(--shadow-sm)'
+            }}
+          >
+            {/* Sleek Editorial Placeholder for Serverless AI Email Agent */}
+            <div
+              style={{
+                backgroundColor: '#f8fafc',
+                borderBottom: '1px dashed var(--border)',
+                height: '260px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '1.5rem',
+                textAlign: 'center',
+                position: 'relative'
+              }}
+            >
+              <div style={{
+                width: '46px',
+                height: '46px',
+                borderRadius: '50%',
+                backgroundColor: '#ffffff',
+                border: '1px solid var(--border)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '0.85rem',
+                boxShadow: 'var(--shadow-sm)'
+              }}>
+                <Radio size={20} color="#64748b" />
+              </div>
+
+              <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.3rem' }}>
+                Telegram Bot & Event Pipeline
+              </span>
+
+              <p style={{ fontSize: '0.775rem', color: 'var(--text-muted)', maxWidth: '280px', margin: 0, lineHeight: 1.5 }}>
+                {emailAgentProject.slides[0].caption}
+              </p>
+
+              <div style={{
+                position: 'absolute',
+                top: '12px',
+                right: '12px',
+                backgroundColor: '#ffffff',
+                border: '1px solid var(--border)',
+                color: 'var(--text-dim)',
+                fontSize: '0.65rem',
+                fontFamily: 'var(--font-mono)',
+                padding: '0.2rem 0.5rem',
+                borderRadius: '4px'
+              }}>
+                {emailAgentProject.slides[0].badge}
+              </div>
+            </div>
+
+            {/* Email Agent Card Body */}
+            <div style={{ padding: '1.75rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.5rem' }}>
+                <Sparkles size={13} color="#2563eb" />
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#2563eb', fontFamily: 'var(--font-mono)' }}>
+                  {emailAgentProject.pillar}
+                </span>
+              </div>
+
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.75rem' }}>
+                {emailAgentProject.title}
+              </h3>
+
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1.25rem', flex: 1 }}>
+                {emailAgentProject.description}
+              </p>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.75rem' }}>
+                {emailAgentProject.tags.map((tag, tIdx) => (
+                  <span key={tIdx} className="tag-badge">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem' }}>
+                <a
+                  href={emailAgentProject.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    color: 'var(--text-main)',
+                    fontSize: '0.85rem',
+                    fontWeight: 600
+                  }}
+                >
+                  <Icons.Github width={14} height={14} /> Repository <ArrowRight size={13} />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* =========================================================================
