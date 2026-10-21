@@ -1,13 +1,13 @@
 import React from 'react';
 import { portfolioConfig } from '../data/portfolioData';
-import { ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Icons } from './BrandIcons';
 
 export const Hero: React.FC = () => {
   const { hero } = portfolioConfig;
 
   return (
-    <section id="home" style={{ padding: '5rem 0 4.5rem 0', borderBottom: '1px solid var(--border)' }}>
+    <section id="home" style={{ padding: '4.5rem 0 4rem 0', borderBottom: '1px solid var(--border)' }}>
       <div className="container" style={{
         display: 'flex',
         alignItems: 'center',
@@ -16,10 +16,23 @@ export const Hero: React.FC = () => {
         flexWrap: 'wrap-reverse'
       }}>
         {/* Left Column: Intro */}
-        <div style={{ flex: '1 1 540px', maxWidth: '620px' }}>
-          <p style={{ fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '0.5rem', fontWeight: 500 }}>
-            {hero.greeting}
-          </p>
+        <div style={{ flex: '1 1 540px', maxWidth: '640px' }}>
+          {/* Live Availability Pill */}
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            backgroundColor: '#f0fdf4',
+            border: '1px solid #bbf7d0',
+            padding: '0.35rem 0.85rem',
+            borderRadius: 'var(--radius-full)',
+            marginBottom: '1.25rem'
+          }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#16a34a', display: 'inline-block' }} />
+            <span style={{ fontSize: '0.775rem', fontWeight: 600, color: '#166534', fontFamily: 'var(--font-mono)' }}>
+              {hero.statusPill}
+            </span>
+          </div>
 
           <h1 style={{
             fontSize: 'clamp(2.5rem, 4vw, 3.25rem)',
@@ -27,55 +40,62 @@ export const Hero: React.FC = () => {
             letterSpacing: '-0.035em',
             color: 'var(--text-main)',
             lineHeight: 1.15,
-            marginBottom: '0.85rem'
+            marginBottom: '0.65rem'
           }}>
             {hero.name}
           </h1>
 
           <p style={{
-            fontSize: '1.2rem',
+            fontSize: '1.15rem',
             color: 'var(--text-body)',
             fontWeight: 500,
-            marginBottom: '1.35rem'
+            marginBottom: '1.25rem'
           }}>
-            {hero.role}
+            {hero.role} <span style={{ color: 'var(--text-light)', margin: '0 0.4rem' }}>•</span> <span style={{ fontSize: '0.925rem', color: 'var(--text-muted)' }}>{hero.location}</span>
           </p>
 
           <p style={{
             fontSize: '1rem',
             color: 'var(--text-muted)',
             lineHeight: 1.75,
-            marginBottom: '2.25rem',
-            maxWidth: '540px'
+            marginBottom: '2rem',
+            maxWidth: '560px'
           }}>
             {hero.summary}
           </p>
 
           {/* Action Buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2.75rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
             <a href="#projects" className="btn-primary">
-              Explore Projects <ArrowRight size={15} />
+              Explore Featured Projects <ArrowRight size={15} />
             </a>
             <a href={hero.links.github} target="_blank" rel="noreferrer" className="btn-outline">
               <Icons.Github width={16} height={16} /> GitHub
             </a>
           </div>
 
-          {/* Mini Social Link Row */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-            <a href={hero.links.github} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-              <Icons.Github width={16} height={16} /> GitHub
-            </a>
-            <a href={hero.links.linkedin} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-              <Icons.Linkedin width={16} height={16} /> LinkedIn
-            </a>
-            <a href={`mailto:${hero.links.email}`} style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-              <Mail size={16} /> Email
-            </a>
+          {/* Impact Stats Grid (Proof of Work) */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+            gap: '1rem',
+            paddingTop: '1.5rem',
+            borderTop: '1px solid var(--border-subtle)'
+          }}>
+            {hero.stats.map((st, i) => (
+              <div key={i} style={{ display: 'flex', flexDirection: 'column' }}>
+                <span style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-mono)', letterSpacing: '-0.02em' }}>
+                  {st.value}
+                </span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 500 }}>
+                  {st.label}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Right Column: Graduation Photo Avatar + Ring + Dots Grid + Mantra */}
+        {/* Right Column: Graduation Portrait Avatar + Ring + Dots Grid + Mantra */}
         <div style={{
           display: 'flex',
           alignItems: 'center',

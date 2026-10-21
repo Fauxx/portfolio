@@ -15,10 +15,10 @@ export interface MediaSlide {
   caption: string;
 }
 
-export interface FeaturedProject {
+export interface ProjectShowcase {
   id: string;
   title: string;
-  badge?: string;
+  badge: string;
   pillar: string;
   description: string;
   highlights: string[];
@@ -26,18 +26,7 @@ export interface FeaturedProject {
   slides: MediaSlide[];
   githubUrl?: string;
   liveUrl?: string;
-  caseStudyText: string;
-}
-
-export interface SecondaryProject {
-  id: string;
-  title: string;
-  pillar: string;
-  description: string;
-  tags: string[];
-  slides: MediaSlide[];
-  githubUrl?: string;
-  caseStudyText: string;
+  reversed?: boolean;
 }
 
 export interface TimelineEntry {
@@ -53,67 +42,40 @@ export const portfolioConfig = {
     tagline: "ENGINEERING"
   },
   hero: {
+    statusPill: "Available for Software Developer & Cloud/DevOps Roles",
+    location: "Pasig City, Metro Manila • UTC+8",
     greeting: "Hi, I'm",
     name: "Zet Donaue Samson",
     role: "Software Developer | Cloud & DevOps Engineer",
-    summary: "I build applications and the cloud infrastructure behind them, with an emphasis on automation, security, and reliable delivery.",
+    summary: "I build end-to-end applications and the cloud-native infrastructure behind them — from 4-layer Terraform Kubernetes platforms to reactive AI applications and automated event-driven pipelines.",
     avatarImage: "/media/zet-avatar.jpg",
     avatarInitials: "ZS",
     mantra: ["BUILD", "DEPLOY", "IMPROVE"],
+    stats: [
+      { label: "Cloud Infrastructure", value: "4-Layer IaC" },
+      { label: "GitOps Kubernetes", value: "13 Services" },
+      { label: "Applied Generative AI", value: "Gemini 2.0 / 3.6" }
+    ],
     links: {
       github: "https://github.com/Fauxx",
       linkedin: "https://linkedin.com/in/zet02",
       email: "zetsamson@gmail.com"
     }
   },
-  expertise: {
-    tag: "ENGINEERING FOCUS",
-    title: "Technologies & Expertise",
-    subtitle: "Tools and technologies I work with to build, deploy, and maintain modern applications and infrastructure.",
-    cards: [
-      {
-        id: "cloud",
-        icon: "cloud",
-        title: "Cloud Infrastructure",
-        items: ["GKE", "Terraform", "Networking", "IaC"]
-      },
-      {
-        id: "containers",
-        icon: "box",
-        title: "Containers & Delivery",
-        items: ["Kubernetes", "Docker", "GitHub Actions", "Argo CD", "Kustomize"]
-      },
-      {
-        id: "security",
-        icon: "shield",
-        title: "Security & Reliability",
-        items: ["Image Scanning", "Network Policies", "Workload Security", "Troubleshooting"]
-      },
-      {
-        id: "observability",
-        icon: "chart",
-        title: "Application & Observability",
-        items: ["Python", "TypeScript", "APIs", "Metrics", "Logs", "Tracing"]
-      }
-    ] as ExpertiseCard[]
-  },
-  projects: {
-    tag: "FEATURED PROJECTS",
-    title: "Real Projects. Practical Solutions.",
-    allProjectsUrl: "https://github.com/Fauxx",
-    flagship: {
+  showcases: [
+    {
       id: "fire-monitoring",
       title: "FireMonitoringSystem",
-      badge: "Flagship Cloud Architecture",
-      pillar: "Cloud Infrastructure • 4-Layer IaC • Full Observability",
-      description: "Production-grade IoT fire monitoring platform on Azure AKS & Kubernetes. Engineered with 4-layer modular Terraform IaC, GitOps deployment via ArgoCD, and a live observability stack with Loki log streaming and Prometheus scrape tuning.",
+      badge: "Flagship Cloud & DevOps",
+      pillar: "Cloud Infrastructure • 4-Layer Modular IaC • Zero-Trust Observability",
+      description: "Production-grade IoT telemetry & fire monitoring platform on Azure AKS & Kubernetes. Engineered with 4-layer modular Terraform IaC, automated GitOps delivery via ArgoCD, and an end-to-end observability stack querying live Prometheus metrics and Grafana Loki log streams without mock data.",
       highlights: [
-        "Live 360° multi-tier architecture & latency verification hops",
-        "Grafana Loki log aggregation with Cloud SQL sidecar stream aliasing",
-        "Animated real-time telemetry streaming over MQTT & WebGL map canvas",
-        "Zero-trust network policies, multi-stage non-root containers & Trivy scanning"
+        "Live 360° multi-tier architecture & latency verification hops across all service tiers",
+        "Grafana Loki log aggregation with Cloud SQL sidecar stream aliasing & level filtering",
+        "Animated real-time telemetry streaming over MQTT & WebGL 3D map canvas",
+        "Zero-trust network policies, multi-stage non-root containers & Trivy vulnerability scanning"
       ],
-      tags: ["Kubernetes (AKS)", "Terraform IaC", "ArgoCD", "Prometheus & Loki", "FastAPI ETL", "MapLibre 3D"],
+      tags: ["Kubernetes (AKS)", "Terraform IaC", "ArgoCD GitOps", "Prometheus & Loki", "FastAPI ETL", "MapLibre 3D", "PostgreSQL"],
       slides: [
         {
           id: "arch",
@@ -154,86 +116,129 @@ export const portfolioConfig = {
       ],
       githubUrl: "https://github.com/Fauxx/FireMonitoringSystem",
       liveUrl: "https://dev.fires.systems",
-      caseStudyText: "View Case Study"
-    } as FeaturedProject,
-    secondaryCards: [
+      reversed: false
+    },
+    {
+      id: "jobflow",
+      title: "Jobflow",
+      badge: "AI Product Engineering",
+      pillar: "Applied Generative AI • Full-Stack Studio • ATS Layout Engine",
+      description: "Full-stack AI job tracking & ATS resume tailoring studio. Combines Google Gemini LLMs with strict Pydantic JSON schema fallback validation, Playwright browser cookie scraping, and ATS-compliant pixel-accurate PDF rendering with typographic scale constraints.",
+      highlights: [
+        "Web-based A4 ATS print preview modal with zoom controls and dynamic pixel overflow detection",
+        "Interactive Resume Studio with real-time draft tailoring, skill extraction, and AI bullet suggestions",
+        "Comprehensive Master Profile data engine centralizing skills, projects, and career records",
+        "Universal job scraper via Playwright with session cookie persistence for LinkedIn & job boards"
+      ],
+      tags: ["FastAPI", "Google Gemini API", "React 19", "TypeScript", "Playwright", "PostgreSQL", "WeasyPrint"],
+      slides: [
+        {
+          id: "jobflow-preview-modal",
+          label: "Preview & Print Modal",
+          type: "image",
+          src: "/media/jobflow-preview-modal.png",
+          badge: "PDF PREVIEW MODAL",
+          title: "Web-Based Resume Preview & Print Modal",
+          caption: "Interactive A4 preview modal with zoom controls, pixel overflow detection, and direct PDF print"
+        },
+        {
+          id: "jobflow-builder",
+          label: "Resume Studio Builder",
+          type: "image",
+          src: "/media/jobflow-resume-builder.png",
+          badge: "AI TAILOR STUDIO",
+          title: "Interactive Resume Builder",
+          caption: "Live resume editor with split-screen tailoring, Gemini AI bullet suggestions, and skill matching"
+        },
+        {
+          id: "jobflow-profile",
+          label: "Master Profile",
+          type: "image",
+          src: "/media/jobflow-master-profile.png",
+          badge: "MASTER REPOSITORY",
+          title: "Master Profile Data Engine",
+          caption: "Centralized repository for skills, career accomplishments, and project telemetry data"
+        },
+        {
+          id: "jobflow-dash",
+          label: "Pipeline Dashboard",
+          type: "image",
+          src: "/media/jobflow-dashboard.png",
+          badge: "JOB PIPELINE",
+          title: "Application Tracking Studio",
+          caption: "Universal scraper ingestion, status tracking lanes, and cover letter generator"
+        }
+      ],
+      githubUrl: "https://github.com/Fauxx/jobflow",
+      reversed: true
+    },
+    {
+      id: "ai-email-agent",
+      title: "Autonomous Job Email Agent",
+      badge: "Event-Driven Automation",
+      pillar: "Serverless Workflow • Automated Batch LLM • Real-Time Telegram Alerting",
+      description: "Event-driven background automation pipeline running on scheduled cloud runners. Autonomously connects to Gmail over IMAP, extracts recruiter communications, executes structured Gemini LLM intent classification, and forwards actionable mobile alerts to Telegram.",
+      highlights: [
+        "Automated GitHub Actions cron scheduler executing batch AI analysis without server overhead",
+        "Structured Telegram bot alerting with company name, role, status summary, and direct Gmail action links",
+        "Idempotent UID caching mechanism preventing duplicate notifications across daily scheduled runs",
+        "Zero-maintenance containerized footprint with environment secret isolation"
+      ],
+      tags: ["Python", "Gemini 2.0 Flash", "Telegram Bot API", "GitHub Actions", "Docker", "IMAP4"],
+      slides: [
+        {
+          id: "email-telegram",
+          label: "Telegram Mobile Alert",
+          type: "image",
+          src: "/media/email-agent-telegram.jpg",
+          badge: "LIVE TELEGRAM BOT",
+          title: "Telegram Alert Notification",
+          caption: "Real-time structured alert with company, role, application status, and direct Gmail action link"
+        },
+        {
+          id: "email-runner",
+          label: "Actions Runner (Forwarding)",
+          type: "image",
+          src: "/media/email-agent-runner.png",
+          badge: "GITHUB ACTIONS RUNNER",
+          title: "CI/CD Scheduled Runner Execution",
+          caption: "Automated cron execution: IMAP polling, Gemini structured batch classification, and Telegram API forward"
+        }
+      ],
+      githubUrl: "https://github.com/Fauxx/ai-job-email-agent",
+      reversed: false
+    }
+  ] as ProjectShowcase[],
+  expertise: {
+    tag: "ENGINEERING FOCUS",
+    title: "Technologies & Expertise",
+    subtitle: "Tools and technologies I work with to build, deploy, and maintain modern applications and infrastructure.",
+    cards: [
       {
-        id: "jobflow",
-        title: "Jobflow",
-        pillar: "AI Product Engineering • Applied Gemini LLM",
-        description: "Full-stack AI job tracking & ATS resume tailoring studio. Combines Google Gemini LLMs with strict Pydantic JSON schema fallback chains, Playwright browser cookie scraping, and ATS-compliant pixel-accurate PDF rendering.",
-        tags: ["FastAPI", "Google Gemini API", "React 19", "Playwright", "PostgreSQL", "WeasyPrint"],
-        slides: [
-          {
-            id: "jobflow-preview-modal",
-            label: "Preview & Print Modal",
-            type: "image",
-            src: "/media/jobflow-preview-modal.png",
-            badge: "PDF PREVIEW MODAL",
-            title: "Web-Based Resume Preview & Print Modal",
-            caption: "Interactive A4 preview modal with zoom controls, pixel overflow detection, and direct PDF print"
-          },
-          {
-            id: "jobflow-builder",
-            label: "Resume Studio Builder",
-            type: "image",
-            src: "/media/jobflow-resume-builder.png",
-            badge: "AI TAILOR STUDIO",
-            title: "Interactive Resume Builder",
-            caption: "Live resume editor with split-screen tailoring, Gemini AI bullet suggestions, and skill matching"
-          },
-          {
-            id: "jobflow-profile",
-            label: "Master Profile",
-            type: "image",
-            src: "/media/jobflow-master-profile.png",
-            badge: "MASTER REPOSITORY",
-            title: "Master Profile Data Engine",
-            caption: "Centralized repository for skills, career accomplishments, and project telemetry data"
-          },
-          {
-            id: "jobflow-dash",
-            label: "Pipeline Dashboard",
-            type: "image",
-            src: "/media/jobflow-dashboard.png",
-            badge: "JOB PIPELINE",
-            title: "Application Tracking Studio",
-            caption: "Universal scraper ingestion, status tracking lanes, and cover letter generator"
-          }
-        ],
-        githubUrl: "https://github.com/Fauxx/jobflow",
-        caseStudyText: "View Case Study"
+        id: "cloud",
+        icon: "cloud",
+        title: "Cloud Infrastructure",
+        items: ["GKE", "Azure AKS", "Terraform", "Networking", "IaC"]
       },
       {
-        id: "ai-email-agent",
-        title: "Autonomous Job Email Agent",
-        pillar: "Event-Driven Backend • Serverless Automation",
-        description: "Event-driven cloud automation pipeline. Autonomously monitors incoming recruiter outreach, triggers Gemini LLM intent classification, and dispatches real-time Telegram alerts with instant action links.",
-        tags: ["Python", "Gemini 2.0 Flash", "Telegram Bot API", "GitHub Actions", "Docker"],
-        slides: [
-          {
-            id: "email-telegram",
-            label: "Telegram Mobile Alert",
-            type: "image",
-            src: "/media/email-agent-telegram.jpg",
-            badge: "LIVE TELEGRAM BOT",
-            title: "Telegram Alert Notification",
-            caption: "Real-time structured alert with company, role, application status, and direct Gmail action link"
-          },
-          {
-            id: "email-runner",
-            label: "Actions Runner (Forwarding)",
-            type: "image",
-            src: "/media/email-agent-runner.png",
-            badge: "GITHUB ACTIONS RUNNER",
-            title: "CI/CD Scheduled Runner Execution",
-            caption: "Automated cron execution: IMAP polling, Gemini structured batch classification, and Telegram API forward"
-          }
-        ],
-        githubUrl: "https://github.com/Fauxx/ai-job-email-agent",
-        caseStudyText: "View Architecture"
+        id: "containers",
+        icon: "box",
+        title: "Containers & Delivery",
+        items: ["Kubernetes", "Docker", "GitHub Actions", "Argo CD", "Kustomize"]
+      },
+      {
+        id: "security",
+        icon: "shield",
+        title: "Security & Reliability",
+        items: ["Trivy Vulnerability Scan", "Calico Network Policies", "Non-Root Containers", "Troubleshooting"]
+      },
+      {
+        id: "observability",
+        icon: "chart",
+        title: "Observability & Systems",
+        items: ["Python", "ASP.NET Core", "TypeScript", "Prometheus", "Loki Logs", "Grafana Alloy"]
       }
-    ] as SecondaryProject[]
+    ] as ExpertiseCard[]
   },
   about: {
     title: "About Me",
@@ -278,6 +283,6 @@ export const portfolioConfig = {
     github: "https://github.com/Fauxx",
     linkedin: "https://linkedin.com/in/zet02",
     email: "zetsamson@gmail.com",
-    resumeUrl: "#"
+    resumeUrl: "/media/Resume_Zet_Donaue_Samson_2.pdf"
   }
 };
