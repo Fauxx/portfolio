@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { portfolioConfig } from '../data/portfolioData';
-import { ArrowRight, ExternalLink, CheckCircle2, Eye, Sparkles, ChevronLeft, ChevronRight, Radio } from 'lucide-react';
+import { ArrowRight, ExternalLink, CheckCircle2, Eye, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Icons } from './BrandIcons';
 
 export const ProjectsSection: React.FC = () => {
@@ -9,12 +9,14 @@ export const ProjectsSection: React.FC = () => {
 
   const [flagshipSlide, setFlagshipSlide] = useState<number>(0);
   const [jobflowSlide, setJobflowSlide] = useState<number>(0);
+  const [emailAgentSlide, setEmailAgentSlide] = useState<number>(0);
   const [modalImage, setModalImage] = useState<string | null>(null);
 
   const currentFlagshipSlide = flagship.slides[flagshipSlide];
   const jobflowProject = secondaryCards.find(c => c.id === 'jobflow')!;
   const currentJobflowSlide = jobflowProject.slides[jobflowSlide];
   const emailAgentProject = secondaryCards.find(c => c.id === 'ai-email-agent')!;
+  const currentEmailSlide = emailAgentProject.slides[emailAgentSlide];
 
   const handleNextFlagship = () => {
     setFlagshipSlide((prev) => (prev + 1) % flagship.slides.length);
@@ -28,6 +30,13 @@ export const ProjectsSection: React.FC = () => {
   };
   const handlePrevJobflow = () => {
     setJobflowSlide((prev) => (prev - 1 + jobflowProject.slides.length) % jobflowProject.slides.length);
+  };
+
+  const handleNextEmail = () => {
+    setEmailAgentSlide((prev) => (prev + 1) % emailAgentProject.slides.length);
+  };
+  const handlePrevEmail = () => {
+    setEmailAgentSlide((prev) => (prev - 1 + emailAgentProject.slides.length) % emailAgentProject.slides.length);
   };
 
   return (
@@ -168,8 +177,7 @@ export const ProjectsSection: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  zIndex: 10,
-                  transition: 'background 0.2s ease'
+                  zIndex: 10
                 }}
                 aria-label="Previous Slide"
               >
@@ -193,8 +201,7 @@ export const ProjectsSection: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  zIndex: 10,
-                  transition: 'background 0.2s ease'
+                  zIndex: 10
                 }}
                 aria-label="Next Slide"
               >
@@ -241,7 +248,7 @@ export const ProjectsSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Sub-caption bar with Slide Index Indicator */}
+            {/* Sub-caption bar */}
             <div style={{
               padding: '0.75rem 1.25rem',
               backgroundColor: '#090d16',
@@ -337,7 +344,7 @@ export const ProjectsSection: React.FC = () => {
         </div>
 
         {/* =========================================================================
-            2. SECONDARY GRID: Jobflow (4-Slide Studio) & AI Email Agent
+            2. SECONDARY GRID: Jobflow (4-Slide Studio) & AI Email Agent (2-Slide)
            ========================================================================= */}
         <div className="secondary-grid">
           {/* A. JOBFLOW CARD (4-Slide Studio) */}
@@ -355,9 +362,8 @@ export const ProjectsSection: React.FC = () => {
           >
             {/* Multi-Slide Media Viewport for Jobflow */}
             <div style={{ backgroundColor: '#0b1120', borderBottom: '1px solid var(--border)', position: 'relative' }}>
-              {/* Header Tab Bar */}
               <div style={{
-                padding: '0.6rem 0.85rem',
+                padding: '0.65rem 0.95rem',
                 backgroundColor: '#0f172a',
                 borderBottom: '1px solid #1e293b',
                 display: 'flex',
@@ -392,10 +398,9 @@ export const ProjectsSection: React.FC = () => {
                 </span>
               </div>
 
-              {/* Image Viewport */}
               <div
                 style={{
-                  height: '280px',
+                  height: '300px',
                   position: 'relative',
                   cursor: 'pointer',
                   overflow: 'hidden',
@@ -418,7 +423,6 @@ export const ProjectsSection: React.FC = () => {
                   }}
                 />
 
-                {/* Left/Right controls */}
                 <button
                   onClick={(e) => { e.stopPropagation(); handlePrevJobflow(); }}
                   style={{
@@ -465,7 +469,6 @@ export const ProjectsSection: React.FC = () => {
                   <ChevronRight size={16} />
                 </button>
 
-                {/* Badge */}
                 <div style={{
                   position: 'absolute',
                   top: '10px',
@@ -484,7 +487,6 @@ export const ProjectsSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Sub-caption */}
               <div style={{
                 padding: '0.55rem 0.85rem',
                 backgroundColor: '#0c111d',
@@ -545,7 +547,7 @@ export const ProjectsSection: React.FC = () => {
             </div>
           </div>
 
-          {/* B. AI EMAIL AGENT CARD (Clean Pipeline Placeholder) */}
+          {/* B. AI EMAIL AGENT CARD (Interactive 2-Slide Showcase) */}
           <div
             style={{
               backgroundColor: '#ffffff',
@@ -558,57 +560,147 @@ export const ProjectsSection: React.FC = () => {
               boxShadow: 'var(--shadow-sm)'
             }}
           >
-            {/* Sleek Editorial Placeholder for Serverless AI Email Agent */}
-            <div
-              style={{
-                backgroundColor: '#f8fafc',
-                borderBottom: '1px dashed var(--border)',
-                height: '320px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '2rem',
-                textAlign: 'center',
-                position: 'relative'
-              }}
-            >
+            {/* Multi-Slide Media Viewport for AI Email Agent */}
+            <div style={{ backgroundColor: '#0b1120', borderBottom: '1px solid var(--border)', position: 'relative' }}>
               <div style={{
-                width: '52px',
-                height: '52px',
-                borderRadius: '50%',
-                backgroundColor: '#ffffff',
-                border: '1px solid var(--border)',
+                padding: '0.65rem 0.95rem',
+                backgroundColor: '#0f172a',
+                borderBottom: '1px solid #1e293b',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1rem',
-                boxShadow: 'var(--shadow-sm)'
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                gap: '0.4rem'
               }}>
-                <Radio size={24} color="#64748b" />
+                <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
+                  {emailAgentProject.slides.map((s, idx) => (
+                    <button
+                      key={s.id}
+                      onClick={() => setEmailAgentSlide(idx)}
+                      style={{
+                        background: emailAgentSlide === idx ? '#1e293b' : 'transparent',
+                        color: emailAgentSlide === idx ? '#38bdf8' : '#94a3b8',
+                        border: emailAgentSlide === idx ? '1px solid #334155' : '1px solid transparent',
+                        borderRadius: '4px',
+                        fontSize: '0.675rem',
+                        fontFamily: 'var(--font-mono)',
+                        padding: '0.2rem 0.5rem',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {s.label}
+                    </button>
+                  ))}
+                </div>
+
+                <span style={{ fontSize: '0.675rem', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
+                  {emailAgentSlide + 1} / {emailAgentProject.slides.length}
+                </span>
               </div>
 
-              <span style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.4rem' }}>
-                Telegram Bot & Event Pipeline
-              </span>
+              <div
+                style={{
+                  height: '300px',
+                  position: 'relative',
+                  cursor: 'pointer',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: '#060a12'
+                }}
+                onClick={() => currentEmailSlide.src && setModalImage(currentEmailSlide.src)}
+                title="Click to view full resolution"
+              >
+                {currentEmailSlide.src ? (
+                  <img
+                    src={currentEmailSlide.src}
+                    alt={currentEmailSlide.caption}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain',
+                      display: 'block'
+                    }}
+                  />
+                ) : null}
 
-              <p style={{ fontSize: '0.825rem', color: 'var(--text-muted)', maxWidth: '320px', margin: 0, lineHeight: 1.6 }}>
-                {emailAgentProject.slides[0].caption}
-              </p>
+                <button
+                  onClick={(e) => { e.stopPropagation(); handlePrevEmail(); }}
+                  style={{
+                    position: 'absolute',
+                    left: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    backgroundColor: 'rgba(15, 23, 42, 0.8)',
+                    border: '1px solid #334155',
+                    color: '#ffffff',
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer'
+                  }}
+                  aria-label="Previous Slide"
+                >
+                  <ChevronLeft size={16} />
+                </button>
+
+                <button
+                  onClick={(e) => { e.stopPropagation(); handleNextEmail(); }}
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    backgroundColor: 'rgba(15, 23, 42, 0.8)',
+                    border: '1px solid #334155',
+                    color: '#ffffff',
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer'
+                  }}
+                  aria-label="Next Slide"
+                >
+                  <ChevronRight size={16} />
+                </button>
+
+                <div style={{
+                  position: 'absolute',
+                  top: '10px',
+                  right: '10px',
+                  backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                  backdropFilter: 'blur(4px)',
+                  border: '1px solid #334155',
+                  color: '#38bdf8',
+                  fontSize: '0.65rem',
+                  fontFamily: 'var(--font-mono)',
+                  padding: '0.2rem 0.5rem',
+                  borderRadius: '4px',
+                  fontWeight: 600
+                }}>
+                  {currentEmailSlide.badge}
+                </div>
+              </div>
 
               <div style={{
-                position: 'absolute',
-                top: '14px',
-                right: '14px',
-                backgroundColor: '#ffffff',
-                border: '1px solid var(--border)',
-                color: 'var(--text-dim)',
-                fontSize: '0.675rem',
+                padding: '0.55rem 0.85rem',
+                backgroundColor: '#0c111d',
+                borderTop: '1px solid #1e293b',
+                fontSize: '0.725rem',
+                color: '#94a3b8',
                 fontFamily: 'var(--font-mono)',
-                padding: '0.25rem 0.55rem',
-                borderRadius: '4px'
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
               }}>
-                {emailAgentProject.slides[0].badge}
+                {currentEmailSlide.caption}
               </div>
             </div>
 

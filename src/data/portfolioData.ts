@@ -57,6 +57,7 @@ export const portfolioConfig = {
     name: "Zet Donaue Samson",
     role: "Software Developer | Cloud & DevOps Engineer",
     summary: "I build applications and the cloud infrastructure behind them, with an emphasis on automation, security, and reliable delivery.",
+    avatarImage: "/media/zet-avatar.jpg",
     avatarInitials: "ZS",
     mantra: ["BUILD", "DEPLOY", "IMPROVE"],
     links: {
@@ -211,12 +212,22 @@ export const portfolioConfig = {
         tags: ["Python", "Gemini 2.0 Flash", "Telegram Bot API", "GitHub Actions", "Docker"],
         slides: [
           {
-            id: "email-placeholder",
-            label: "Alert Pipeline",
-            type: "placeholder",
-            badge: "MEDIA PLACEHOLDER",
-            title: "Telegram Alert & Actions Runner",
-            caption: "Awaiting Telegram notification & GitHub Actions runner execution captures"
+            id: "email-telegram",
+            label: "Telegram Mobile Alert",
+            type: "image",
+            src: "/media/email-agent-telegram.jpg",
+            badge: "LIVE TELEGRAM BOT",
+            title: "Telegram Alert Notification",
+            caption: "Real-time structured alert with company, role, application status, and direct Gmail action link"
+          },
+          {
+            id: "email-runner",
+            label: "Actions Runner (Forwarding)",
+            type: "image",
+            src: "/media/email-agent-runner.png",
+            badge: "GITHUB ACTIONS RUNNER",
+            title: "CI/CD Scheduled Runner Execution",
+            caption: "Automated cron execution: IMAP polling, Gemini structured batch classification, and Telegram API forward"
           }
         ],
         githubUrl: "https://github.com/Fauxx/ai-job-email-agent",
