@@ -1,19 +1,21 @@
-import { Header } from './components/Header';
-import { SkillsSection } from './components/SkillsSection';
+import { Navbar } from './components/Navbar';
+import { Hero } from './components/Hero';
+import { ExpertiseSection } from './components/ExpertiseSection';
 import { ProjectsSection } from './components/ProjectsSection';
-import { ExperienceSection } from './components/ExperienceSection';
-import { Footer } from './components/Footer';
+import { AboutAndTimeline } from './components/AboutAndTimeline';
+import { ContactAndFooter } from './components/ContactAndFooter';
 
 function App() {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Header />
+      <Navbar />
       <main style={{ flex: 1 }}>
-        <SkillsSection />
+        <Hero />
+        <ExpertiseSection />
         <ProjectsSection />
-        <ExperienceSection />
+        <AboutAndTimeline />
+        <ContactAndFooter />
       </main>
-      <Footer />
     </div>
   );
 }
