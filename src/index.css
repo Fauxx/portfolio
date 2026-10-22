@@ -157,9 +157,53 @@ code, pre {
   margin-bottom: 2.5rem;
 }
 
+.flagship-grid-reversed {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+}
+
 @media (max-width: 992px) {
-  .flagship-grid {
-    grid-template-columns: 1fr;
+  .flagship-grid,
+  .flagship-grid-reversed {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Mobile Navbar Support */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 680px) {
+  .nav-links {
+    gap: 1.15rem;
+    font-size: 0.8rem;
+    overflow-x: auto;
+    max-width: 60vw;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Hero Mantra Mobile Collapse */
+.hero-mantra {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  border-left: 1px solid var(--border);
+  padding-left: 1.25rem;
+  z-index: 1;
+}
+
+@media (max-width: 520px) {
+  .hero-mantra {
+    display: none;
   }
 }
 

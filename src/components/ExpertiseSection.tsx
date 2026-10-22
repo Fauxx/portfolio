@@ -1,6 +1,6 @@
 import React from 'react';
 import { portfolioConfig } from '../data/portfolioData';
-import { Cloud, Box, ShieldCheck, BarChart3 } from 'lucide-react';
+import { Cloud, Box, Server, ShieldCheck, BarChart3 } from 'lucide-react';
 
 export const ExpertiseSection: React.FC = () => {
   const { expertise } = portfolioConfig;
@@ -12,6 +12,8 @@ export const ExpertiseSection: React.FC = () => {
         return <Cloud {...props} />;
       case 'box':
         return <Box {...props} />;
+      case 'server':
+        return <Server {...props} />;
       case 'shield':
         return <ShieldCheck {...props} />;
       case 'chart':

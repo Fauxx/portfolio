@@ -1,6 +1,6 @@
 export interface ExpertiseCard {
   id: string;
-  icon: 'cloud' | 'box' | 'shield' | 'chart';
+  icon: 'cloud' | 'box' | 'server' | 'shield' | 'chart';
   title: string;
   items: string[];
 }
@@ -60,7 +60,7 @@ export const portfolioConfig = {
     stats: [
       { label: "Cloud Infrastructure", value: "4-Layer IaC" },
       { label: "GitOps Kubernetes", value: "13 Services" },
-      { label: "Applied Generative AI", value: "Gemini 2.0 / 3.6" }
+      { label: "Applied Generative AI", value: "Gemini 2.0 Flash" }
     ],
     links: {
       github: "https://github.com/Fauxx",
@@ -234,7 +234,7 @@ export const portfolioConfig = {
       },
       {
         id: "backend",
-        icon: "box",
+        icon: "server",
         title: "Backend APIs & Architecture",
         items: ["Python / FastAPI", "C# / ASP.NET Core 8 Minimal APIs", "Clean Architecture", "PostgreSQL", "Redis"]
       },

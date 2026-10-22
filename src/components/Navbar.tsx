@@ -29,7 +29,7 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Navigation Links */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', fontSize: '0.875rem' }}>
+        <div className="nav-links">
           <a href="#home" style={{ color: 'var(--primary-blue)', fontWeight: 600, position: 'relative', paddingBottom: '4px', borderBottom: '2px solid var(--primary-blue)' }}>
             Home
           </a>

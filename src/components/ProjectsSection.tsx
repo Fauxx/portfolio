@@ -84,12 +84,7 @@ export const ProjectsSection: React.FC = () => {
             return (
               <div
                 key={project.id}
-                className="flagship-grid"
-                style={{
-                  gridTemplateColumns: isReversed
-                    ? 'minmax(0, 1fr) minmax(0, 1.35fr)'
-                    : 'minmax(0, 1.35fr) minmax(0, 1fr)'
-                }}
+                className={`flagship-grid ${isReversed ? 'flagship-grid-reversed' : ''}`}
               >
                 {/* 1. Media Viewport (Left if not reversed, Right if reversed) */}
                 <div

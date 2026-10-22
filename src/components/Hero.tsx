@@ -107,7 +107,13 @@ export const Hero: React.FC = () => {
                 <span style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-mono)', letterSpacing: '-0.02em' }}>
                   {st.value}
                 </span>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 500 }}>
+                <span style={{
+                  fontSize: '0.725rem',
+                  color: 'var(--text-muted)',
+                  fontWeight: 600,
+                  letterSpacing: '0.02em',
+                  marginTop: '0.2rem'
+                }}>
                   {st.label}
                 </span>
               </div>
@@ -230,14 +236,7 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Side Vertical Mantra (BUILD DEPLOY IMPROVE) */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.65rem',
-            borderLeft: '1px solid var(--border)',
-            paddingLeft: '1.25rem',
-            zIndex: 1
-          }}>
+          <div className="hero-mantra">
             {hero.mantra.map((word, idx) => (
               <span
                 key={idx}

@@ -110,6 +110,9 @@ export const ContactAndFooter: React.FC = () => {
             {/* Résumé */}
             <a
               href={contact.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              download="Resume_Zet_Donaue_Samson.pdf"
               style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}
             >
               <div style={{
