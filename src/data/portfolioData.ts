@@ -87,7 +87,7 @@ export const portfolioConfig = {
           id: "arch",
           label: "360° Architecture",
           type: "image",
-          src: "/media/fire-architecture-modal.png",
+          src: "./media/fire-architecture-modal.png",
           badge: "MULTI-TIER TOPOLOGY",
           title: "Live End-to-End System Topology",
           caption: "Live 360° architecture modal showing broker, InfluxDB buffer, FastAPI ETL, and storage nodes"
@@ -96,7 +96,7 @@ export const portfolioConfig = {
           id: "loki",
           label: "Loki Logs Stream",
           type: "image",
-          src: "/media/fire-loki-logs.png",
+          src: "./media/fire-loki-logs.png",
           badge: "LOG AGGREGATION",
           title: "Cluster Logs (Loki Live Stream)",
           caption: "Real-time structured log aggregation with container stream alias mapping and level filtering"
@@ -105,7 +105,7 @@ export const portfolioConfig = {
           id: "telemetry-gif",
           label: "Live Telemetry (GIF)",
           type: "gif",
-          src: "/media/fire-live-telemetry.gif",
+          src: "./media/fire-live-telemetry.gif",
           badge: "MQTT TELEMETRY",
           title: "Real-Time Telemetry & Radar",
           caption: "Live pulsing telemetry markers, anomaly indicators, and MQTT sensor heartbeat streams"
@@ -114,7 +114,7 @@ export const portfolioConfig = {
           id: "command-center",
           label: "Command Center",
           type: "image",
-          src: "/media/fire-command-center.png",
+          src: "./media/fire-command-center.png",
           badge: "FLEET MANAGEMENT",
           title: "Unified Command Center",
           caption: "Fleet diagnostics, hardware health status indicators, and workstation navigation suite"
@@ -142,7 +142,7 @@ export const portfolioConfig = {
           id: "jobflow-preview-modal",
           label: "Preview & Print Modal",
           type: "image",
-          src: "/media/jobflow-preview-modal.png",
+          src: "./media/jobflow-preview-modal.png",
           badge: "PDF PREVIEW MODAL",
           title: "Web-Based Resume Preview & Print Modal",
           caption: "Interactive A4 preview modal with zoom controls, pixel overflow detection, and direct PDF print"
@@ -151,7 +151,7 @@ export const portfolioConfig = {
           id: "jobflow-builder",
           label: "Resume Studio Builder",
           type: "image",
-          src: "/media/jobflow-resume-builder.png",
+          src: "./media/jobflow-resume-builder.png",
           badge: "AI TAILOR STUDIO",
           title: "Interactive Resume Builder",
           caption: "Live resume editor with split-screen tailoring, Gemini AI bullet suggestions, and skill matching"
@@ -160,7 +160,7 @@ export const portfolioConfig = {
           id: "jobflow-profile",
           label: "Master Profile",
           type: "image",
-          src: "/media/jobflow-master-profile.png",
+          src: "./media/jobflow-master-profile.png",
           badge: "MASTER REPOSITORY",
           title: "Master Profile Data Engine",
           caption: "Centralized repository for skills, career accomplishments, and project telemetry data"
@@ -169,7 +169,7 @@ export const portfolioConfig = {
           id: "jobflow-dash",
           label: "Pipeline Dashboard",
           type: "image",
-          src: "/media/jobflow-dashboard.png",
+          src: "./media/jobflow-dashboard.png",
           badge: "JOB PIPELINE",
           title: "Application Tracking Studio",
           caption: "Universal scraper ingestion, status tracking lanes, and cover letter generator"
@@ -196,7 +196,7 @@ export const portfolioConfig = {
           id: "email-telegram",
           label: "Telegram Mobile Alert",
           type: "image",
-          src: "/media/email-agent-telegram.jpg",
+          src: "./media/email-agent-telegram.jpg",
           badge: "LIVE TELEGRAM BOT",
           title: "Telegram Alert Notification",
           caption: "Real-time structured alert with company, role, application status, and direct Gmail action link"
@@ -205,7 +205,7 @@ export const portfolioConfig = {
           id: "email-runner",
           label: "Actions Runner (Forwarding)",
           type: "image",
-          src: "/media/email-agent-runner.png",
+          src: "./media/email-agent-runner.png",
           badge: "GITHUB ACTIONS RUNNER",
           title: "CI/CD Scheduled Runner Execution",
           caption: "Automated cron execution: IMAP polling, Gemini structured batch classification, and Telegram API forward"
@@ -295,6 +295,6 @@ export const portfolioConfig = {
     github: "https://github.com/Fauxx",
     linkedin: "https://linkedin.com/in/zet02",
     email: "zetsamson@gmail.com",
-    resumeUrl: "/media/Resume_Zet_Donaue_Samson_2.pdf"
+    resumeUrl: "./media/Resume_Zet_Donaue_Samson_2.pdf"
   }
 };
