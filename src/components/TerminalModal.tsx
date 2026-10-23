@@ -7,7 +7,7 @@ import {
   ExternalLink,
   ArrowRight
 } from 'lucide-react';
-import { QUICK_CHIPS, SUGGESTIONS } from '../data/terminalData';
+import { SUGGESTIONS } from '../data/terminalData';
 
 interface TerminalModalProps {
   isOpen: boolean;
@@ -23,28 +23,65 @@ interface HistoryItem {
 }
 
 function renderWelcome() {
+  const loginDate = new Date().toUTCString();
   return (
-    <div style={{ color: '#e2e8f0', lineHeight: 1.6 }}>
-      <div style={{ color: '#38bdf8', fontWeight: 700, marginBottom: '0.4rem', fontSize: '0.85rem' }}>
-        ⚡ FAUX TELEMETRY WORKSTATION — v2.4.0 (gke-prod / local-hybrid)
+    <div style={{ color: '#e2e8f0', lineHeight: 1.5, fontFamily: 'var(--font-mono)' }}>
+      <div style={{ color: '#64748b', fontSize: '0.725rem', marginBottom: '0.2rem' }}>
+        Linux fauxx-station 6.12.1-fms-zen x86_64 GNU/Linux
       </div>
-      <p style={{ color: '#94a3b8', fontSize: '0.8rem', margin: '0 0 0.75rem 0' }}>
-        This sandbox provides 100% verified, factual architecture telemetry, manifests, and runtime states
-        extracted directly from Zet Samson&apos;s real repositories on disk.
-      </p>
+      <div style={{ color: '#64748b', fontSize: '0.725rem', marginBottom: '0.65rem' }}>
+        Last login: {loginDate} from 127.0.0.1 (tty1)
+      </div>
+
+      <pre style={{
+        color: '#38bdf8',
+        margin: '0.4rem 0 0.85rem 0',
+        fontFamily: 'inherit',
+        fontSize: 'clamp(0.48rem, 1.25vw, 0.78rem)',
+        lineHeight: 1.15,
+        fontWeight: 700,
+        textShadow: '0 0 15px rgba(56, 189, 248, 0.45)',
+        userSelect: 'none',
+        overflowX: 'auto'
+      }}>
+{` ███████╗ █████╗ ██╗   ██╗██╗  ██╗██╗  ██╗
+ ██╔════╝██╔══██╗██║   ██║╚██╗██╔╝╚██╗██╔╝
+ █████╗  ███████║██║   ██║ ╚███╔╝  ╚███╔╝ 
+ ██╔══╝  ██╔══██║██║   ██║ ██╔██╗  ██╔██╗ 
+ ██║     ██║  ██║╚██████╔╝██╔╝ ██╗██╔╝ ██╗
+ ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝`}
+      </pre>
+
       <div style={{
-        backgroundColor: '#0f172a',
-        border: '1px solid #1e293b',
-        borderRadius: '6px',
-        padding: '0.65rem 0.85rem',
-        fontSize: '0.75rem',
-        fontFamily: 'var(--font-mono)',
-        color: '#cbd5e1',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.25rem',
+        fontSize: '0.775rem',
+        borderLeft: '2px solid #38bdf8',
+        paddingLeft: '0.75rem',
         marginBottom: '0.85rem'
       }}>
-        <div>• Press <span style={{ color: '#f59e0b', fontWeight: 600 }}>Tab</span> or click chips below for instant command completion.</div>
-        <div>• Use <span style={{ color: '#38bdf8', fontWeight: 600 }}>↑ / ↓</span> arrows for shell history.</div>
-        <div>• Type <span style={{ color: '#10b981', fontWeight: 600 }}>help</span> to list all commands, or <span style={{ color: '#10b981', fontWeight: 600 }}>projects</span> to view the 3 systems.</div>
+        <div style={{ color: '#f8fafc', fontWeight: 700 }}>
+          Zet Donaue Samson <span style={{ color: '#38bdf8' }}>[fauxx]</span> — Systems &amp; Cloud DevOps Engineer
+        </div>
+        <div style={{ color: '#94a3b8', fontSize: '0.725rem' }}>
+          Infrastructure: GKE Kubernetes • ArgoCD GitOps • 4-Stage Terraform (GCP/Azure)
+        </div>
+        <div style={{ color: '#94a3b8', fontSize: '0.725rem' }}>
+          Stack: Python • C# / ASP.NET Core 8 • React 19 • Next.js 15 • InfluxDB • Mosquitto
+        </div>
+      </div>
+
+      <div style={{
+        color: '#10b981',
+        fontSize: '0.75rem',
+        backgroundColor: 'rgba(16, 185, 129, 0.08)',
+        border: '1px solid rgba(16, 185, 129, 0.25)',
+        borderRadius: '4px',
+        padding: '0.45rem 0.75rem',
+        display: 'inline-block'
+      }}>
+        💡 Type <span style={{ color: '#ffffff', fontWeight: 700, textDecoration: 'underline' }}>help</span> to view verified commands, or <span style={{ color: '#ffffff', fontWeight: 700, textDecoration: 'underline' }}>projects</span> to inspect repositories. (Press <span style={{ color: '#38bdf8', fontWeight: 600 }}>Tab</span> to autocomplete)
       </div>
     </div>
   );
@@ -996,7 +1033,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             fontFamily: 'var(--font-mono)'
           }}>
             <TerminalIcon size={14} color="#38bdf8" />
-            <span style={{ color: '#e2e8f0', fontWeight: 600 }}>zet@cloud-workstation</span>
+            <span style={{ color: '#e2e8f0', fontWeight: 600 }}>fauxx@workstation</span>
             <span style={{ color: '#475569' }}>:</span>
             <span style={{ color: '#38bdf8' }}>~/projects</span>
             <span style={{ color: '#475569' }}>(zsh)</span>
@@ -1037,52 +1074,6 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           </div>
         </div>
 
-        {/* Quick Suggestion Chips Bar */}
-        <div style={{
-          backgroundColor: '#0c1222',
-          borderBottom: '1px solid #1e293b',
-          padding: '0.45rem 0.85rem',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.4rem',
-          overflowX: 'auto',
-          whiteSpace: 'nowrap'
-        }}>
-          <span style={{ fontSize: '0.675rem', color: '#64748b', fontFamily: 'var(--font-mono)', marginRight: '0.2rem' }}>
-            RUN:
-          </span>
-          {QUICK_CHIPS.map((chip, idx) => (
-            <button
-              key={idx}
-              onClick={() => executeCommand(chip.cmd)}
-              style={{
-                backgroundColor: '#161f36',
-                border: '1px solid #23314f',
-                color: '#93c5fd',
-                fontSize: '0.7rem',
-                fontFamily: 'var(--font-mono)',
-                padding: '0.2rem 0.55rem',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
-                flexShrink: 0
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#1e293b';
-                e.currentTarget.style.borderColor = '#38bdf8';
-                e.currentTarget.style.color = '#ffffff';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#161f36';
-                e.currentTarget.style.borderColor = '#23314f';
-                e.currentTarget.style.color = '#93c5fd';
-              }}
-            >
-              {chip.label}
-            </button>
-          ))}
-        </div>
-
         {/* Terminal Scrollable Body */}
         <div style={{
           flex: 1,
@@ -1098,7 +1089,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             <div key={item.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               {item.command !== 'sys-init' && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748b' }}>
-                  <span style={{ color: '#10b981', fontWeight: 600 }}>visitor@zet-samson</span>
+                  <span style={{ color: '#10b981', fontWeight: 600 }}>fauxx@workstation</span>
                   <span style={{ color: '#475569' }}>:</span>
                   <span style={{ color: '#38bdf8' }}>~/projects</span>
                   <span style={{ color: '#f59e0b' }}>$</span>
@@ -1116,7 +1107,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
 
           {/* Prompt Row */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' }}>
-            <span style={{ color: '#10b981', fontWeight: 600 }}>visitor@zet-samson</span>
+            <span style={{ color: '#10b981', fontWeight: 600 }}>fauxx@workstation</span>
             <span style={{ color: '#475569' }}>:</span>
             <span style={{ color: '#38bdf8' }}>~/projects</span>
             <span style={{ color: '#f59e0b' }}>$</span>
@@ -1126,7 +1117,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="type a command (e.g. 'help', 'kubectl get pods', 'projects')..."
+              placeholder="type 'help' to see commands..."
               style={{
                 flex: 1,
                 backgroundColor: 'transparent',
@@ -1156,12 +1147,12 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           fontFamily: 'var(--font-mono)'
         }}>
           <div>
-            HINT: Press <span style={{ color: '#38bdf8' }}>~</span> (backtick) or <span style={{ color: '#38bdf8' }}>Esc</span> anywhere to toggle terminal
+            Type <span style={{ color: '#38bdf8' }}>help</span> for commands • Press <span style={{ color: '#38bdf8' }}>~</span> or <span style={{ color: '#38bdf8' }}>Esc</span> to close
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <span>UTF-8</span>
             <span>GKE v1.36</span>
-            <span style={{ color: '#10b981' }}>● LIVE REPOSITORIES</span>
+            <span style={{ color: '#10b981' }}>● fauxx-rig</span>
           </div>
         </div>
       </div>
