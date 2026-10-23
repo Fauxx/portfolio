@@ -1,11 +1,15 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ProjectsSection } from './components/ProjectsSection';
 import { ExpertiseSection } from './components/ExpertiseSection';
 import { AboutAndTimeline } from './components/AboutAndTimeline';
 import { ContactAndFooter } from './components/ContactAndFooter';
-import { TerminalModal } from './components/TerminalModal';
+
+// Code-split TerminalModal so initial page load bundle is tiny and instant
+const TerminalModal = lazy(() =>
+  import('./components/TerminalModal').then((m) => ({ default: m.TerminalModal }))
+);
 
 function App() {
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
@@ -55,12 +59,16 @@ function App() {
         <ContactAndFooter />
       </main>
 
-      {/* Global Interactive Faux Terminal Modal */}
-      <TerminalModal
-        isOpen={isTerminalOpen}
-        onClose={closeTerminal}
-        initialCommand={terminalCommand}
-      />
+      {/* Global Interactive Faux Terminal Modal (Lazy loaded on demand) */}
+      {isTerminalOpen && (
+        <Suspense fallback={null}>
+          <TerminalModal
+            isOpen={isTerminalOpen}
+            onClose={closeTerminal}
+            initialCommand={terminalCommand}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }
