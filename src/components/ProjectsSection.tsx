@@ -88,13 +88,9 @@ export const ProjectsSection: React.FC = () => {
               >
                 {/* 1. Media Viewport (Left if not reversed, Right if reversed) */}
                 <div
+                  className={`project-viewport ${isReversed ? 'project-viewport-reversed' : 'project-viewport-default'}`}
                   style={{
-                    order: isReversed ? 2 : 1,
-                    backgroundColor: '#090d16',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    borderRight: isReversed ? 'none' : '1px solid var(--border)',
-                    borderLeft: isReversed ? '1px solid var(--border)' : 'none'
+                    order: isReversed ? 2 : 1
                   }}
                 >
                   {/* Top Window Bar with Slide Tabs */}
@@ -155,17 +151,7 @@ export const ProjectsSection: React.FC = () => {
 
                   {/* Media Canvas with Carousel Arrows */}
                   <div
-                    style={{
-                      position: 'relative',
-                      flex: 1,
-                      minHeight: '430px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      backgroundColor: '#05070d',
-                      cursor: 'pointer',
-                      overflow: 'hidden'
-                    }}
+                    className="project-canvas"
                     onClick={() => currentSlide.src && setModalImage(currentSlide.src)}
                     title="Click to view full-resolution image"
                   >
@@ -299,12 +285,9 @@ export const ProjectsSection: React.FC = () => {
 
                 {/* 2. Narrative Column (Right if not reversed, Left if reversed) */}
                 <div
+                  className="project-narrative"
                   style={{
-                    order: isReversed ? 1 : 2,
-                    padding: '3rem 2.5rem',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center'
+                    order: isReversed ? 1 : 2
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.85rem' }}>
