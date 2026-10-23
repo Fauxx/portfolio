@@ -3,7 +3,11 @@ import { portfolioConfig } from '../data/portfolioData';
 import { ArrowRight, Terminal, Copy, Check } from 'lucide-react';
 import { Icons } from './BrandIcons';
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  onOpenTerminal?: () => void;
+}
+
+export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
   const { hero } = portfolioConfig;
   const [copied, setCopied] = useState(false);
 
@@ -153,23 +157,43 @@ export const Hero: React.FC = () => {
             maxWidth: '100%',
             overflow: 'hidden'
           }}>
-            {/* Window Top Bar */}
-            <div style={{
-              padding: '0.7rem 1rem',
-              backgroundColor: '#070a12',
-              borderBottom: '1px solid #1e293b',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between'
-            }}>
+            {/* Window Top Bar (Clickable CLI trigger) */}
+            <div
+              onClick={onOpenTerminal}
+              style={{
+                padding: '0.7rem 1rem',
+                backgroundColor: '#070a12',
+                borderBottom: '1px solid #1e293b',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                cursor: onOpenTerminal ? 'pointer' : 'default',
+                transition: 'background-color 0.2s ease'
+              }}
+              title="Click to launch interactive terminal (Press ~)"
+            >
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#ef4444' }} />
                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#f59e0b' }} />
                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981' }} />
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#64748b', fontSize: '0.7rem', fontFamily: 'var(--font-mono)' }}>
-                <Terminal size={12} />
-                <span>engine.sys ~ 100%</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                <span style={{
+                  backgroundColor: '#161f36',
+                  border: '1px solid #23314f',
+                  color: '#38bdf8',
+                  fontSize: '0.675rem',
+                  fontFamily: 'var(--font-mono)',
+                  padding: '0.15rem 0.5rem',
+                  borderRadius: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.3rem',
+                  fontWeight: 600
+                }}>
+                  <Terminal size={11} color="#10b981" />
+                  <span>Launch CLI &gt;_</span>
+                </span>
               </div>
             </div>
 
@@ -246,19 +270,26 @@ export const Hero: React.FC = () => {
             </div>
 
             {/* Bottom Status Ticker */}
-            <div style={{
-              padding: '0.55rem 1rem',
-              backgroundColor: '#070a12',
-              borderTop: '1px solid #1e293b',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              fontSize: '0.675rem',
-              fontFamily: 'var(--font-mono)',
-              color: '#10b981'
-            }}>
+            <div
+              onClick={onOpenTerminal}
+              style={{
+                padding: '0.55rem 1rem',
+                backgroundColor: '#070a12',
+                borderTop: '1px solid #1e293b',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                fontSize: '0.675rem',
+                fontFamily: 'var(--font-mono)',
+                color: '#10b981',
+                cursor: onOpenTerminal ? 'pointer' : 'default'
+              }}
+              title="Click to launch interactive telemetry terminal"
+            >
               <span>IMMUTABLE IAC</span>
-              <span>ZERO-TRUST PSS</span>
+              <span style={{ color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                OPEN TERMINAL [~] &gt;_
+              </span>
             </div>
           </div>
 

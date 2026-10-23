@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { portfolioConfig } from '../data/portfolioData';
 import { Icons } from './BrandIcons';
+import { Terminal } from 'lucide-react';
 
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  onOpenTerminal?: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal }) => {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
@@ -87,6 +92,41 @@ export const Navbar: React.FC = () => {
           >
             <Icons.Github width={18} height={18} />
           </a>
+
+          {onOpenTerminal && (
+            <button
+              onClick={onOpenTerminal}
+              title="Launch Terminal CLI (Press ~)"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                backgroundColor: '#0f172a',
+                color: '#38bdf8',
+                border: '1px solid #1e293b',
+                padding: '0.35rem 0.65rem',
+                borderRadius: '6px',
+                fontSize: '0.75rem',
+                fontFamily: 'var(--font-mono)',
+                fontWeight: 600,
+                cursor: 'pointer',
+                marginLeft: '0.75rem',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#1e293b';
+                e.currentTarget.style.borderColor = '#38bdf8';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '#0f172a';
+                e.currentTarget.style.borderColor = '#1e293b';
+              }}
+            >
+              <Terminal size={13} color="#10b981" />
+              <span>&gt;_ CLI</span>
+              <span style={{ fontSize: '0.65rem', color: '#64748b', backgroundColor: '#1e293b', padding: '0.1rem 0.3rem', borderRadius: '3px' }}>~</span>
+            </button>
+          )}
         </div>
       </div>
     </nav>

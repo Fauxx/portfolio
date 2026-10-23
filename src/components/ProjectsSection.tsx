@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { portfolioConfig } from '../data/portfolioData';
-import { ArrowRight, ExternalLink, CheckCircle2, Eye, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, ExternalLink, CheckCircle2, Eye, ChevronLeft, ChevronRight, Terminal } from 'lucide-react';
 import { Icons } from './BrandIcons';
 
-export const ProjectsSection: React.FC = () => {
+interface ProjectsSectionProps {
+  onOpenTerminal?: (cmd?: string) => void;
+}
+
+export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal }) => {
   const { showcases, allProjectsUrl } = {
     showcases: portfolioConfig.showcases,
     allProjectsUrl: portfolioConfig.hero.links.github
@@ -334,7 +338,7 @@ export const ProjectsSection: React.FC = () => {
                   </div>
 
                   {/* Action Row */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
@@ -355,6 +359,46 @@ export const ProjectsSection: React.FC = () => {
                       >
                         <Icons.Github width={15} height={15} /> Source Code
                       </a>
+                    )}
+
+                    {onOpenTerminal && (
+                      <button
+                        onClick={() => {
+                          const cmd = project.id === 'fire-monitoring'
+                            ? 'inspect fire-monitoring'
+                            : project.id === 'jobflow'
+                            ? 'inspect jobflow'
+                            : 'inspect email-agent';
+                          onOpenTerminal(cmd);
+                        }}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.45rem',
+                          backgroundColor: '#0c111d',
+                          color: '#38bdf8',
+                          border: '1px solid #1e293b',
+                          padding: '0.55rem 0.95rem',
+                          borderRadius: 'var(--radius-md)',
+                          fontSize: '0.85rem',
+                          fontFamily: 'var(--font-mono)',
+                          fontWeight: 600,
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#1e293b';
+                          e.currentTarget.style.borderColor = '#38bdf8';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#0c111d';
+                          e.currentTarget.style.borderColor = '#1e293b';
+                        }}
+                        title={`Inspect ${project.title} CLI Telemetry`}
+                      >
+                        <Terminal size={14} color="#10b981" />
+                        <span>Inspect CLI &gt;_</span>
+                      </button>
                     )}
                   </div>
                 </div>
