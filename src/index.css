@@ -39,6 +39,11 @@ html {
   line-height: 1.6;
 }
 
+/* Ensure sticky navbar doesn't cover section headers on anchor jump */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
 body {
   min-height: 100vh;
   background-color: var(--bg);
@@ -205,6 +210,122 @@ code, pre {
   .hero-mantra {
     display: none;
   }
+}
+
+/* Expertise Card Interactive States & Pills */
+.expertise-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.expertise-card:hover {
+  border-color: #93c5fd;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(37, 99, 235, 0.06);
+}
+
+.skill-tag {
+  display: inline-block;
+  font-size: 0.725rem;
+  font-family: var(--font-mono);
+  padding: 0.25rem 0.6rem;
+  background-color: #f8fafc;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.skill-tag:hover {
+  background-color: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+/* Timeline Responsive Flow */
+.timeline-item {
+  display: flex;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.timeline-period {
+  width: 125px;
+  flex-shrink: 0;
+  font-size: 0.775rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-align: right;
+  padding-top: 3px;
+  font-weight: 500;
+}
+
+.timeline-period-mobile {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .timeline-period {
+    display: none;
+  }
+  .timeline-period-mobile {
+    display: inline-block;
+    font-size: 0.725rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .timeline-item {
+    gap: 1rem;
+  }
+}
+
+/* Showcase Carousel Controls */
+.carousel-tabs-desktop {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.carousel-tabs-mobile {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .carousel-tabs-desktop {
+    display: none;
+  }
+  .carousel-tabs-mobile {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid #475569;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.carousel-dot.active {
+  background-color: #38bdf8;
+  border-color: #38bdf8;
+  transform: scale(1.2);
 }
 
 /* Secondary Two-Column Grid */

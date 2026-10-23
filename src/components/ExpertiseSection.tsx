@@ -49,43 +49,41 @@ export const ExpertiseSection: React.FC = () => {
           </p>
         </div>
 
-        {/* 4 Clean Minimalist Cards Grid */}
+        {/* 4 Clean Minimalist Cards Grid with Interactive States */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
-          gap: '1.25rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gap: '1.5rem'
         }}>
           {expertise.cards.map((card) => (
-            <div
-              key={card.id}
-              style={{
-                backgroundColor: '#ffffff',
-                border: '1px solid var(--border)',
-                borderRadius: 'var(--radius-md)',
-                padding: '1.75rem 1.5rem',
+            <div key={card.id} className="expertise-card">
+              <div style={{
+                width: '46px',
+                height: '46px',
+                borderRadius: '10px',
+                backgroundColor: '#eff6ff',
+                border: '1px solid #dbeafe',
                 display: 'flex',
-                flexDirection: 'column',
-                gap: '1rem',
-                boxShadow: 'var(--shadow-sm)',
-                transition: 'all 0.2s ease'
-              }}
-            >
-              <div style={{ marginBottom: '0.25rem' }}>
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '0.15rem'
+              }}>
                 {renderIcon(card.icon)}
               </div>
 
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-main)', letterSpacing: '-0.01em' }}>
-                {card.title}
-              </h3>
+              <div>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-main)', letterSpacing: '-0.015em', marginBottom: '0.75rem' }}>
+                  {card.title}
+                </h3>
 
-              <p style={{
-                fontSize: '0.85rem',
-                color: 'var(--text-muted)',
-                lineHeight: 1.7,
-                margin: 0
-              }}>
-                {card.items.join('  •  ')}
-              </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                  {card.items.map((item, itemIdx) => (
+                    <span key={itemIdx} className="skill-tag">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           ))}
         </div>

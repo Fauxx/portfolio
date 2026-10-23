@@ -149,7 +149,8 @@ export const Hero: React.FC = () => {
             border: '1px solid #1e293b',
             borderRadius: 'var(--radius-lg)',
             boxShadow: 'var(--shadow-md)',
-            width: '310px',
+            width: '350px',
+            maxWidth: '100%',
             overflow: 'hidden'
           }}>
             {/* Window Top Bar */}
@@ -172,33 +173,59 @@ export const Hero: React.FC = () => {
               </div>
             </div>
 
-            {/* Inner Console Content with ZS Monogram Watermark */}
+            {/* Inner Console Content with Prominent Pixel Avatar */}
             <div style={{ padding: '1.5rem', position: 'relative' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1.15rem',
+                marginBottom: '1.35rem',
+                paddingBottom: '1.25rem',
+                borderBottom: '1px solid #1e293b'
+              }}>
                 <div style={{
-                  width: '54px',
-                  height: '54px',
-                  borderRadius: '12px',
-                  backgroundColor: '#111827',
+                  position: 'relative',
+                  width: '92px',
+                  height: '92px',
+                  borderRadius: '18px',
+                  overflow: 'hidden',
                   border: '2px solid #2563eb',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#ffffff',
-                  fontSize: '1.35rem',
-                  fontWeight: 800,
-                  fontFamily: 'var(--font-mono)',
-                  letterSpacing: '0.05em',
-                  boxShadow: '0 4px 14px -2px rgba(37, 99, 235, 0.4)'
+                  boxShadow: '0 0 20px -2px rgba(37, 99, 235, 0.45)',
+                  backgroundColor: '#0c111d',
+                  flexShrink: 0
                 }}>
-                  {hero.monogram}
+                  <img
+                    src="./media/pixel-avatar.jpg"
+                    alt="Zet Donaue Samson Pixel Avatar"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      imageRendering: 'pixelated'
+                    }}
+                  />
+                  {/* Subtle live radar ping dot */}
+                  <span style={{
+                    position: 'absolute',
+                    bottom: '4px',
+                    right: '4px',
+                    width: '10px',
+                    height: '10px',
+                    borderRadius: '50%',
+                    backgroundColor: '#10b981',
+                    border: '2px solid #0c111d',
+                    boxShadow: '0 0 6px #10b981'
+                  }} />
                 </div>
                 <div>
-                  <div style={{ color: '#ffffff', fontSize: '0.95rem', fontWeight: 700 }}>
+                  <div style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 700, letterSpacing: '-0.01em' }}>
                     Zet Donaue Samson
                   </div>
-                  <div style={{ color: '#38bdf8', fontSize: '0.725rem', fontFamily: 'var(--font-mono)' }}>
+                  <div style={{ color: '#38bdf8', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', marginTop: '0.2rem' }}>
                     ● Systems Engineer
+                  </div>
+                  <div style={{ color: '#64748b', fontSize: '0.675rem', fontFamily: 'var(--font-mono)', marginTop: '0.25rem' }}>
+                    LOC // Pasig City • PH
                   </div>
                 </div>
               </div>

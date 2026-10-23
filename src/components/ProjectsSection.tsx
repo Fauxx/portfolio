@@ -118,8 +118,8 @@ export const ProjectsSection: React.FC = () => {
                       </span>
                     </div>
 
-                    {/* Slide Buttons */}
-                    <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
+                    {/* Slide Buttons (Desktop full tabs, Mobile compact dots) */}
+                    <div className="carousel-tabs-desktop">
                       {project.slides.map((s, idx) => (
                         <button
                           key={s.id}
@@ -138,6 +138,17 @@ export const ProjectsSection: React.FC = () => {
                         >
                           {s.label}
                         </button>
+                      ))}
+                    </div>
+
+                    <div className="carousel-tabs-mobile">
+                      {project.slides.map((s, idx) => (
+                        <button
+                          key={s.id}
+                          onClick={() => handleSelectSlide(project.id, idx)}
+                          className={`carousel-dot ${currentIdx === idx ? 'active' : ''}`}
+                          aria-label={`Go to slide ${idx + 1}`}
+                        />
                       ))}
                     </div>
                   </div>

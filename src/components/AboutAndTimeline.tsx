@@ -75,23 +75,13 @@ export const AboutAndTimeline: React.FC = () => {
             {careerEducation.timeline.map((item, idx) => (
               <div
                 key={idx}
+                className="timeline-item"
                 style={{
-                  display: 'flex',
-                  gap: '1.5rem',
-                  paddingBottom: idx === careerEducation.timeline.length - 1 ? '0' : '2.5rem',
-                  position: 'relative'
+                  paddingBottom: idx === careerEducation.timeline.length - 1 ? '0' : '2.5rem'
                 }}
               >
-                {/* Year Label */}
-                <div style={{
-                  width: '120px',
-                  flexShrink: 0,
-                  fontSize: '0.775rem',
-                  fontFamily: 'var(--font-mono)',
-                  color: 'var(--text-muted)',
-                  textAlign: 'right',
-                  paddingTop: '3px'
-                }}>
+                {/* Desktop Year Label */}
+                <div className="timeline-period">
                   {item.period}
                 </div>
 
@@ -126,6 +116,11 @@ export const AboutAndTimeline: React.FC = () => {
 
                 {/* Content */}
                 <div style={{ flex: 1, paddingBottom: '0.5rem' }}>
+                  {/* Mobile-only date label */}
+                  <div className="timeline-period-mobile">
+                    {item.period}
+                  </div>
+
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.25rem' }}>
                     <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-main)' }}>
                       {item.title}
