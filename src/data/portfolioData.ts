@@ -121,7 +121,6 @@ export const portfolioConfig = {
         }
       ],
       githubUrl: "https://github.com/Fauxx/FireMonitoringSystem",
-      liveUrl: "https://dev.fires.systems",
       reversed: false
     },
     {
@@ -183,14 +182,14 @@ export const portfolioConfig = {
       title: "Autonomous Job Email Agent",
       badge: "Event-Driven Automation",
       pillar: "Serverless Workflow • Automated Batch LLM • Real-Time Telegram Alerting",
-      description: "Event-driven background automation pipeline running on scheduled cloud runners. Autonomously connects to Gmail over IMAP, extracts recruiter communications, executes structured Gemini LLM intent classification, and forwards actionable mobile alerts to Telegram.",
+      description: "Event-driven background automation pipeline running on scheduled cloud runners. Autonomously connects to Gmail over IMAP, extracts recruiter communications, executes structured Gemini 2.0 Flash LLM intent classification, and forwards actionable mobile alerts to Telegram.",
       highlights: [
-        "Automated GitHub Actions cron scheduler executing batch AI analysis without server overhead",
-        "Structured Telegram bot alerting with company name, role, status summary, and direct Gmail action links",
+        "Automated GitHub Actions cron scheduler executing batch AI analysis with zero monthly server overhead",
+        "Structured Telegram bot alerting with company name, role, status summary, and direct Gmail deep links",
         "Idempotent UID caching mechanism preventing duplicate notifications across daily scheduled runs",
-        "Zero-maintenance containerized footprint with environment secret isolation"
+        "Declarative Terraform IaC bootstrap managing repository secrets with Libsodium encrypted vault"
       ],
-      tags: ["Python", "Gemini 2.0 Flash", "Telegram Bot API", "GitHub Actions", "Docker", "IMAP4"],
+      tags: ["Python 3.10", "Gemini 2.0 Flash", "Telegram Bot API", "GitHub Actions", "Terraform IaC", "IMAP4 SSL"],
       slides: [
         {
           id: "email-telegram",

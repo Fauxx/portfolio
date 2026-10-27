@@ -45,10 +45,10 @@ function App() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Navbar onOpenTerminal={() => openTerminal()} />
+      <Navbar />
       <main style={{ flex: 1 }}>
         {/* 1. Hero with Status Pill, Stats & Terminal Monogram Card */}
-        <Hero onOpenTerminal={() => openTerminal()} />
+        <Hero />
         {/* 2. Primary Showcase: Selected Projects with Alternating Rhythm & CLI Inspector */}
         <ProjectsSection onOpenTerminal={openTerminal} />
         {/* 3. Technical Competencies & Focus Area Cards */}

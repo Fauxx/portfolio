@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { portfolioConfig } from '../data/portfolioData';
-import { ArrowRight, ExternalLink, CheckCircle2, Eye, ChevronLeft, ChevronRight, Terminal } from 'lucide-react';
+import { ArrowRight, ExternalLink, CheckCircle2, Eye, ChevronLeft, ChevronRight, GitBranch, X } from 'lucide-react';
 import { Icons } from './BrandIcons';
+import { ProjectFlowchartModal, type ProjectId } from './ProjectFlowchartModal';
 
 interface ProjectsSectionProps {
   onOpenTerminal?: (cmd?: string) => void;
@@ -20,6 +21,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal
   });
 
   const [modalImage, setModalImage] = useState<string | null>(null);
+  const [showFlowchartModal, setShowFlowchartModal] = useState<boolean>(false);
+  const [activeFlowchartProject, setActiveFlowchartProject] = useState<ProjectId>('fire-monitoring');
 
   const handleNext = (projectId: string, max: number) => {
     setSlideIndices((prev) => ({
@@ -100,21 +103,23 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal
                   {/* Top Window Bar with Slide Tabs */}
                   <div style={{
                     padding: '0.85rem 1.25rem',
-                    backgroundColor: '#0c111d',
-                    borderBottom: '1px solid #1e293b',
+                    backgroundColor: '#f8fafc',
+                    borderBottom: '1px solid var(--border)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     flexWrap: 'wrap',
                     gap: '0.5rem'
                   }}>
-                    {/* Window Controls */}
+                    {/* Window Controls (Fedora / Linux Clean Terminal Bar) */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                      <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: '#ef4444' }} />
-                      <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: '#f59e0b' }} />
-                      <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: '#10b981' }} />
-                      <span style={{ fontSize: '0.725rem', color: '#64748b', fontFamily: 'var(--font-mono)', marginLeft: '0.5rem' }}>
-                        {project.title.toLowerCase()} ~ {currentSlide.id}
+                      <Icons.Fedora width={13} height={13} fill="#0f172a" />
+                      <span style={{ fontSize: '0.725rem', color: '#0f172a', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>
+                        {project.title.toLowerCase()}
+                      </span>
+                      <span style={{ color: '#cbd5e1' }}>/</span>
+                      <span style={{ fontSize: '0.7rem', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
+                        {currentSlide.id}
                       </span>
                     </div>
 
@@ -125,9 +130,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal
                           key={s.id}
                           onClick={() => handleSelectSlide(project.id, idx)}
                           style={{
-                            background: currentIdx === idx ? '#1e293b' : 'transparent',
-                            color: currentIdx === idx ? '#38bdf8' : '#94a3b8',
-                            border: currentIdx === idx ? '1px solid #334155' : '1px solid transparent',
+                            background: currentIdx === idx ? '#0f172a' : 'transparent',
+                            color: currentIdx === idx ? '#ffffff' : '#64748b',
+                            border: currentIdx === idx ? '1px solid #0f172a' : '1px solid transparent',
                             borderRadius: '4px',
                             fontSize: '0.7rem',
                             fontFamily: 'var(--font-mono)',
@@ -156,7 +161,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal
                   {/* Media Canvas with Carousel Arrows */}
                   <div
                     className="project-canvas"
-                    onClick={() => currentSlide.src && setModalImage(currentSlide.src)}
+                    onClick={() => {
+                      if (currentSlide.src) {
+                        setModalImage(currentSlide.src);
+                      }
+                    }}
                     title="Click to view full-resolution image"
                   >
                     {currentSlide.src ? (
@@ -174,68 +183,75 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal
                     ) : null}
 
                     {/* Prev / Next Carousel Controls */}
-                    <button
-                      onClick={(e) => { e.stopPropagation(); handlePrev(project.id, project.slides.length); }}
-                      style={{
-                        position: 'absolute',
-                        left: '12px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        backgroundColor: 'rgba(15, 23, 42, 0.8)',
-                        border: '1px solid #334155',
-                        color: '#ffffff',
-                        width: '36px',
-                        height: '36px',
-                        borderRadius: '50%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        zIndex: 10
-                      }}
-                      aria-label="Previous Slide"
-                    >
-                      <ChevronLeft size={18} />
-                    </button>
+                    {project.slides.length > 1 && (
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handlePrev(project.id, project.slides.length); }}
+                        style={{
+                          position: 'absolute',
+                          left: '12px',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                          backgroundColor: 'rgba(255, 255, 255, 0.92)',
+                          border: '1px solid var(--border)',
+                          color: '#0f172a',
+                          width: '36px',
+                          height: '36px',
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                          zIndex: 10,
+                          boxShadow: '0 2px 6px rgba(0,0,0,0.06)'
+                        }}
+                        aria-label="Previous Slide"
+                      >
+                        <ChevronLeft size={18} />
+                      </button>
+                    )}
 
-                    <button
-                      onClick={(e) => { e.stopPropagation(); handleNext(project.id, project.slides.length); }}
-                      style={{
-                        position: 'absolute',
-                        right: '12px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        backgroundColor: 'rgba(15, 23, 42, 0.8)',
-                        border: '1px solid #334155',
-                        color: '#ffffff',
-                        width: '36px',
-                        height: '36px',
-                        borderRadius: '50%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        zIndex: 10
-                      }}
-                      aria-label="Next Slide"
-                    >
-                      <ChevronRight size={18} />
-                    </button>
+                    {project.slides.length > 1 && (
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleNext(project.id, project.slides.length); }}
+                        style={{
+                          position: 'absolute',
+                          right: '12px',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                          backgroundColor: 'rgba(255, 255, 255, 0.92)',
+                          border: '1px solid var(--border)',
+                          color: '#0f172a',
+                          width: '36px',
+                          height: '36px',
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                          zIndex: 10,
+                          boxShadow: '0 2px 6px rgba(0,0,0,0.06)'
+                        }}
+                        aria-label="Next Slide"
+                      >
+                        <ChevronRight size={18} />
+                      </button>
+                    )}
 
                     {/* Floating Slide Badge */}
                     <div style={{
                       position: 'absolute',
                       top: '14px',
                       right: '14px',
-                      backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                      backdropFilter: 'blur(4px)',
-                      border: '1px solid #334155',
-                      color: '#38bdf8',
+                      backgroundColor: 'rgba(255, 255, 255, 0.92)',
+                      backdropFilter: 'blur(6px)',
+                      border: '1px solid var(--border)',
+                      color: '#0f172a',
                       fontSize: '0.675rem',
                       fontFamily: 'var(--font-mono)',
                       padding: '0.25rem 0.6rem',
                       borderRadius: '4px',
-                      fontWeight: 600
+                      fontWeight: 600,
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
                     }}>
                       {currentSlide.badge}
                     </div>
@@ -245,10 +261,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal
                       position: 'absolute',
                       bottom: '14px',
                       right: '14px',
-                      backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                      backdropFilter: 'blur(4px)',
-                      border: '1px solid #334155',
-                      color: '#f8fafc',
+                      backgroundColor: 'rgba(255, 255, 255, 0.92)',
+                      backdropFilter: 'blur(6px)',
+                      border: '1px solid var(--border)',
+                      color: '#475569',
                       fontSize: '0.725rem',
                       fontFamily: 'var(--font-mono)',
                       padding: '0.3rem 0.65rem',
@@ -256,7 +272,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.4rem',
-                      pointerEvents: 'none'
+                      pointerEvents: 'none',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
                     }}>
                       <Eye size={13} /> Click to expand
                     </div>
@@ -265,10 +282,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal
                   {/* Sub-caption bar */}
                   <div style={{
                     padding: '0.75rem 1.25rem',
-                    backgroundColor: '#090d16',
-                    borderTop: '1px solid #1e293b',
+                    backgroundColor: '#f8fafc',
+                    borderTop: '1px solid var(--border)',
                     fontSize: '0.775rem',
-                    color: '#94a3b8',
+                    color: '#475569',
                     fontFamily: 'var(--font-mono)',
                     display: 'flex',
                     alignItems: 'center',
@@ -276,7 +293,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal
                     gap: '0.75rem'
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', overflow: 'hidden' }}>
-                      <span style={{ color: '#38bdf8' }}>●</span>
+                      <span style={{ color: '#0f172a' }}>●</span>
                       <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {currentSlide.title}: {currentSlide.caption}
                       </span>
@@ -361,6 +378,21 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal
                       </a>
                     )}
 
+                    <button
+                      onClick={() => {
+                        const pid = (project.id === 'fire-monitoring' || project.id === 'jobflow' || project.id === 'ai-email-agent')
+                          ? (project.id as ProjectId)
+                          : 'fire-monitoring';
+                        setActiveFlowchartProject(pid);
+                        setShowFlowchartModal(true);
+                      }}
+                      className="btn-outline"
+                      title={`Open Interactive ${project.title} Pipeline Flowchart`}
+                    >
+                      <GitBranch size={15} />
+                      <span>Pipeline Flowchart</span>
+                    </button>
+
                     {onOpenTerminal && (
                       <button
                         onClick={() => {
@@ -371,33 +403,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal
                             : 'inspect email-agent';
                           onOpenTerminal(cmd);
                         }}
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '0.45rem',
-                          backgroundColor: '#0c111d',
-                          color: '#38bdf8',
-                          border: '1px solid #1e293b',
-                          padding: '0.55rem 0.95rem',
-                          borderRadius: 'var(--radius-md)',
-                          fontSize: '0.85rem',
-                          fontFamily: 'var(--font-mono)',
-                          fontWeight: 600,
-                          cursor: 'pointer',
-                          transition: 'all 0.2s ease'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = '#1e293b';
-                          e.currentTarget.style.borderColor = '#38bdf8';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = '#0c111d';
-                          e.currentTarget.style.borderColor = '#1e293b';
-                        }}
-                        title={`Inspect ${project.title} CLI Telemetry`}
+                        className="btn-outline"
+                        title={`Open Terminal for ${project.title}`}
                       >
-                        <Terminal size={14} color="#10b981" />
-                        <span>Inspect CLI &gt;_</span>
+                        <Icons.Fedora width={15} height={15} />
+                        <span>Open Terminal &gt;_</span>
                       </button>
                     )}
                   </div>
@@ -428,6 +438,32 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal
             }}
           >
             <div style={{ maxWidth: '96vw', maxHeight: '92vh', position: 'relative' }}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setModalImage(null);
+                }}
+                style={{
+                  position: 'absolute',
+                  top: '12px',
+                  right: '12px',
+                  backgroundColor: 'rgba(15, 23, 42, 0.85)',
+                  border: '1px solid #334155',
+                  color: '#ffffff',
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  zIndex: 20
+                }}
+                aria-label="Close Preview"
+              >
+                <X size={18} />
+              </button>
+
               <img
                 src={modalImage}
                 alt="Enlarged view"
@@ -445,12 +481,49 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenTerminal
                 right: '0',
                 color: '#ffffff',
                 fontSize: '0.85rem',
-                fontFamily: 'var(--font-mono)'
+                fontFamily: 'var(--font-mono)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                flexWrap: 'wrap'
               }}>
-                [ Click anywhere to close ]
+                {modalImage.includes('fire-architecture') && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setModalImage(null);
+                      setActiveFlowchartProject('fire-monitoring');
+                      setShowFlowchartModal(true);
+                    }}
+                    style={{
+                      background: '#ffffff',
+                      border: '1px solid #cbd5e1',
+                      color: '#0f172a',
+                      padding: '0.25rem 0.75rem',
+                      borderRadius: '4px',
+                      fontSize: '0.75rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontWeight: 600,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Open Interactive Flowchart ➔
+                  </button>
+                )}
+                <span>[ Click anywhere to close ]</span>
               </div>
             </div>
           </div>
+        )}
+
+        {/* Dedicated Pipeline Flowchart Modal */}
+        {showFlowchartModal && (
+          <ProjectFlowchartModal
+            isOpen={showFlowchartModal}
+            initialProjectId={activeFlowchartProject}
+            onClose={() => setShowFlowchartModal(false)}
+            onOpenTerminal={onOpenTerminal}
+          />
         )}
       </div>
     </section>

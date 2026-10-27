@@ -100,6 +100,10 @@ code, pre {
   color: var(--text-main);
 }
 
+button {
+  font-family: inherit;
+}
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -112,6 +116,7 @@ code, pre {
   font-weight: 600;
   border: 1px solid transparent;
   cursor: pointer;
+  font-family: inherit;
   transition: background-color 0.2s, transform 0.15s ease;
 }
 
@@ -132,6 +137,7 @@ code, pre {
   font-weight: 600;
   border: 1px solid var(--border);
   cursor: pointer;
+  font-family: inherit;
   transition: all 0.2s ease;
 }
 
@@ -167,7 +173,7 @@ code, pre {
 }
 
 .project-viewport {
-  background-color: #090d16;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -189,7 +195,7 @@ code, pre {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #05070d;
+  background-color: #f8fafc;
   cursor: pointer;
   overflow: hidden;
 }
@@ -379,7 +385,7 @@ code, pre {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  border: 1px solid #475569;
+  border: 1px solid var(--border);
   background-color: transparent;
   padding: 0;
   cursor: pointer;
@@ -387,8 +393,8 @@ code, pre {
 }
 
 .carousel-dot.active {
-  background-color: #38bdf8;
-  border-color: #38bdf8;
+  background-color: #0f172a;
+  border-color: #0f172a;
   transform: scale(1.2);
 }
 
@@ -403,4 +409,47 @@ code, pre {
   .secondary-grid {
     grid-template-columns: 1fr;
   }
+  .flowchart-stage-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Responsive Terminal & Flowchart Modals */
+@media (max-width: 640px) {
+  .terminal-modal-backdrop,
+  .flowchart-modal-backdrop {
+    padding: 0 !important;
+  }
+  .terminal-modal-window,
+  .flowchart-modal-window {
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    border-radius: 0 !important;
+    border: none !important;
+    max-width: 100vw !important;
+  }
+}
+
+/* Slim non-intrusive scrollbars for terminal & flowchart code blocks */
+.terminal-modal-window ::-webkit-scrollbar,
+.flowchart-modal-window ::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.terminal-modal-window ::-webkit-scrollbar-track,
+.flowchart-modal-window ::-webkit-scrollbar-track {
+  background: rgba(10, 15, 29, 0.6);
+}
+
+.terminal-modal-window ::-webkit-scrollbar-thumb,
+.flowchart-modal-window ::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+
+.terminal-modal-window ::-webkit-scrollbar-thumb:hover,
+.flowchart-modal-window ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }

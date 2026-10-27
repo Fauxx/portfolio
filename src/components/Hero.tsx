@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import { portfolioConfig } from '../data/portfolioData';
-import { ArrowRight, Terminal, Copy, Check } from 'lucide-react';
+import { ArrowRight, Copy, Check } from 'lucide-react';
 import { Icons } from './BrandIcons';
 
-interface HeroProps {
-  onOpenTerminal?: () => void;
-}
-
-export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
+export const Hero: React.FC = () => {
   const { hero } = portfolioConfig;
   const [copied, setCopied] = useState(false);
 
@@ -145,59 +141,39 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
             opacity: 0.75
           }} />
 
-          {/* Minimalist Engineering Monogram Card */}
+          {/* Minimalist Engineering Monogram Card (Sleek Black & White Developer Card) */}
           <div style={{
             position: 'relative',
             zIndex: 1,
-            backgroundColor: '#0c111d',
-            border: '1px solid #1e293b',
+            backgroundColor: '#ffffff',
+            border: '1px solid var(--border)',
             borderRadius: 'var(--radius-lg)',
             boxShadow: 'var(--shadow-md)',
             width: '350px',
             maxWidth: '100%',
             overflow: 'hidden'
           }}>
-            {/* Window Top Bar (Clickable CLI trigger) */}
-            <div
-              onClick={onOpenTerminal}
-              style={{
-                padding: '0.7rem 1rem',
-                backgroundColor: '#070a12',
-                borderBottom: '1px solid #1e293b',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                cursor: onOpenTerminal ? 'pointer' : 'default',
-                transition: 'background-color 0.2s ease'
-              }}
-              title="Click to launch interactive terminal (Press ~)"
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#ef4444' }} />
-                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#f59e0b' }} />
-                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981' }} />
+            {/* Window Top Bar (Fedora/GNOME Monochrome Header) */}
+            <div style={{
+              padding: '0.7rem 1rem',
+              backgroundColor: '#f8fafc',
+              borderBottom: '1px solid var(--border)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.725rem', fontFamily: 'var(--font-mono)' }}>
+                <Icons.Fedora width={14} height={14} fill="#51a2da" />
+                <span style={{ color: '#0f172a', fontWeight: 700 }}>fauxx@fedora</span>
+                <span style={{ color: '#94a3b8' }}>:</span>
+                <span style={{ color: '#2563eb', fontWeight: 600 }}>~</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                <span style={{
-                  backgroundColor: '#161f36',
-                  border: '1px solid #23314f',
-                  color: '#38bdf8',
-                  fontSize: '0.675rem',
-                  fontFamily: 'var(--font-mono)',
-                  padding: '0.15rem 0.5rem',
-                  borderRadius: '4px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.3rem',
-                  fontWeight: 600
-                }}>
-                  <Terminal size={11} color="#10b981" />
-                  <span>Launch CLI &gt;_</span>
-                </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#16a34a', fontSize: '0.7rem', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>
+                <span>● active</span>
               </div>
             </div>
 
-            {/* Inner Console Content with Prominent Pixel Avatar */}
+            {/* Inner Console Content with Pixel Avatar */}
             <div style={{ padding: '1.5rem', position: 'relative' }}>
               <div style={{
                 display: 'flex',
@@ -205,17 +181,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
                 gap: '1.15rem',
                 marginBottom: '1.35rem',
                 paddingBottom: '1.25rem',
-                borderBottom: '1px solid #1e293b'
+                borderBottom: '1px solid var(--border)'
               }}>
                 <div style={{
                   position: 'relative',
-                  width: '92px',
-                  height: '92px',
-                  borderRadius: '18px',
+                  width: '84px',
+                  height: '84px',
+                  borderRadius: '10px',
                   overflow: 'hidden',
-                  border: '2px solid #2563eb',
-                  boxShadow: '0 0 20px -2px rgba(37, 99, 235, 0.45)',
-                  backgroundColor: '#0c111d',
+                  border: '1px solid var(--border)',
+                  boxShadow: 'var(--shadow-sm)',
+                  backgroundColor: '#f8fafc',
                   flexShrink: 0
                 }}>
                   <img
@@ -228,7 +204,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
                       imageRendering: 'pixelated'
                     }}
                   />
-                  {/* Subtle live radar ping dot */}
+                  {/* Live status dot */}
                   <span style={{
                     position: 'absolute',
                     bottom: '4px',
@@ -236,20 +212,19 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
                     width: '10px',
                     height: '10px',
                     borderRadius: '50%',
-                    backgroundColor: '#10b981',
-                    border: '2px solid #0c111d',
-                    boxShadow: '0 0 6px #10b981'
+                    backgroundColor: '#16a34a',
+                    border: '2px solid #ffffff'
                   }} />
                 </div>
                 <div>
-                  <div style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 700, letterSpacing: '-0.01em' }}>
+                  <div style={{ color: 'var(--text-main)', fontSize: '1.05rem', fontWeight: 800, letterSpacing: '-0.01em' }}>
                     Zet Donaue Samson
                   </div>
-                  <div style={{ color: '#38bdf8', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', marginTop: '0.2rem' }}>
-                    ● Systems Engineer
+                  <div style={{ color: 'var(--text-body)', fontSize: '0.775rem', fontFamily: 'var(--font-mono)', marginTop: '0.2rem', fontWeight: 600 }}>
+                    Systems &amp; DevOps Engineer
                   </div>
-                  <div style={{ color: '#64748b', fontSize: '0.675rem', fontFamily: 'var(--font-mono)', marginTop: '0.25rem' }}>
-                    LOC // Pasig City • PH
+                  <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', fontFamily: 'var(--font-mono)', marginTop: '0.25rem' }}>
+                    Pasig City, Metro Manila • PH
                   </div>
                 </div>
               </div>
@@ -258,10 +233,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                 {hero.terminalSpecs.map((spec, sIdx) => (
                   <div key={sIdx} style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>
-                    <span style={{ color: '#64748b', display: 'block', fontSize: '0.675rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                    <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.675rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                       {spec.label}
                     </span>
-                    <span style={{ color: '#e2e8f0', fontWeight: 500 }}>
+                    <span style={{ color: 'var(--text-main)', fontWeight: 600 }}>
                       {spec.value}
                     </span>
                   </div>
@@ -270,26 +245,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
             </div>
 
             {/* Bottom Status Ticker */}
-            <div
-              onClick={onOpenTerminal}
-              style={{
-                padding: '0.55rem 1rem',
-                backgroundColor: '#070a12',
-                borderTop: '1px solid #1e293b',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                fontSize: '0.675rem',
-                fontFamily: 'var(--font-mono)',
-                color: '#10b981',
-                cursor: onOpenTerminal ? 'pointer' : 'default'
-              }}
-              title="Click to launch interactive telemetry terminal"
-            >
+            <div style={{
+              padding: '0.55rem 1rem',
+              backgroundColor: '#f8fafc',
+              borderTop: '1px solid var(--border)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              fontSize: '0.675rem',
+              fontFamily: 'var(--font-mono)',
+              color: '#0f172a',
+              fontWeight: 600
+            }}>
               <span>IMMUTABLE IAC</span>
-              <span style={{ color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                OPEN TERMINAL [~] &gt;_
-              </span>
+              <span>ZERO-TRUST PSS</span>
             </div>
           </div>
 
