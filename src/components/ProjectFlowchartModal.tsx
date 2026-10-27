@@ -19,7 +19,10 @@ import {
   GitBranch,
   Printer,
   Sparkles,
-  Search
+  Search,
+  ChevronRight,
+  Copy,
+  Check
 } from 'lucide-react';
 
 export type ProjectId = 'fire-monitoring' | 'jobflow' | 'ai-email-agent';
@@ -56,38 +59,7 @@ interface ProjectPipeline {
   steps: FlowStep[];
 }
 
-export const ProjectFlowchartModal: React.FC<ProjectFlowchartModalProps> = ({
-  isOpen,
-  initialProjectId = 'fire-monitoring',
-  onClose,
-  onOpenTerminal
-}) => {
-  const [activeProjectId, setActiveProjectId] = useState<ProjectId>(initialProjectId);
-  const [selectedStepId, setSelectedStepId] = useState<string>('step-1');
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [prevInitialId, setPrevInitialId] = useState(initialProjectId);
-
-  if (initialProjectId !== prevInitialId) {
-    setPrevInitialId(initialProjectId);
-    setActiveProjectId(initialProjectId);
-    setSelectedStepId('step-1');
-  }
-
-  // Handle Escape key to close
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
-
-  const pipelines: Record<ProjectId, ProjectPipeline> = {
+const pipelines: Record<ProjectId, ProjectPipeline> = {
     'fire-monitoring': {
       id: 'fire-monitoring',
       name: 'FireMonitoringSystem',
@@ -747,8 +719,57 @@ elif classification.intent == "rejection":
     }
   };
 
+export const ProjectFlowchartModal: React.FC<ProjectFlowchartModalProps> = ({
+  isOpen,
+  initialProjectId = 'fire-monitoring',
+  onClose,
+  onOpenTerminal
+}) => {
+  const [activeProjectId, setActiveProjectId] = useState<ProjectId>(initialProjectId);
+  const [selectedStepId, setSelectedStepId] = useState<string>('step-1');
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [prevInitialId, setPrevInitialId] = useState(initialProjectId);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyCode = (text: string) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  if (initialProjectId !== prevInitialId) {
+    setPrevInitialId(initialProjectId);
+    setActiveProjectId(initialProjectId);
+    setSelectedStepId('step-1');
+  }
   const activePipeline = pipelines[activeProjectId] || pipelines['fire-monitoring'];
   const currentStep = activePipeline.steps.find((s) => s.id === selectedStepId) || activePipeline.steps[0];
+
+  // Combined keyboard navigation & escape listener
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'ArrowRight') {
+        const stepIdx = activePipeline.steps.findIndex((s) => s.id === selectedStepId);
+        if (stepIdx < activePipeline.steps.length - 1) {
+          setSelectedStepId(activePipeline.steps[stepIdx + 1].id);
+        }
+      } else if (e.key === 'ArrowLeft') {
+        const stepIdx = activePipeline.steps.findIndex((s) => s.id === selectedStepId);
+        if (stepIdx > 0) {
+          setSelectedStepId(activePipeline.steps[stepIdx - 1].id);
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose, activePipeline, selectedStepId]);
+
+  if (!isOpen) return null;
+
 
   return (
     <div
@@ -763,7 +784,7 @@ elif classification.intent == "rejection":
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: isFullscreen ? '0' : '1.25rem',
+        padding: isFullscreen ? '0' : '0.75rem',
         animation: 'fadeIn 0.2s ease-out'
       }}
     >
@@ -771,13 +792,14 @@ elif classification.intent == "rejection":
         onClick={(e) => e.stopPropagation()}
         className="flowchart-modal-window"
         style={{
-          width: isFullscreen ? '100vw' : '1100px',
-          maxWidth: '100%',
-          height: isFullscreen ? '100vh' : '90vh',
+          width: isFullscreen ? '100vw' : 'min(1560px, 96vw)',
+          maxWidth: isFullscreen ? '100vw' : '96vw',
+          height: isFullscreen ? '100vh' : '95vh',
+          maxHeight: isFullscreen ? '100vh' : '95vh',
           backgroundColor: '#ffffff',
           border: isFullscreen ? 'none' : '1px solid #e2e8f0',
-          borderRadius: isFullscreen ? '0' : '14px',
-          boxShadow: '0 25px 60px -15px rgba(15, 23, 42, 0.2), 0 10px 25px -5px rgba(0, 0, 0, 0.06)',
+          borderRadius: isFullscreen ? '0' : '12px',
+          boxShadow: '0 25px 60px -15px rgba(15, 23, 42, 0.25), 0 10px 25px -5px rgba(0, 0, 0, 0.08)',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden'
@@ -787,7 +809,7 @@ elif classification.intent == "rejection":
         <div style={{
           backgroundColor: '#ffffff',
           borderBottom: '1px solid #e2e8f0',
-          padding: '0.85rem 1.25rem',
+          padding: '0.65rem 1.25rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -925,27 +947,29 @@ elif classification.intent == "rejection":
           flex: 1,
           overflowY: 'auto',
           overflowX: 'hidden',
-          padding: '1.25rem',
+          padding: '0.85rem 1.25rem',
           display: 'flex',
           flexDirection: 'column',
-          gap: '1.25rem',
-          backgroundColor: '#fafafa'
+          gap: '0.85rem',
+          backgroundColor: '#fafafa',
+          minHeight: 0
         }}>
           {/* Subtitle Banner */}
           <div style={{
             backgroundColor: '#ffffff',
             border: '1px solid #e2e8f0',
             borderRadius: '8px',
-            padding: '1rem 1.25rem',
+            padding: '0.75rem 1.15rem',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             flexWrap: 'wrap',
             gap: '0.75rem',
-            boxShadow: 'var(--shadow-sm)'
+            boxShadow: 'var(--shadow-sm)',
+            flexShrink: 0
           }}>
             <div style={{ flex: '1 1 300px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
                 <span style={{ fontSize: '1rem' }}>{activePipeline.icon}</span>
                 <span style={{ color: '#0f172a', fontWeight: 800, fontSize: '1.05rem' }}>
                   {activePipeline.name}
@@ -962,120 +986,192 @@ elif classification.intent == "rejection":
                   {activePipeline.badge}
                 </span>
               </div>
-              <div style={{ color: '#475569', fontSize: '0.825rem', lineHeight: 1.5 }}>
+              <div style={{ color: '#475569', fontSize: '0.825rem', lineHeight: 1.45 }}>
                 {activePipeline.summary}
               </div>
             </div>
+
+            {/* Quick Status Pill & Keyboard Nav Hint */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.6rem',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.725rem',
+              color: '#64748b',
+              flexShrink: 0
+            }}>
+              <span style={{
+                backgroundColor: '#f1f5f9',
+                border: '1px solid #e2e8f0',
+                padding: '0.25rem 0.6rem',
+                borderRadius: '5px',
+                color: '#0f172a',
+                fontWeight: 600
+              }}>
+                {activePipeline.steps.length} Pipeline Stages
+              </span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                <kbd style={{ backgroundColor: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: '3px', padding: '1px 5px', fontSize: '0.65rem' }}>←</kbd>
+                <kbd style={{ backgroundColor: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: '3px', padding: '1px 5px', fontSize: '0.65rem' }}>→</kbd>
+                <span>Navigate</span>
+              </span>
+            </div>
           </div>
 
-          {/* Interactive Flow Nodes Selector */}
-          <div>
+          {/* Interactive Flowchart Track (End-to-End Pipeline) */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', flexShrink: 0 }}>
             <div style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              marginBottom: '0.65rem',
+              marginBottom: '0.2rem',
               flexWrap: 'wrap',
               gap: '0.5rem'
             }}>
               <span style={{ fontSize: '0.725rem', fontWeight: 700, color: '#0f172a', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>
-                PIPELINE STAGES (CLICK TO INSPECT ARCHITECTURE &amp; CODE)
+                PIPELINE FLOWCHART (CLICK NODE TO INSPECT ARCHITECTURE &amp; CODE)
               </span>
               <span style={{ fontSize: '0.725rem', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
-                Stage {currentStep.stepNumber} of 0{activePipeline.steps.length} Selected
+                Stage {currentStep.stepNumber} of 0{activePipeline.steps.length} Selected: <strong style={{ color: '#0f172a' }}>{currentStep.title}</strong>
               </span>
             </div>
 
-            {/* Responsive Auto-Wrapping Step Cards (Sleek Black & White) */}
+            {/* Connected Step Cards (Maximizing Width & Dataflow Direction) */}
             <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
-              gap: '0.5rem',
-              width: '100%'
+              display: 'flex',
+              alignItems: 'stretch',
+              gap: '0.35rem',
+              width: '100%',
+              overflowX: 'auto',
+              paddingBottom: '2px'
             }}>
-              {activePipeline.steps.map((step) => {
+              {activePipeline.steps.map((step, idx) => {
                 const isSelected = step.id === selectedStepId;
+                const isLast = idx === activePipeline.steps.length - 1;
                 return (
-                  <button
-                    key={step.id}
-                    onClick={() => setSelectedStepId(step.id)}
-                    style={{
-                      backgroundColor: isSelected ? '#0f172a' : '#ffffff',
-                      border: isSelected ? '1px solid #0f172a' : '1px solid #e2e8f0',
-                      borderRadius: '8px',
-                      padding: '0.7rem 0.65rem',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'flex-start',
-                      gap: '0.35rem',
-                      cursor: 'pointer',
-                      textAlign: 'left',
-                      transition: 'all 0.15s ease',
-                      boxShadow: isSelected ? '0 4px 12px rgba(15, 23, 42, 0.18)' : 'var(--shadow-sm)',
-                      minWidth: 0
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                      <span style={{
-                        fontSize: '0.65rem',
-                        fontFamily: 'var(--font-mono)',
+                  <React.Fragment key={step.id}>
+                    <button
+                      onClick={() => setSelectedStepId(step.id)}
+                      style={{
+                        flex: '1 1 0',
+                        minWidth: '140px',
+                        backgroundColor: isSelected ? '#0f172a' : '#ffffff',
+                        border: isSelected ? '1.5px solid #0f172a' : '1px solid #e2e8f0',
+                        borderRadius: '8px',
+                        padding: '0.65rem 0.7rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        justifyContent: 'space-between',
+                        gap: '0.35rem',
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        transition: 'all 0.15s ease',
+                        boxShadow: isSelected ? '0 4px 12px rgba(15, 23, 42, 0.2)' : 'var(--shadow-sm)',
+                        position: 'relative'
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                          <span style={{
+                            fontSize: '0.65rem',
+                            fontFamily: 'var(--font-mono)',
+                            fontWeight: 800,
+                            color: isSelected ? '#38bdf8' : '#0f172a'
+                          }}>
+                            STAGE {step.stepNumber}
+                          </span>
+                          {isSelected && (
+                            <span style={{
+                              fontSize: '0.55rem',
+                              fontFamily: 'var(--font-mono)',
+                              backgroundColor: 'rgba(56, 189, 248, 0.2)',
+                              color: '#38bdf8',
+                              padding: '0.05rem 0.3rem',
+                              borderRadius: '3px',
+                              fontWeight: 700
+                            }}>
+                              ACTIVE
+                            </span>
+                          )}
+                        </div>
+                        {React.cloneElement(step.icon as React.ReactElement<{ color?: string }>, {
+                          color: isSelected ? '#ffffff' : '#0f172a'
+                        })}
+                      </div>
+
+                      <div style={{
+                        fontSize: '0.775rem',
                         fontWeight: 700,
-                        color: isSelected ? '#38bdf8' : '#0f172a'
+                        color: isSelected ? '#ffffff' : '#0f172a',
+                        lineHeight: 1.25,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        width: '100%'
+                      }} title={step.title}>
+                        {step.title.split('&')[0].trim()}
+                      </div>
+
+                      <div style={{
+                        fontSize: '0.65rem',
+                        color: isSelected ? '#94a3b8' : '#64748b',
+                        lineHeight: 1.2,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        width: '100%',
+                        fontFamily: 'var(--font-mono)'
+                      }} title={step.subtitle}>
+                        {step.subtitle}
+                      </div>
+                    </button>
+
+                    {/* Flow Connector Arrow */}
+                    {!isLast && (
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        padding: '0 0.1rem',
+                        color: isSelected ? '#0f172a' : '#cbd5e1',
+                        flexShrink: 0
                       }}>
-                        STAGE {step.stepNumber}
-                      </span>
-                      {React.cloneElement(step.icon as React.ReactElement<{ color?: string }>, {
-                        color: isSelected ? '#ffffff' : '#0f172a'
-                      })}
-                    </div>
-
-                    <div style={{
-                      fontSize: '0.775rem',
-                      fontWeight: 700,
-                      color: isSelected ? '#ffffff' : '#0f172a',
-                      lineHeight: 1.25,
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                      width: '100%'
-                    }}>
-                      {step.title.split('&')[0].trim()}
-                    </div>
-
-                    <div style={{
-                      fontSize: '0.65rem',
-                      color: isSelected ? '#94a3b8' : '#64748b',
-                      lineHeight: 1.2,
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                      width: '100%'
-                    }}>
-                      {step.subtitle}
-                    </div>
-                  </button>
+                        <ChevronRight size={14} />
+                      </div>
+                    )}
+                  </React.Fragment>
                 );
               })}
             </div>
           </div>
 
-          {/* Active Stage Detailed Inspector */}
+          {/* Active Stage Detailed Inspector (Fills All Remaining Space) */}
           <div
             className="flowchart-stage-grid"
             style={{
+              flex: 1,
               display: 'grid',
-              gridTemplateColumns: 'minmax(0, 1.15fr) minmax(0, 1fr)',
+              gridTemplateColumns: 'minmax(0, 1.25fr) minmax(0, 1fr)',
               gap: '1.25rem',
               backgroundColor: '#ffffff',
               border: '1px solid #e2e8f0',
               borderRadius: '10px',
               padding: '1.25rem',
-              minHeight: '340px',
-              boxShadow: 'var(--shadow-sm)'
+              minHeight: '380px',
+              boxShadow: 'var(--shadow-sm)',
+              overflow: 'hidden'
             }}
           >
-            {/* Left: Code File Inspector with Word Wrap */}
-            <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+            {/* Left: Code File Inspector */}
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100%',
+              minHeight: 0,
+              minWidth: 0
+            }}>
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -1086,87 +1182,126 @@ elif classification.intent == "rejection":
                 flexWrap: 'wrap',
                 gap: '0.5rem'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#0f172a', fontSize: '0.775rem', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
-                  <Code2 size={15} color="#0f172a" />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#0f172a', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+                  <Code2 size={16} color="#0f172a" />
                   <span>{currentStep.codeFile}</span>
                 </div>
-                <span style={{ fontSize: '0.675rem', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
-                  Production Implementation
-                </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ fontSize: '0.675rem', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
+                    Production Implementation
+                  </span>
+                  <button
+                    onClick={() => handleCopyCode(currentStep.codeSnippet)}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.3rem',
+                      backgroundColor: copied ? '#0f172a' : '#f1f5f9',
+                      color: copied ? '#ffffff' : '#0f172a',
+                      border: '1px solid #cbd5e1',
+                      padding: '0.25rem 0.55rem',
+                      borderRadius: '5px',
+                      fontSize: '0.685rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease'
+                    }}
+                    title="Copy code snippet to clipboard"
+                  >
+                    {copied ? <Check size={12} color="#4ade80" /> : <Copy size={12} />}
+                    <span>{copied ? 'Copied!' : 'Copy Code'}</span>
+                  </button>
+                </div>
               </div>
 
               <pre style={{
                 margin: 0,
                 flex: 1,
-                backgroundColor: '#0f172a',
+                height: '100%',
+                backgroundColor: '#0a0f1d',
                 border: '1px solid #1e293b',
-                borderRadius: '6px',
-                padding: '1rem',
+                borderRadius: '8px',
+                padding: '1.15rem 1.25rem',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.775rem',
-                lineHeight: 1.5,
+                fontSize: '0.825rem',
+                lineHeight: 1.55,
                 color: '#e2e8f0',
+                overflowY: 'auto',
                 overflowX: 'auto',
                 whiteSpace: 'pre-wrap',
-                wordBreak: 'break-word'
+                wordBreak: 'break-word',
+                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.3)'
               }}>
                 {currentStep.codeSnippet}
               </pre>
             </div>
 
-            {/* Right: Architectural Specifications & Capabilities */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', minWidth: 0 }}>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
-                  <span style={{
-                    backgroundColor: '#0f172a',
-                    color: '#ffffff',
-                    fontSize: '0.65rem',
-                    fontFamily: 'var(--font-mono)',
-                    fontWeight: 700,
-                    padding: '0.15rem 0.5rem',
-                    borderRadius: '4px'
-                  }}>
-                    STAGE {currentStep.stepNumber}
-                  </span>
-                  <span style={{ color: '#64748b', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>
-                    {currentStep.subtitle}
-                  </span>
-                </div>
-
-                <h4 style={{ color: '#0f172a', fontSize: '1.25rem', fontWeight: 800, margin: '0 0 0.5rem 0', letterSpacing: '-0.01em' }}>
-                  {currentStep.title}
-                </h4>
-
-                <p style={{ color: '#334155', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
-                  {currentStep.summary}
-                </p>
-              </div>
-
-              {/* Specs checklist */}
-              <div style={{
-                backgroundColor: '#f8fafc',
-                border: '1px solid #e2e8f0',
-                borderRadius: '6px',
-                padding: '0.85rem 1rem',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.45rem'
-              }}>
-                <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#64748b', fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>
-                  KEY SPECIFICATIONS &amp; CONSTRAINTS
-                </div>
-                {currentStep.specs.map((spec, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.775rem', color: '#334155' }}>
-                    <CheckCircle2 size={13} color="#0f172a" style={{ flexShrink: 0, marginTop: '3px' }} />
-                    <span style={{ wordBreak: 'break-word' }}>{spec}</span>
+            {/* Right: Architectural Specifications & Constraints */}
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              height: '100%',
+              minHeight: 0,
+              minWidth: 0,
+              gap: '1rem',
+              overflowY: 'auto',
+              paddingRight: '4px'
+            }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
+                    <span style={{
+                      backgroundColor: '#0f172a',
+                      color: '#ffffff',
+                      fontSize: '0.65rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontWeight: 700,
+                      padding: '0.15rem 0.55rem',
+                      borderRadius: '4px'
+                    }}>
+                      STAGE {currentStep.stepNumber} • {currentStep.badge}
+                    </span>
+                    <span style={{ color: '#64748b', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>
+                      {currentStep.subtitle}
+                    </span>
                   </div>
-                ))}
+
+                  <h4 style={{ color: '#0f172a', fontSize: '1.35rem', fontWeight: 800, margin: '0 0 0.5rem 0', letterSpacing: '-0.01em' }}>
+                    {currentStep.title}
+                  </h4>
+
+                  <p style={{ color: '#334155', fontSize: '0.875rem', lineHeight: 1.6, margin: 0 }}>
+                    {currentStep.summary}
+                  </p>
+                </div>
+
+                {/* Specs checklist */}
+                <div style={{
+                  backgroundColor: '#f8fafc',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '8px',
+                  padding: '0.9rem 1.1rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.55rem'
+                }}>
+                  <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#64748b', fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>
+                    KEY ARCHITECTURAL CONSTRAINTS &amp; SPECIFICATIONS
+                  </div>
+                  {currentStep.specs.map((spec, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.55rem', fontSize: '0.8rem', color: '#1e293b' }}>
+                      <CheckCircle2 size={14} color="#0f172a" style={{ flexShrink: 0, marginTop: '3px' }} />
+                      <span style={{ wordBreak: 'break-word', lineHeight: 1.45 }}>{spec}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Direct CLI trigger */}
               {onOpenTerminal && (
-                <div style={{ marginTop: 'auto', paddingTop: '0.5rem' }}>
+                <div style={{ paddingTop: '0.5rem' }}>
                   <button
                     onClick={() => {
                       onClose();
@@ -1181,11 +1316,11 @@ elif classification.intent == "rejection":
                     style={{
                       width: '100%',
                       backgroundColor: '#ffffff',
-                      border: '1px solid #0f172a',
+                      border: '1.5px solid #0f172a',
                       color: '#0f172a',
-                      padding: '0.6rem 1rem',
+                      padding: '0.65rem 1rem',
                       borderRadius: '6px',
-                      fontSize: '0.775rem',
+                      fontSize: '0.8rem',
                       fontFamily: 'var(--font-mono)',
                       fontWeight: 700,
                       cursor: 'pointer',
@@ -1204,8 +1339,8 @@ elif classification.intent == "rejection":
                       e.currentTarget.style.color = '#0f172a';
                     }}
                   >
-                    <Terminal size={14} />
-                    <span>Inspect `{currentStep.codeFile.split(' ')[0]}` in Terminal CLI</span>
+                    <Terminal size={15} />
+                    <span>Inspect `{currentStep.codeFile.split(' ')[0]}` in Terminal CLI &gt;_</span>
                   </button>
                 </div>
               )}
