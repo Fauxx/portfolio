@@ -5,6 +5,7 @@ import { ProjectsSection } from './components/ProjectsSection';
 import { ExpertiseSection } from './components/ExpertiseSection';
 import { AboutAndTimeline } from './components/AboutAndTimeline';
 import { ContactAndFooter } from './components/ContactAndFooter';
+import { trackVisitor } from './utils/visitorTracker';
 
 // Code-split TerminalModal so initial page load bundle is tiny and instant
 const TerminalModal = lazy(() =>
@@ -14,6 +15,11 @@ const TerminalModal = lazy(() =>
 function App() {
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [terminalCommand, setTerminalCommand] = useState<string | undefined>(undefined);
+
+  // Initialize privacy-friendly visitor notification
+  useEffect(() => {
+    trackVisitor();
+  }, []);
 
   const openTerminal = useCallback((cmd?: string) => {
     setTerminalCommand(cmd);
