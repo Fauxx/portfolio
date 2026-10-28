@@ -1,6 +1,6 @@
 // Cookieless, privacy-friendly visitor notification service for portfolio
 
-const TELEGRAM_TOKEN_B64 = 'ODg4MDQ4NTE0NDpBQUdaU1o4bUNYTGpOVVVZcGM0SEVnbmFyRUR4TVZkRUVRMA==';
+const TELEGRAM_TOKEN_B64 = 'OTIxMTgxMTMzMjpBQUZGSUg4X2JfdzdfYy1hNmFJbWlCdjRDMF9XVDE0TExnWQ==';
 const TELEGRAM_CHAT_ID = '5040778991';
 const SESSION_FLAG = 'portfolio_visit_notified';
 
