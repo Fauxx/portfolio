@@ -94,7 +94,7 @@ const PROJECT_GUIDES: Record<ProjectKey, ProjectGuideInfo> = {
     icon: '🤖',
     name: 'ai-job-email-agent',
     tagline: 'Serverless GitHub Actions Cron ($0/mo) • IMAP4 TLS • Gemini Classifier • Telegram Bot',
-    badge: 'SERVERLESS RECRUITER RADAR',
+    badge: 'SERVERLESS AUTOMATION',
     badgeColor: '#a855f7',
     instructions: 'You are inspecting the ai-job-email-agent repository. Explore scheduled cloud runners, TLS email ingestion, Gemini batch intent categorization, Telegram push alerting, and idempotent UID caching.',
     suggestedPills: [
@@ -688,7 +688,7 @@ function renderInspectEmailAgent(onRunCmd: (cmd: string) => void) {
     }}>
       <div style={{ borderBottom: '1px solid #27272a', margin: '0.45rem 0' }} />
       <div style={{ color: '#51a2da', fontWeight: 700, fontSize: '0.85rem' }}>
-        PROJECT TELEMETRY: ai-job-email-agent (Serverless Recruiter Radar &amp; Alert Bot)
+        PROJECT TELEMETRY: ai-job-email-agent (Serverless Recruiter Triage &amp; Alert Bot)
       </div>
       <div style={{ borderBottom: '1px solid #27272a', margin: '0.45rem 0' }} />
 
@@ -748,7 +748,7 @@ Print Engine  : <span style={{ color: '#4ade80' }}>WeasyPrint / CSS Paged Media<
 function renderAgentStatus() {
   return (
     <pre style={{ margin: 0, fontFamily: 'var(--font-mono)', fontSize: '0.76rem', lineHeight: 1.5, color: '#d4d4d8', whiteSpace: 'pre-wrap', wordBreak: 'break-word', maxWidth: '100%' }}>
-<span style={{ color: '#51a2da', fontWeight: 700 }}>[SYSTEM TELEMETRY] ai-job-email-agent — SERVERLESS RADAR &amp; PUSH BOT</span>
+<span style={{ color: '#51a2da', fontWeight: 700 }}>[SYSTEM TELEMETRY] ai-job-email-agent — SERVERLESS TRIAGE &amp; PUSH BOT</span>
 Status        : <span style={{ color: '#4ade80' }}>SCHEDULED</span> (Automated cloud runner cycle)
 Runner Engine : <span style={{ color: '#4ade80' }}>GitHub Actions Cron</span> (schedule: '0 */2 * * *', $0/month serverless)
 Mail Protocol : <span style={{ color: '#4ade80' }}>IMAP4 SSL</span> (imap.gmail.com:993, unseen recruiter message filter)

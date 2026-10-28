@@ -58,8 +58,8 @@ export const portfolioConfig = {
       { label: "DELIVERY & OPS", value: "ArgoCD GitOps • Prometheus • Loki" }
     ],
     stats: [
-      { label: "Cloud Infrastructure", value: "4-Layer IaC" },
-      { label: "GitOps Kubernetes", value: "13 Services" },
+      { label: "Cloud Platform", value: "4-Layer IaC" },
+      { label: "Delivery Engine", value: "ArgoCD GitOps" },
       { label: "Observability Stack", value: "Prometheus & Loki" }
     ],
     links: {
@@ -72,11 +72,11 @@ export const portfolioConfig = {
     {
       id: "fire-monitoring",
       title: "FireMonitoringSystem",
-      badge: "Flagship Cloud & DevOps",
-      pillar: "Cloud Infrastructure • 4-Layer Modular IaC • Zero-Trust Observability",
-      description: "Production-grade IoT telemetry & fire monitoring platform on Azure AKS & Kubernetes. Engineered with 4-layer modular Terraform IaC, automated GitOps delivery via ArgoCD, and an end-to-end observability stack querying live Prometheus metrics and Grafana Loki log streams without mock data.",
+      badge: "Cloud & DevOps (Thesis Lab)",
+      pillar: "Cloud Infrastructure • 4-Layer Modular IaC • Observability & Network Policies",
+      description: "Cloud-native IoT telemetry & fire monitoring platform on Azure AKS & Kubernetes, engineered as a full-lifecycle university thesis & cloud lab. Built with 4-layer modular Terraform IaC, automated GitOps delivery via ArgoCD, and an end-to-end observability stack querying live Prometheus metrics and Grafana Loki log streams without mock data.",
       highlights: [
-        "Live 360° multi-tier architecture & latency verification hops across all service tiers",
+        "End-to-end multi-tier topology (Edge MQTT ➔ Mosquitto ➔ Pandas ETL ➔ InfluxDB & PostgreSQL)",
         "Grafana Loki log aggregation with Cloud SQL sidecar stream aliasing & level filtering",
         "Animated real-time telemetry streaming over MQTT & WebGL 3D map canvas",
         "Zero-trust network policies (Calico), non-root containers & Trivy vulnerability scanning"
@@ -90,7 +90,7 @@ export const portfolioConfig = {
           src: "./media/fire-architecture-modal.png",
           badge: "MULTI-TIER TOPOLOGY",
           title: "Live End-to-End System Topology",
-          caption: "Live 360° architecture modal showing broker, InfluxDB buffer, FastAPI ETL, and storage nodes"
+          caption: "Multi-tier architecture topology showing broker, InfluxDB buffer, FastAPI ETL, and storage nodes"
         },
         {
           id: "loki",

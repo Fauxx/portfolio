@@ -510,8 +510,8 @@ def tailor_resume(master_profile: dict, job_description: str) -> TailoredResumeR
     'ai-email-agent': {
       id: 'ai-email-agent',
       name: 'Autonomous Job Email Agent',
-      tagline: 'Event-Driven Recruiter Radar & Real-Time Push Bot',
-      badge: 'SERVERLESS RECRUITER RADAR',
+      tagline: 'Event-Driven Recruiter Triage & Real-Time Alert Bot',
+      badge: 'SERVERLESS AUTOMATION',
       badgeColor: '#ec4899',
       icon: '🤖',
       summary: 'Zero-cost serverless automation: scheduled GitHub Actions cron boots ephemeral runner, connects to Gmail over IMAP TLS, deduplicates unread emails against daily cache, invokes Gemini 2.0 Flash for structured intent extraction, and pushes instant mobile alerts to Telegram.',
