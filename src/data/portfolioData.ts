@@ -60,7 +60,7 @@ export const portfolioConfig = {
     stats: [
       { label: "Cloud Infrastructure", value: "4-Layer IaC" },
       { label: "GitOps Kubernetes", value: "13 Services" },
-      { label: "Applied Generative AI", value: "Gemini 2.0 Flash" }
+      { label: "Observability Stack", value: "Prometheus & Loki" }
     ],
     links: {
       github: "https://github.com/Fauxx",
@@ -294,6 +294,6 @@ export const portfolioConfig = {
     github: "https://github.com/Fauxx",
     linkedin: "https://linkedin.com/in/zet02",
     email: "zetsamson@gmail.com",
-    resumeUrl: "./media/Resume_Zet_Donaue_Samson_2.pdf"
+    resumeUrl: "./media/Resume_Zet_Samson_1.pdf"
   }
 };

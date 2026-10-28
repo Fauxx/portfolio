@@ -7,6 +7,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { Icons } from './BrandIcons';
+import { portfolioConfig } from '../data/portfolioData';
 import {
   VFS_ROOT,
   resolveVFSPath,
@@ -1096,8 +1097,10 @@ function renderResume() {
       </p>
       <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
         <a
-          href="./resume.pdf"
-          download
+          href={portfolioConfig.contact.resumeUrl}
+          download="Resume_Zet_Samson.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
           className="btn-primary"
           style={{ fontSize: '0.75rem', padding: '0.35rem 0.75rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
         >
