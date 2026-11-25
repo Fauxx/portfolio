@@ -62,24 +62,14 @@ export const Hero: React.FC = () => {
           </p>
 
           <p style={{
-            fontSize: '1.025rem',
-            color: 'var(--text-main)',
-            fontWeight: 600,
+            fontSize: '1.05rem',
+            color: 'var(--text-body)',
+            fontWeight: 500,
             lineHeight: 1.6,
-            marginBottom: '0.65rem',
+            marginBottom: '1.5rem',
             maxWidth: '580px'
           }}>
             {hero.hook}
-          </p>
-
-          <p style={{
-            fontSize: '0.975rem',
-            color: 'var(--text-muted)',
-            lineHeight: 1.75,
-            marginBottom: '1.25rem',
-            maxWidth: '560px'
-          }}>
-            {hero.summary}
           </p>
 
           {/* Top Skills Strip */}

@@ -50,7 +50,6 @@ export const portfolioConfig = {
     role: "Software Developer & Cloud Enthusiast | Kubernetes, Terraform & Observability",
     hook: "A capable Software Developer with genuine hands-on passion for Kubernetes, Terraform, and Observability.",
     topSkills: "Kubernetes • Terraform • Grafana • Docker • C#",
-    summary: "I build end-to-end applications and containerized platforms — pairing C# .NET 8 and Python / FastAPI services with Kubernetes (GKE / Kind), modular Terraform IaC, and Grafana observability, accelerated by AI-augmented agentic workflows (Antigravity CLI / agy).",
     monogram: "ZS",
     mantra: ["BUILD", "DEPLOY", "IMPROVE"],
     terminalSpecs: [
