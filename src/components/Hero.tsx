@@ -56,20 +56,64 @@ export const Hero: React.FC = () => {
             fontSize: '1.15rem',
             color: 'var(--text-body)',
             fontWeight: 500,
-            marginBottom: '1.25rem'
+            marginBottom: '1rem'
           }}>
             {hero.role} <span style={{ color: 'var(--text-light)', margin: '0 0.4rem' }}>•</span> <span style={{ fontSize: '0.925rem', color: 'var(--text-muted)' }}>{hero.location}</span>
           </p>
 
           <p style={{
-            fontSize: '1rem',
+            fontSize: '1.025rem',
+            color: 'var(--text-main)',
+            fontWeight: 600,
+            lineHeight: 1.6,
+            marginBottom: '0.65rem',
+            maxWidth: '580px'
+          }}>
+            {hero.hook}
+          </p>
+
+          <p style={{
+            fontSize: '0.975rem',
             color: 'var(--text-muted)',
             lineHeight: 1.75,
-            marginBottom: '2rem',
+            marginBottom: '1.25rem',
             maxWidth: '560px'
           }}>
             {hero.summary}
           </p>
+
+          {/* Top Skills Strip */}
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.65rem',
+            flexWrap: 'wrap',
+            backgroundColor: 'var(--bg-subtle)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius-sm)',
+            padding: '0.5rem 0.85rem',
+            marginBottom: '1.75rem'
+          }}>
+            <span style={{
+              fontSize: '0.68rem',
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              color: 'var(--primary-blue)',
+              fontFamily: 'var(--font-mono)',
+              textTransform: 'uppercase'
+            }}>
+              Top Skills
+            </span>
+            <span style={{ color: 'var(--border)' }}>|</span>
+            <span style={{
+              fontSize: '0.825rem',
+              fontWeight: 600,
+              color: 'var(--text-main)',
+              fontFamily: 'var(--font-mono)'
+            }}>
+              {hero.topSkills}
+            </span>
+          </div>
 
           {/* Action Buttons */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
@@ -220,8 +264,8 @@ export const Hero: React.FC = () => {
                   <div style={{ color: 'var(--text-main)', fontSize: '1.05rem', fontWeight: 800, letterSpacing: '-0.01em' }}>
                     Zet Donaue Samson
                   </div>
-                  <div style={{ color: 'var(--text-body)', fontSize: '0.775rem', fontFamily: 'var(--font-mono)', marginTop: '0.2rem', fontWeight: 600 }}>
-                    Systems &amp; DevOps Engineer
+                  <div style={{ color: 'var(--text-body)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', marginTop: '0.2rem', fontWeight: 600 }}>
+                    Software Developer &amp; Cloud Enthusiast
                   </div>
                   <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', fontFamily: 'var(--font-mono)', marginTop: '0.25rem' }}>
                     Pasig City, Metro Manila • PH

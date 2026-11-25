@@ -113,7 +113,7 @@ const PROJECT_GUIDES: Record<ProjectKey, ProjectGuideInfo> = {
     key: 'station',
     icon: '💻',
     name: 'fauxx@fedora',
-    tagline: 'Systems & Cloud DevOps Engineering Workspace — Fedora Linux 41 (x86_64)',
+    tagline: 'Software & Cloud Engineering Workspace — Fedora Linux 41 (x86_64)',
     badge: 'MONOREPO WORKSPACE',
     badgeColor: '#51a2da',
     instructions: 'Welcome to the cloud engineering terminal. You can explore all 3 repositories on disk, run Kubernetes queries, inspect Terraform states, or switch into any project below.',
@@ -1086,7 +1086,7 @@ function renderResume() {
   return (
     <div style={{ fontSize: '0.8rem', lineHeight: 1.6, color: '#f4f4f5', maxWidth: '100%', boxSizing: 'border-box' }}>
       <div style={{ color: '#51a2da', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.2rem' }}>
-        ZET DONAUE SAMSON — SYSTEMS &amp; CLOUD DEVOPS ENGINEER
+        ZET DONAUE SAMSON — SOFTWARE DEVELOPER &amp; CLOUD ENTHUSIAST
       </div>
       <div style={{ color: '#a1a1aa', fontSize: '0.75rem', marginBottom: '0.6rem' }}>
         Pasig City, Metro Manila • zetsamson@gmail.com • <a href="https://fauxx.is-a.dev" target="_blank" rel="noreferrer" style={{ color: '#51a2da' }}>fauxx.is-a.dev</a>
@@ -1407,7 +1407,7 @@ AI Email Agent   : <span style={{ color: '#4ade80' }}>Cron Scheduled (0 */2 * * 
     } else if (lower === 'cat resume' || lower === 'resume') {
       output = renderResume();
     } else if (lower === 'whoami') {
-      output = <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#51a2da' }}>zet (Zet Donaue Samson — Systems &amp; Cloud DevOps Engineer)</div>;
+      output = <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#51a2da' }}>zet (Zet Donaue Samson — Software Developer &amp; Cloud Enthusiast)</div>;
     } else if (lower === 'uname -a') {
       output = <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#a1a1aa' }}>Linux fauxx-station 6.12.1-200.fc41.x86_64 #1 SMP PREEMPT_DYNAMIC Wed Oct 21 00:00:00 UTC 2026 x86_64 GNU/Linux</div>;
     } else if (lower.includes('os-release') || lower.includes('fedora-release')) {

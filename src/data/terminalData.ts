@@ -958,7 +958,7 @@ export const VFS_ROOT: VNode = {
                       size: '2.4 KB',
                       permissions: '-rw-r--r--',
                       updated: 'Oct 24 15:20',
-                      content: `# FireMonitoringSystem (FMS)\nProduction-grade IoT telemetry platform on Azure AKS & Kubernetes with 4-layer modular Terraform IaC, ArgoCD GitOps, and Prometheus/Grafana Loki observability.`
+                      content: `# FireMonitoringSystem (FMS)\nProduction-grade IoT telemetry platform on Multi-Cloud Kubernetes (GKE / Kind) with 4-layer modular Terraform IaC, ArgoCD GitOps, and Prometheus/Grafana Loki observability.`
                     }
                   }
                 },
@@ -1098,7 +1098,7 @@ export const VFS_ROOT: VNode = {
                               size: '1.5 KB',
                               permissions: '-rw-r--r--',
                               updated: 'Oct 24 17:18',
-                              content: `from fastapi import APIRouter\n\nrouter = APIRouter()\n\n@router.get("/")\ndef list_jobs():\n    return [{"id": 1, "title": "DevOps Engineer", "company": "CloudNative Labs"}]`
+                              content: `from fastapi import APIRouter\n\nrouter = APIRouter()\n\n@router.get("/")\ndef list_jobs():\n    return [{"id": 1, "title": "Software Developer", "company": "CloudNative Labs"}]`
                             },
                             'resume_tailor.py': {
                               name: 'resume_tailor.py',
@@ -1156,7 +1156,7 @@ export const VFS_ROOT: VNode = {
                           size: '4.2 KB',
                           permissions: '-rw-r--r--',
                           updated: 'Oct 24 17:05',
-                          content: `{\n  "name": "Zet Donaue Samson",\n  "title": "Systems & Cloud DevOps Engineer",\n  "email": "zetsamson@gmail.com",\n  "location": "Pasig City, Metro Manila",\n  "github": "https://github.com/Fauxx",\n  "focus": ["Kubernetes", "4-Stage Terraform", "ArgoCD", "FastAPI", "Full-Stack Observability"]\n}`
+                          content: `{\n  "name": "Zet Donaue Samson",\n  "title": "Software Developer & Cloud Enthusiast",\n  "email": "zetsamson@gmail.com",\n  "location": "Pasig City, Metro Manila",\n  "github": "https://github.com/Fauxx",\n  "focus": ["Kubernetes", "4-Stage Terraform", "ArgoCD", "FastAPI", "Full-Stack Observability"]\n}`
                         }
                       }
                     },
@@ -1460,14 +1460,14 @@ if __name__ == '__main__':
               updated: 'Oct 24 18:10',
               content: `ZET DONAUE SAMSON (fauxx)
 ==============================================
-Role: Systems & Cloud DevOps Engineer
+Role: Software Developer & Cloud Enthusiast
 Focus: Cloud-Native Infrastructure, GitOps, Kubernetes, IaC
 Location: Pasig City, Metro Manila • UTC+8
 Email: zetsamson@gmail.com
 Web: https://fauxx.is-a.dev
 
 Engineering Pillars:
-- Modular 4-Stage Infrastructure as Code (Terraform on GCP/Azure)
+- Modular 4-Stage Infrastructure as Code (Terraform on GCP / Multi-Cloud Kubernetes)
 - Automated Continuous Delivery & GitOps (ArgoCD, Kustomize v5)
 - Zero-Trust Security (PSS Restricted, Non-Root, Cloudflare Tunnels)
 - High-Throughput Ingestion (MQTT Mosquitto, InfluxDB, PostgreSQL)
@@ -1776,7 +1776,7 @@ export const PROJECT_SEGMENTED_TREES: Record<string, ProjectTreeArchitecture> = 
     id: 'fire-monitoring',
     name: 'FireMonitoringSystem',
     subtitle: 'Production Cloud IoT & Telemetry Platform',
-    description: 'Segmented microservice architecture on Azure AKS with 4-stage Terraform IaC and ArgoCD GitOps.',
+    description: 'Segmented microservice architecture on Multi-Cloud Kubernetes (GKE / Kind) with 4-stage Terraform IaC and ArgoCD GitOps.',
     segments: [
       {
         segmentName: 'apps/',

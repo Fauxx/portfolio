@@ -43,19 +43,20 @@ export const portfolioConfig = {
     tagline: "ENGINEERING"
   },
   hero: {
-    statusPill: "Available for Software Developer & Cloud/DevOps Roles",
+    statusPill: "Open to Software Developer & Cloud Platform Roles",
     location: "Pasig City, Metro Manila • UTC+8",
     greeting: "Hi, I'm",
     name: "Zet Donaue Samson",
-    role: "Software Developer | Cloud & DevOps Engineer",
-    summary: "I build end-to-end applications and the cloud-native infrastructure behind them — from 4-layer Terraform Kubernetes platforms and C# Clean Architecture APIs to reactive AI systems and event-driven automation pipelines.",
+    role: "Software Developer & Cloud Enthusiast | Kubernetes, Terraform & Observability",
+    hook: "A capable Software Developer with genuine hands-on passion for Kubernetes, Terraform, and Observability.",
+    topSkills: "Kubernetes • Terraform • Grafana • Docker • C#",
+    summary: "I build end-to-end applications and containerized platforms — pairing C# .NET 8 and Python / FastAPI services with Kubernetes (GKE / Kind), modular Terraform IaC, and Grafana observability, accelerated by AI-augmented agentic workflows (Antigravity CLI / agy).",
     monogram: "ZS",
     mantra: ["BUILD", "DEPLOY", "IMPROVE"],
     terminalSpecs: [
-      { label: "ENGINEERING", value: "Full-Lifecycle (Code to Cloud)" },
-      { label: "CLOUD & IAC", value: "Azure AKS • GKE • Terraform (4-Layer)" },
-      { label: "BACKEND STACK", value: "Python • C# / ASP.NET Core 8 • Node.js" },
-      { label: "DELIVERY & OPS", value: "ArgoCD GitOps • Prometheus • Loki" }
+      { label: "CLOUD & IAC", value: "Kubernetes (GKE/Kind) • Modular Terraform" },
+      { label: "BACKEND & DATA", value: "Python / FastAPI • C# .NET 8 • PostgreSQL" },
+      { label: "OBSERVABILITY", value: "Grafana • Prometheus • Loki • Alloy" }
     ],
     stats: [
       { label: "Cloud Platform", value: "4-Layer IaC" },
@@ -72,16 +73,16 @@ export const portfolioConfig = {
     {
       id: "fire-monitoring",
       title: "FireMonitoringSystem",
-      badge: "Cloud & DevOps (Thesis Lab)",
+      badge: "Cloud & Kubernetes (Thesis Lab)",
       pillar: "Cloud Infrastructure • 4-Layer Modular IaC • Observability & Network Policies",
-      description: "Cloud-native IoT telemetry & fire monitoring platform on Azure AKS & Kubernetes, engineered as a full-lifecycle university thesis & cloud lab. Built with 4-layer modular Terraform IaC, automated GitOps delivery via ArgoCD, and an end-to-end observability stack querying live Prometheus metrics and Grafana Loki log streams without mock data.",
+      description: "Cloud-native IoT telemetry & fire monitoring platform on Multi-Cloud Kubernetes (GKE / Kind), engineered as a full-lifecycle university thesis & cloud lab. Built with 4-layer modular Terraform IaC, automated GitOps delivery via ArgoCD, and an end-to-end observability stack querying live Prometheus metrics and Grafana Loki log streams without mock data.",
       highlights: [
         "End-to-end multi-tier topology (Edge MQTT ➔ Mosquitto ➔ Pandas ETL ➔ InfluxDB & PostgreSQL)",
         "Grafana Loki log aggregation with Cloud SQL sidecar stream aliasing & level filtering",
         "Animated real-time telemetry streaming over MQTT & WebGL 3D map canvas",
         "Zero-trust network policies (Calico), non-root containers & Trivy vulnerability scanning"
       ],
-      tags: ["Kubernetes (AKS)", "Terraform IaC", "ArgoCD GitOps", "Prometheus & Loki", "FastAPI ETL", "MapLibre 3D", "PostgreSQL"],
+      tags: ["Kubernetes (GKE / Kind)", "Terraform IaC", "ArgoCD GitOps", "Prometheus & Loki", "FastAPI ETL", "MapLibre 3D", "PostgreSQL"],
       slides: [
         {
           id: "arch",
@@ -126,9 +127,9 @@ export const portfolioConfig = {
     {
       id: "jobflow",
       title: "Jobflow",
-      badge: "AI Product Engineering",
+      badge: "Full-Stack & Applied AI",
       pillar: "Applied Generative AI • Full-Stack Studio • ATS Layout Engine",
-      description: "Full-stack AI job tracking & ATS resume tailoring studio. Combines Google Gemini LLMs with strict Pydantic JSON schema fallback validation, Playwright browser cookie scraping, and ATS-compliant pixel-accurate PDF rendering with typographic scale constraints.",
+      description: "Full-stack AI job tracking & ATS resume tailoring studio. Combines Google Gemini LLMs with strict Pydantic JSON schema fallback validation, Playwright browser cookie scraping, and ATS-compliant pixel-accurate WeasyPrint PDF rendering with typographic scale constraints.",
       highlights: [
         "Web-based A4 ATS print preview modal with zoom controls and dynamic pixel overflow detection",
         "Interactive Resume Studio with real-time draft tailoring, skill extraction, and AI bullet suggestions",
@@ -180,9 +181,9 @@ export const portfolioConfig = {
     {
       id: "ai-email-agent",
       title: "Autonomous Job Email Agent",
-      badge: "Event-Driven Automation",
-      pillar: "Serverless Workflow • Automated Batch LLM • Real-Time Telegram Alerting",
-      description: "Event-driven background automation pipeline running on scheduled cloud runners. Autonomously connects to Gmail over IMAP, extracts recruiter communications, executes structured Gemini 2.0 Flash LLM intent classification, and forwards actionable mobile alerts to Telegram.",
+      badge: "Autonomous AI Agent",
+      pillar: "Agentic Background Workflow • Automated Batch LLM • Real-Time Telegram Telemetry",
+      description: "Agentic background workflow running on scheduled cloud runners. Autonomously connects to Gmail over IMAP SSL, extracts recruiter communications, executes structured Gemini 2.0 Flash LLM intent classification, and forwards actionable mobile alerts via Telegram telemetry.",
       highlights: [
         "Automated GitHub Actions cron scheduler executing batch AI analysis with zero monthly server overhead",
         "Structured Telegram bot alerting with company name, role, status summary, and direct Gmail deep links",
@@ -223,7 +224,7 @@ export const portfolioConfig = {
         id: "cloud",
         icon: "cloud",
         title: "Cloud Infrastructure & IaC",
-        items: ["GKE", "Azure AKS", "Terraform (Modular 4-Layer)", "VNet / VPC Networking", "Helm"]
+        items: ["Kubernetes (GKE / Kind)", "Terraform (Modular 4-Layer)", "VPC Networking", "Helm"]
       },
       {
         id: "containers",
@@ -241,14 +242,14 @@ export const portfolioConfig = {
         id: "security",
         icon: "shield",
         title: "Security & Observability",
-        items: ["Trivy CVE Scanning", "Calico NetworkPolicies", "Prometheus", "Loki Logs", "Grafana Alloy"]
+        items: ["Trivy CVE Scanning", "Calico NetworkPolicies", "Grafana", "Prometheus", "Loki Logs", "Grafana Alloy"]
       }
     ] as ExpertiseCard[]
   },
   about: {
     title: "About Me",
-    paragraph: "I'm a Computer Engineering Technology graduate from TUP Manila, with hands-on experience in backend engineering, cloud infrastructure, and intelligent automation. I enjoy designing clean architectures, solving concurrency challenges, and operationalizing zero-trust cloud platforms.",
-    highlightQuote: "Building reliable, scalable systems through disciplined code, immutable infrastructure, and full-stack observability."
+    paragraph: "I'm a Computer Engineering Technology graduate from TUP Manila, with hands-on experience in backend software engineering, containerized cloud infrastructure, and intelligent automation. Alongside designing clean C# and Python architectures and operating Kubernetes & Terraform platforms, I embrace AI-augmented developer velocity — orchestrating agentic workflows with Antigravity CLI (agy) backed by human-in-the-loop review, automated testing, and full architectural ownership.",
+    highlightQuote: "Building reliable, scalable systems through disciplined code, immutable infrastructure, full-stack observability, and human-verified AI velocity."
   },
   careerEducation: {
     title: "Career & Education",
